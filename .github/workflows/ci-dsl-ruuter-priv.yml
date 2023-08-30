@@ -36,6 +36,7 @@ jobs:
             else
               echo "$folder folder already exists."
             fi
+            done
       
       - name: Commit and Push Folder Structure Creation
         run: |
