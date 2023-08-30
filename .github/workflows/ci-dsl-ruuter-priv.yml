@@ -14,10 +14,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Check and Create Folder Structure
+      - name: Check and Create Folder Structure and copy DSLs
         run: |
-          FOLDER_PATH=Ruuter/private/v2/
-
+          FOLDER_PATH=Router/private/v2/
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
@@ -37,6 +36,32 @@ jobs:
               echo "$folder folder already exists."
             fi
             done
+
+      - name: Copy DSLs from Source Repos
+        run: |
+          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+          SOURCE_FOLDER_CHATBOT=DSL.Ruuter.private/DSL
+
+          SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
+          SOURCE_FOLDER_ANALYTICS=DSL/Ruuter
+
+          SOURCE_REPO_SERVICE=buerokratt/Service-Module
+          SOURCE_FOLDER_SERVICE=DSL/Ruuter
+
+          SOURCE_REPO_TRAINING=buerokratt/Training-Module
+          SOURCE_FOLDER_TRAINING=DSL/Ruuter.private
+
+          git clone "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT" "$FOLDER_PATH/backoffice"
+
+          git clone "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
+          cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS" "$FOLDER_PATH/analytics"
+
+          git clone "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE" "$FOLDER_PATH/services"
+
+          git clone "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING" "$FOLDER_PATH/training"
       
       - name: Commit and Push Folder Structure Creation
         run: |
