@@ -16,7 +16,7 @@ jobs:
 
       - name: Check and Create Folder Structure
         run: |
-          FOLDER_PATH=Ruuter/private/v2/backoffice
+          FOLDER_PATH=Ruuter/private/v2/
 
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
@@ -26,7 +26,7 @@ jobs:
           fi
       - name: Create Subfolders
         run: |
-           SUBFOLDERS=("analytics" "services" "training")
+           SUBFOLDERS=("analytics" "backoffice" "services" "training")
            for folder in "${SUBFOLDERS[@]}"; do
             FOLDER_PATH="Ruuter/v2/private/$folder"
             if [ ! -d "$FOLDER_PATH" ]; then
