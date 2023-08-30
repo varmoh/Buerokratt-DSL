@@ -15,9 +15,7 @@ jobs:
 
       - name: Check if directories exist
         run: |
-          if [ ! -d "RUUTER/private/v2/backoffice/" ]; then
             mkdir -p RUUTER/private/v2/backoffice/
-          fi
         working-directory: ${{ github.workspace }}
 
   copy_backoffice:
