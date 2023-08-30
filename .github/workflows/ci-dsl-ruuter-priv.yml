@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Check and Create Folder Structure
         run: |
-          FOLDER_PATH=Ruuter
+          FOLDER_PATH=Ruuter/private/v2/backoffice
 
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
@@ -24,6 +24,9 @@ jobs:
           else
             echo "Folder structure already exists."
           fi
+
+      - name: Create Empty README.md
+        run: touch Ruuter/private/v2/backoffice/README.md
 
       - name: Commit and Push Folder Structure Creation
         run: |
