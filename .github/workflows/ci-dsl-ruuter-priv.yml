@@ -24,6 +24,19 @@ jobs:
           else
             echo "Folder structure already exists."
           fi
+      - name: Create Subfolders
+        run: |
+           SUBFOLDERS=("analytics" "services" "training")
+           for folder in "${SUBFOLDERS[@]}"; do
+            FOLDER_PATH="Ruuter/v2/private/$folder"
+            if [ ! -d "$FOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$FOLDER_PATH"
+              touch "$FOLDER_PATH/README.md"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
 
       - name: Create Empty README.md
         run: touch Ruuter/private/v2/backoffice/README.md
