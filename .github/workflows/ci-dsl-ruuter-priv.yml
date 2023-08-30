@@ -18,15 +18,6 @@ jobs:
           if [ ! -d "RUUTER/private/v2/backoffice/" ]; then
             mkdir -p RUUTER/private/v2/backoffice/
           fi
-          if [ ! -d "RUUTER/private/analytics/" ]; then
-            mkdir -p RUUTER/private/analytics/
-          fi
-          if [ ! -d "RUUTER/private/training/" ]; then
-            mkdir -p RUUTER/private/training/
-          fi
-          if [ ! -d "RUUTER/private/services/" ]; then
-            mkdir -p RUUTER/private/services/
-          fi
         working-directory: ${{ github.workspace }}
 
   copy_backoffice:
