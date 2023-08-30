@@ -15,7 +15,7 @@ jobs:
 
       - name: Check and Create Folder Structure and copy DSLs
         run: |
-          FOLDER_PATH=ruuter/private/v2/
+          FOLDER_PATH=Ruuter/private/v2/
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
@@ -26,7 +26,7 @@ jobs:
           SUBFOLDERS=("analytics" "backoffice" "services" "training")
           for folder in "${SUBFOLDERS[@]}"; do
             FOLDER_PATH="Ruuter/private/v2/$folder"
-            if [ ! -d "$FOLDER_PATH" ]; thenf
+            if [ ! -d "$FOLDER_PATH" ]; then
               echo "Creating $folder folder..."
               mkdir -p "$FOLDER_PATH"
               touch "$FOLDER_PATH/README.md"
