@@ -6,6 +6,7 @@ on:
       - varmo-gha-testing # Adjust the branch name if needed
 
 jobs:
+
   setup_directories:
     runs-on: ubuntu-22.04
 
@@ -15,28 +16,9 @@ jobs:
 
       - name: Check if directories exist
         run: |
+            if [ ! -d "RUUTER/private/v2/backoffice/" ]; then
             mkdir -p RUUTER/private/v2/backoffice/
-        working-directory: ${{ github.workspace }}
-
-  copy_backoffice:
-    runs-on: ubuntu-22.04
-    needs: setup_directories
-
-    steps:
-      - name: Checkout DSL Repository
-        uses: actions/checkout@v2
-        with:
-          repository: varmoh/Buerokratt-Chatbot
-          path: DSL
-
-      - name: Copy GET files to backoffice
-        run: |
-          cp -R DSL/DSL.Ruuter.private/DSL/GET/. RUUTER/private/v2/backoffice/
-        working-directory: ${{ github.workspace }}
-
-      - name: Copy POST files to backoffice
-        run: |
-          cp -R DSL/DSL.Ruuter.private/DSL/POST/. RUUTER/private/v2/backoffice/
+            fi
         working-directory: ${{ github.workspace }}
 
       - name: Set up Git
