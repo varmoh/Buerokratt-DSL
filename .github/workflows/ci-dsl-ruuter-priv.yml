@@ -20,23 +20,21 @@ jobs:
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
             touch "$FOLDER_PATH/README.md"
+
+            SUBFOLDERS=("analytics" "backoffice" "services" "training")
+            for folder in "${SUBFOLDERS[@]}"; do
+              SUBFOLDER_PATH="$FOLDER_PATH$folder"
+              if [ ! -d "$SUBFOLDER_PATH" ]; then
+                echo "Creating $folder folder..."
+                mkdir -p "$SUBFOLDER_PATH"
+                touch "$SUBFOLDER_PATH/README.md"
+              else
+                echo "$folder folder already exists."
+              fi
+            done
           else
             echo "Folder structure already exists."
           fi
-
-      - name: Create Subfolders
-        run: |
-          SUBFOLDERS=("analytics" "backoffice" "services" "training")
-          for folder in "${SUBFOLDERS[@]}"; do
-            FOLDER_PATH="$FOLDER_PATH$folder"
-            if [ ! -d "$FOLDER_PATH" ]; then
-              echo "Creating $folder folder..."
-              mkdir -p "$FOLDER_PATH"
-              touch "$FOLDER_PATH/README.md"
-            else
-              echo "$folder folder already exists."
-            fi
-          done
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL.Ruuter.private/DSL
