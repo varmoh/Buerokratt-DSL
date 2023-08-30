@@ -6,7 +6,6 @@ on:
       - varmo-gha-testing # Adjust the branch name if needed
 
 jobs:
-
   setup_directories:
     runs-on: ubuntu-22.04
 
@@ -16,29 +15,26 @@ jobs:
 
       - name: Check and Create Folder Structure and copy DSLs
         run: |
-          FOLDER_PATH=Router/private/v2/
+          FOLDER_PATH=ruuter/private/v2/
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
           else
             echo "Folder structure already exists."
           fi
-      - name: Create Subfolders
-        run: |
-           SUBFOLDERS=("analytics" "backoffice" "services" "training")
-           for folder in "${SUBFOLDERS[@]}"; do
-            FOLDER_PATH="Ruuter/v2/private/$folder"
-            if [ ! -d "$FOLDER_PATH" ]; then
+
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
+          for folder in "${SUBFOLDERS[@]}"; do
+            FOLDER_PATH="Ruuter/private/v2/$folder"
+            if [ ! -d "$FOLDER_PATH" ]; thenf
               echo "Creating $folder folder..."
               mkdir -p "$FOLDER_PATH"
               touch "$FOLDER_PATH/README.md"
             else
               echo "$folder folder already exists."
             fi
-            done
+          done
 
-      - name: Copy DSLs from Source Repos
-        run: |
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL.Ruuter.private/DSL
 
@@ -62,11 +58,14 @@ jobs:
 
           git clone "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING" "$FOLDER_PATH/training"
-      
-      - name: Commit and Push Folder Structure Creation
+
+      - name: Create Empty README.md
+        run: touch Ruuter/private/v2/backoffice/README.md
+
+      - name: Commit and Push Folder Structure with Copied Contents
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add Ruuter
-          git diff-index --quiet HEAD || git commit -m "Create or update folder structure using GitHub Actions"
+          git diff-index --quiet HEAD || git commit -m "Copy contents and update folder structure using GitHub Actions"
           git push
