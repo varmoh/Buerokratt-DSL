@@ -52,13 +52,9 @@ jobs:
           git clone "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE" "$FOLDER_PATH/services"
 
-          SOURCE_REPO_TRAINING=buerokratt/Training-Module
-          SOURCE_FOLDER_TRAINING=DSL/Ruuter.private
-          git clone "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
-          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING" "$FOLDER_PATH/training"
+       
 
-      - name: Create Empty README.md
-        run: touch Ruuter/private/v2/backoffice/README.md
+     
 
       - name: Commit and Push Folder Structure with Copied Contents
         run: |
