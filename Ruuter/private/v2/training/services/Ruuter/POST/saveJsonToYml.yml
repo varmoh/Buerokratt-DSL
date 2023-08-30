@@ -1,0 +1,21 @@
+toYml:
+  call: http.post
+  args:
+    url: "[#SERVICE_NODE]:[#SERVICE_NODE_PORT]/conversion/json_to_yaml_data"
+    body:
+      data: ${incoming.body.result}
+  result: r
+
+saveFile:
+  call: http.post
+  args:
+    url: "[#SERVICE_NODE]:[#SERVICE_NODE_PORT]/file/write"
+    body:
+      file_path: ${incoming.params.location}
+      content: ${r.response.body.yaml}
+  result: fileResult
+
+saved_seccessfully:
+  reloadDsl: true
+  return: ""
+  next: end
