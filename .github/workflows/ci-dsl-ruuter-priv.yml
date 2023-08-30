@@ -36,11 +36,7 @@ jobs:
             else
               echo "$folder folder already exists."
             fi
-          done
-
-      - name: Create Empty README.md
-        run: touch Ruuter/private/v2/backoffice/README.md
-
+      
       - name: Commit and Push Folder Structure Creation
         run: |
           git config --local user.email "actions@github.com"
