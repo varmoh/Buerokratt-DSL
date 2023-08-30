@@ -23,9 +23,11 @@ jobs:
             echo "Folder structure already exists."
           fi
 
+      - name: Create Subfolders
+        run: |
           SUBFOLDERS=("analytics" "backoffice" "services" "training")
           for folder in "${SUBFOLDERS[@]}"; do
-            FOLDER_PATH="Ruuter/private/v2/$folder"
+            FOLDER_PATH="$FOLDER_PATH$folder"
             if [ ! -d "$FOLDER_PATH" ]; then
               echo "Creating $folder folder..."
               mkdir -p "$FOLDER_PATH"
