@@ -16,7 +16,7 @@ jobs:
 
       - name: Check and Create Folder Structure
         run: |
-          FOLDER_PATH=Ruuter/private/v2/backoffice
+          FOLDER_PATH=Ruuter
 
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
