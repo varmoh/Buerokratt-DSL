@@ -1,0 +1,200 @@
+name: Buerokratt DSL
+
+on:
+  push:
+    branches:
+      - varmo-gha-testing # Adjust the branch name if needed
+
+jobs:
+  setup_directories:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check if directories exist
+        run: |
+          if [ ! -d "RUUTER/private/v2/backoffice/" ]; then
+            mkdir -p RUUTER/private/v2/backoffice/
+          fi
+          if [ ! -d "RUUTER/private/analytics/" ]; then
+            mkdir -p RUUTER/private/analytics/
+          fi
+          if [ ! -d "RUUTER/private/training/" ]; then
+            mkdir -p RUUTER/private/training/
+          fi
+          if [ ! -d "RUUTER/private/services/" ]; then
+            mkdir -p RUUTER/private/services/
+          fi
+        working-directory: ${{ github.workspace }}
+
+  copy_backoffice:
+    runs-on: ubuntu-22.04
+    needs: setup_directories
+
+    steps:
+      - name: Checkout DSL Repository
+        uses: actions/checkout@v2
+        with:
+          repository: buerokratt/Buerokratt-Chatbot
+          path: DSL
+
+      - name: Copy GET files to backoffice
+        run: |
+          cp -R DSL/DSL.Ruuter.private/DSL/GET/. RUUTER/private/v2/backoffice/
+        working-directory: ${{ github.workspace }}
+
+      - name: Copy POST files to backoffice
+        run: |
+          cp -R DSL/DSL.Ruuter.private/DSL/POST/. RUUTER/private/v2/backoffice/
+        working-directory: ${{ github.workspace }}
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Commit and push changes
+        run: |
+          git add .
+          git commit -m "Copy backoffice files from CHATBOT repository"
+          git push origin main # Or the appropriate branch
+
+  setup_services:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check if services directory exists
+        run: |
+          if [ ! -d "RUUTER/private/services/" ]; then
+            mkdir -p RUUTER/private/services/
+          fi
+        working-directory: ${{ github.workspace }}
+
+  copy_services:
+    runs-on: ubuntu-22.04
+    needs: setup_services
+
+    steps:
+      - name: Checkout services Repository
+        uses: actions/checkout@v2
+        with:
+          repository: buerokratt/Service-Module # Replace with the actual reposit
+          path: DSL
+
+      - name: Copy GET files to services
+        run: |
+          cp -R DSL/Ruuter/GET/. RUUTER/private/services/
+        working-directory: ${{ github.workspace }}
+
+      - name: Copy POST files to services
+        run: |
+          cp -R DSL/Ruuter/POST/. RUUTER/private/services/
+        working-directory: ${{ github.workspace }}
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Commit and push changes
+        run: |
+          git add .
+          git commit -m "Copy services files from CHATBOT repository"
+          git push origin main # Or the appropriate branch
+
+  setup_training:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check if training directory exists
+        run: |
+          if [ ! -d "RUUTER/private/training/" ]; then
+            mkdir -p RUUTER/private/training/
+          fi
+        working-directory: ${{ github.workspace }}
+
+  copy_training:
+    runs-on: ubuntu-22.04
+    needs: setup_training
+
+    steps:
+      - name: Checkout training Repository
+        uses: actions/checkout@v2
+        with:
+          repository: buerokratt/training-repo # Replace with the actual reposito
+          path: training
+
+      - name: Copy GET files to training
+        run: |
+          cp -R training/DSL.Ruuter.private/DSL/GET/. RUUTER/private/training/
+        working-directory: ${{ github.workspace }}
+
+      - name: Copy POST files to training
+        run: |
+          cp -R training/DSL.Ruuter.private/DSL/POST/. RUUTER/private/training/
+        working-directory: ${{ github.workspace }}
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Commit and push changes
+        run: |
+          git add .
+          git commit -m "Copy training files from CHATBOT repository"
+          git push origin main # Or the appropriate branch
+
+  setup_analytics:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check if analytics directory exists
+        run: |
+          if [ ! -d "RUUTER/private/analytics/" ]; then
+            mkdir -p RUUTER/private/analytics/
+          fi
+        working-directory: ${{ github.workspace }}
+
+  copy_analytics:
+    runs-on: ubuntu-22.04
+    needs: setup_analytics
+
+    steps:
+      - name: Checkout analytics Repository
+        uses: actions/checkout@v2
+        with:
+          repository: buerokratt/analytics-repo # Replace with the actual reposit
+          path: analytics
+
+      - name: Copy GET files to analytics
+        run: |
+          cp -R analytics/DSL.Ruuter.private/DSL/GET/. RUUTER/private/analytics/
+        working-directory: ${{ github.workspace }}
+
+      - name: Copy POST files to analytics
+        run: |
+          cp -R analytics/DSL.Ruuter.private/DSL/POST/. RUUTER/private/analytics/
+        working-directory: ${{ github.workspace }}
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Commit and push changes
+        run: |
+          git add .
+          git commit -m "Copy analytics files from CHATBOT repository"
+          git push origin main # Or the appropriate branch
