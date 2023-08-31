@@ -59,7 +59,7 @@ jobs:
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
           # Print copied files to changelog.md
-          changelog_entries="Date: $(date)\n\nCopied Files:\n$(find "$FOLDER_PATH" -type f | sed 's/$/\n/')"
+          changelog_entries="Date: $(date)\n\nCopied Files:\n$(find "$FOLDER_PATH" -type f)"
 
       - name: Create Empty README.md
         run: touch Ruuter/private/v2/backoffice/README.md
