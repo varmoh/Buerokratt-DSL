@@ -58,8 +58,8 @@ jobs:
           git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
-          # Delete old changelog.md and print copied files to changelog.md
-          rm -f changelog.md
+          # Print copied files to changelog.md
+          
           echo "Copied Files:" >> changelog.md
           find "$FOLDER_PATH" -type f >> changelog.md
 
