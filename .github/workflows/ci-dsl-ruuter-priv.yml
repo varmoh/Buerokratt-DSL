@@ -59,7 +59,12 @@ jobs:
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
           # Print copied files to changelog.md
-          changelog_entries=$(printf "Date: $(date)\n\nCopied Files:\n%s\n" "$(find "$FOLDER_PATH" -type f)")
+          rm -f changelog.md
+          echo "Date: $(date)" >> changelog.md
+          echo "" >> changelog.md
+          echo "Copied Files:" >> changelog.md
+          find "$FOLDER_PATH" -type f >> changelog.md
+          sed -i 's/$/\n/' changelog.md
 
 
       - name: Create Empty README.md
@@ -75,7 +80,7 @@ jobs:
 
       - name: Create Changelog
         run: |
-          echo -e "$changelog_entries" > changelog.md
+          
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add changelog.md
