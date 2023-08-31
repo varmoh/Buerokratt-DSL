@@ -58,7 +58,8 @@ jobs:
           git clone "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
-           # Print copied files to changelog.md
+          # Delete old changelog.md and print copied files to changelog.md
+          rm -f changelog.md
           echo "Copied Files:" >> changelog.md
           find "$FOLDER_PATH" -type f >> changelog.md
 
@@ -78,7 +79,6 @@ jobs:
           sed -i 's/$/\n/' changelog.md  # Add a line break at the end of each line
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git restore changelog.md
           git add changelog.md
           git diff-index --quiet HEAD || git commit -m "Add changelog with copied files"
           git push
