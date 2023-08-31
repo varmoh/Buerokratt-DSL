@@ -59,7 +59,8 @@ jobs:
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
           # Print copied files to changelog.md
-          
+           echo "Date: $(date)" >> changelog.md
+           echo "" >> changelog.md
            echo "Copied Files:" >> changelog.md
            find "$FOLDER_PATH" -type f >> changelog.md
            sed -i 's/$/\n/' changelog.md  # Add a line break at the end of each line
