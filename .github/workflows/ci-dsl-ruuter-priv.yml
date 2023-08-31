@@ -20,38 +20,44 @@ jobs:
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
             touch "$FOLDER_PATH/README.md"
-
-            SUBFOLDERS=("analytics" "backoffice" "services" "training")
-            for folder in "${SUBFOLDERS[@]}"; do
-              SUBFOLDER_PATH="$FOLDER_PATH$folder"
-              if [ ! -d "$SUBFOLDER_PATH" ]; then
-                echo "Creating $folder folder..."
-                mkdir -p "$SUBFOLDER_PATH"
-                touch "$SUBFOLDER_PATH/README.md"
-              else
-                echo "$folder folder already exists."
-              fi
-            done
           else
             echo "Folder structure already exists."
           fi
 
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/README.md"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
+
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL.Ruuter.private/DSL
           git clone "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT" "$FOLDER_PATH/backoffice"
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
+
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
           SOURCE_FOLDER_ANALYTICS=DSL/Ruuter
           git clone "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
-          cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS" "$FOLDER_PATH/analytics"
+          cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics"
+
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
           SOURCE_FOLDER_SERVICE=DSL/Ruuter
           git clone "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
-          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE" "$FOLDER_PATH/services"
+          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
+
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/Ruuter.private
           git clone "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
-          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING" "$FOLDER_PATH/training"
+          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
+
+      - name: Create Empty README.md
+        run: touch Ruuter/private/v2/backoffice/README.md
 
       - name: Commit and Push Folder Structure with Copied Contents
         run: |
