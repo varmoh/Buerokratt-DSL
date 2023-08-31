@@ -1,0 +1,9 @@
+checkOdpKey:
+  call: http.post
+  args:
+    url: "[#ANALYTICS_RESQL]/get-odp-settings"
+  result: odpsettings
+
+return:
+  return: ${odpsettings.response.body[0]}
+
