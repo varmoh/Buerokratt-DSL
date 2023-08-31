@@ -82,3 +82,10 @@ jobs:
           git add changelog.md
           git diff-index --quiet HEAD || git commit -m "Add changelog with copied files"
           git push
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+          rm -rf source-repo-analytics
+          rm -rf source-repo-service
+          rm -rf source-repo-training
