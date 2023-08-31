@@ -74,7 +74,7 @@ jobs:
 
       - name: Create Changelog
         run: |
-          
+          echo -e "$changelog_entries" > changelog.md
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add changelog.md
