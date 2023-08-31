@@ -1,8 +1,0 @@
-get_message:
-  call: http.get
-  args:
-    url: https://petstore3.swagger.io/api/v3/openapi.json
-  result: res
-
-return_value:
-  return: ${res.response.body}
