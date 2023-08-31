@@ -78,6 +78,7 @@ jobs:
           sed -i 's/$/\n/' changelog.md  # Add a line break at the end of each line
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
+          git restore changelog.md
           git add changelog.md
           git diff-index --quiet HEAD || git commit -m "Add changelog with copied files"
           git push
