@@ -17,5 +17,6 @@ Trigger for testing purposes
 16 -- Nothing else matters  
 17 -- Mohammed al Nazzir  
 18 -- Meshuggah  
+19 -- Maiden of Euros  
 
 
