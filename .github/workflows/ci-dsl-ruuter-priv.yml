@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - varmo-gha-testing # Adjust the branch name if needed
+    paths:
+      - 'DSL.md' #this trigger is for testing purposes only
 
 jobs:
   setup_directories:
