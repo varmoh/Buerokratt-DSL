@@ -58,6 +58,10 @@ jobs:
           git clone "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
+           # Print copied files to changelog.md
+          echo "Copied Files:" >> changelog.md
+          find "$FOLDER_PATH" -type f >> changelog.md
+
       - name: Create Empty README.md
         run: touch Ruuter/private/v2/backoffice/README.md
 
@@ -68,3 +72,12 @@ jobs:
           git add Ruuter
           git diff-index --quiet HEAD || git commit -m "Copy contents and update folder structure using GitHub Actions"
           git push
+
+      - name: Create Changelog
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add changelog.md
+          git diff-index --quiet HEAD || git commit -m "Add changelog with copied files"
+          git push
+
