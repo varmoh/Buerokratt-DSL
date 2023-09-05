@@ -1,46 +1,26 @@
+# Use the official Python 3.8 image as the base
 FROM python:3.8
+
+# Install Flask
 RUN pip install Flask
 
-COPY run.py /app/
-
+# Create the application directory
 WORKDIR /app
 
-# Create folder structure
-RUN mkdir -p \
-    /Ruuter/private/v2/backoffice \
-    /Ruuter/private/v2/analytics \
-    /Ruuter/private/v2/services \
-    /Ruuter/private/v2/training \
-    /Ruuter/public/v2/backoffice \
-    /Ruuter/public/v2/analytics \
-    /Ruuter/public/v2/services \
-    /Ruuter/public/v2/training \
-    /Resql/backoffice \
-    /Resql/analytics \
-    /Resql/services \
-    /Resql/training \
-    /Dmapper/v1/backoffice \
-    /Dmapper/v1/analytics \
-    /Dmapper/v1/services \
-    /Dmapper/v1/training \
-    /Dmapper/v2/backoffice \
-    /Dmapper/v2/analytics \
-    /Dmapper/v2/services \
-    /Dmapper/v2/training
-# Copy files
-COPY Ruuter/private/v2/backoffice /Ruuter/private/v2/backoffice
-COPY Ruuter/private/v2/analytics /Ruuter/private/v2/analytics
-COPY Ruuter/private/v2/services /Ruuter/private/v2/services
-COPY Ruuter/private/v2/training /Ruuter/private/v2/training
-COPY Ruuter/public/v2/backoffice /Ruuter/public/v2/backoffice
-COPY Ruuter/public/v2/analytics /Ruuter/public/v2/analytics
-COPY Ruuter/public/v2/services /Ruuter/public/v2/services
-COPY Ruuter/public/v2/training /Ruuter/public/v2/training
+# Copy the Python script and other files
+COPY run.py .
 
-COPY Resql/backoffice /Resql/backoffice
-COPY Resql/analytics /Resql/analytics
-COPY Resql/services /Resql//services
-COPY Resql/training /Resql/training
+# Define the directory structure
+ENV APP_DIRS="/Ruuter/private/v2 /Ruuter/public/v2 /Resql /Dmapper/v1 /Dmapper/v2"
+RUN mkdir -p $APP_DIRS
+RUN mkdir -p $APP_DIRS/backoffice $APP_DIRS/analytics $APP_DIRS/services $APP_DIRS/training
 
+# Copy files for each directory
+COPY Ruuter/private/v2 /Ruuter/private/v2
+COPY Ruuter/public/v2 /Ruuter/public/v2
+COPY Resql /Resql
+COPY Dmapper/v1 /Dmapper/v1
+COPY Dmapper/v2 /Dmapper/v2
+
+# Set the main command to run your application
 CMD ["python", "run.py"]
-
