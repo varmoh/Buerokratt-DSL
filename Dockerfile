@@ -28,7 +28,23 @@ RUN mkdir -p \
     /Dmapper/v2/services \
     /Dmapper/v2/training
 # Copy files
-COPY Ruuter/ /Ruuter/private/v2/backoffice
+COPY Ruuter/private/v2/backoffice /Ruuter/private/v2/backoffice
+COPY Ruuter/private/v2/analytics /Ruuter/private/v2/analytics
+COPY Ruuter/private/v2/services /Ruuter/private/v2/services
+COPY Ruuter/private/v2/training /Ruuter/private/v2/training
+COPY Ruuter/private/v2/backoffice /Ruuter/private/v2/backoffice
+COPY Ruuter/private/v2/analytics /Ruuter/private/v2/analytics
+COPY Ruuter/private/v2/services /Ruuter/private/v2/services
+COPY Ruuter/private/v2/training /Ruuter/private/v2/training
+
+COPY Resql/backoffice /Resql/backoffice
+COPY Resql/analytics /Resql/analytics
+COPY Resql/services /Resql//services
+COPY Resql/training /Resql/training
+COPY Resql/backoffice /Resql/backoffice
+COPY Resql/analytics /Resql/analytics
+COPY Resql/services /Resql/services
+COPY Resql/training /Resql/training
 
 CMD ["python", "run.py"]
 
