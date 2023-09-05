@@ -14,7 +14,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Check and Create Folder Structure and copy DSLs for Ruuter
+        
+      - name: Check and Create Folder Structure and copy DSLs for Ruuter v2 private
         run: |
           FOLDER_PATH=Ruuter/private/v2/
           if [ ! -d "$FOLDER_PATH" ]; then
@@ -54,6 +55,47 @@ jobs:
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/Ruuter.private
+          git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+          rm -rf source-repo-analytics
+          rm -rf source-repo-service
+          rm -rf source-repo-training
+
+      - name: Check and Create Folder Structure and copy DSLs for Ruuter v2 public
+        run: |
+          FOLDER_PATH=Ruuter/public/v2/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/README.md"
+          else
+            echo "Folder structure already exists."
+          fi
+
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/README.md"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
+
+          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+          SOURCE_FOLDER_CHATBOT=DSL.Ruuter.public/DSL
+          git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
+
+
+          SOURCE_REPO_TRAINING=buerokratt/Training-Module
+          SOURCE_FOLDER_TRAINING=DSL/Ruuter.public
           git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
@@ -115,8 +157,9 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add Ruuter
+          git add Ruuter.v2.priv
           git add Resql
+          git add Ruuter.v2.public
           git diff-index --quiet HEAD || git commit -m "Copy contents and update folder structure using GitHub Actions"
           git push
 
