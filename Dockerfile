@@ -32,10 +32,10 @@ COPY Ruuter/private/v2/backoffice /Ruuter/private/v2/backoffice
 COPY Ruuter/private/v2/analytics /Ruuter/private/v2/analytics
 COPY Ruuter/private/v2/services /Ruuter/private/v2/services
 COPY Ruuter/private/v2/training /Ruuter/private/v2/training
-COPY Ruuter/private/v2/backoffice /Ruuter/private/v2/backoffice
-COPY Ruuter/private/v2/analytics /Ruuter/private/v2/analytics
-COPY Ruuter/private/v2/services /Ruuter/private/v2/services
-COPY Ruuter/private/v2/training /Ruuter/private/v2/training
+COPY Ruuter/public/v2/backoffice /Ruuter/public/v2/backoffice
+COPY Ruuter/public/v2/analytics /Ruuter/public/v2/analytics
+COPY Ruuter/public/v2/services /Ruuter/public/v2/services
+COPY Ruuter/public/v2/training /Ruuter/public/v2/training
 
 COPY Resql/backoffice /Resql/backoffice
 COPY Resql/analytics /Resql/analytics
