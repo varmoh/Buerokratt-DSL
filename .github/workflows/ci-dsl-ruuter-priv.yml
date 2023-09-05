@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - dev # Adjust the branch name if needed
-    paths:
-      - '.env' #this trigger is for testing purposes only
+   # paths:
+   #   - '.env' #this trigger is for testing purposes only
 
 jobs:
   setup_directories:
