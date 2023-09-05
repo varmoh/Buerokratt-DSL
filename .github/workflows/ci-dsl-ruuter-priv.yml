@@ -67,7 +67,7 @@ jobs:
           
       - name: Check and Create Folder Structure and copy DSLs for RESQL
         run: |
-          FOLDER_PATH=Resql/
+          FOLDER_PATH=Resql/v2/
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
