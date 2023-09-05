@@ -41,10 +41,6 @@ COPY Resql/backoffice /Resql/backoffice
 COPY Resql/analytics /Resql/analytics
 COPY Resql/services /Resql//services
 COPY Resql/training /Resql/training
-COPY Resql/backoffice /Resql/backoffice
-COPY Resql/analytics /Resql/analytics
-COPY Resql/services /Resql/services
-COPY Resql/training /Resql/training
 
 CMD ["python", "run.py"]
 
