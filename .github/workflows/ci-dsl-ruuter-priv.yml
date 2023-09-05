@@ -157,9 +157,8 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add Ruuter.v2.priv
+          git add Ruuter
           git add Resql
-          git add Ruuter.v2.public
           git diff-index --quiet HEAD || git commit -m "Copy contents and update folder structure using GitHub Actions"
           git push
 
