@@ -11,7 +11,7 @@ WORKDIR /app
 COPY run.py .
 
 # Define the directory structure
-ENV APP_DIRS="/Ruuter/private/v2 /Ruuter/public/v2 /Resql /Dmapper/v1 /Dmapper/v2"
+ENV APP_DIRS="/Ruuter/private/v2 /Ruuter/public/v2 /Resql"
 RUN mkdir -p $APP_DIRS
 RUN mkdir -p $APP_DIRS/backoffice $APP_DIRS/analytics $APP_DIRS/services $APP_DIRS/training
 
