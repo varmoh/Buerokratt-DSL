@@ -19,8 +19,8 @@ RUN mkdir -p $APP_DIRS/backoffice $APP_DIRS/analytics $APP_DIRS/services $APP_DI
 COPY Ruuter/private/v2 /Ruuter/private/v2
 COPY Ruuter/public/v2 /Ruuter/public/v2
 COPY Resql /Resql
-COPY Dmapper/v1 /Dmapper/v1
-COPY Dmapper/v2 /Dmapper/v2
+#COPY Dmapper/v1 /Dmapper/v1
+#COPY Dmapper/v2 /Dmapper/v2
 
 # Set the main command to run your application
 CMD ["python", "run.py"]
