@@ -15,4 +15,4 @@ COPY Ruuter/private/v2/backoffice /Ruuter/private/v2/backoffice
 COPY Ruuter/private/v2/services /Ruuter/private/v2/services
 COPY Ruuter/private/v2/training /Ruuter/private/v2/training
 
-CMD ["sh", "-c", "echo 'Enjoy the Ruuter' && wait"]
+CMD ["bash", "tail", "-f", "/var/log/myapp.log"]
