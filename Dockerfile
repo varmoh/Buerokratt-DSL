@@ -1,5 +1,9 @@
-# Use a base image
-FROM alpine:3.18.3
+FROM python:3.8
+RUN pip install Flask
+
+COPY run.py /app/
+
+WORKDIR /app
 
 # Create folder structure
 RUN mkdir -p \
@@ -11,29 +15,20 @@ RUN mkdir -p \
     /Ruuter/public/v2/analytics \
     /Ruuter/public/v2/services \
     /Ruuter/public/v2/training \
-    /resql/backoffice \
-    /resql/analytics \
-    /resql/services \
-    /resql/training \
-    /dmapper/backoffice \
-    /dmapper/analytics \
-    /dmapper/services \
-    /dmapper/training \
-    /dmapper/v2/backoffice \
-    /dmapper/v2/analytics \
-    /dmapper/v2/services \
-    /dmapper/v2/training \ 
-
+    /Resql/backoffice \
+    /Resql/analytics \
+    /Resql/services \
+    /Resql/training \
+    /Dmapper/v1/backoffice \
+    /Dmapper/v1/analytics \
+    /Dmapper/v1/services \
+    /Dmapper/v1/training \
+    /Dmapper/v2/backoffice \
+    /Dmapper/v2/analytics \
+    /Dmapper/v2/services \
+    /Dmapper/v2/training
 # Copy files
-COPY Ruuter/private/v2/backoffice /Ruuter/private/v2/backoffice
-COPY Ruuter/private/v2/analytics /Ruuter/private/v2/analytics
-COPY Ruuter/private/v2/services /Ruuter/private/v2/services
-COPY Ruuter/private/v2/training /Ruuter/private/v2/training
-COPY Ruuter/private/v2/backoffice /Ruuter/private/v2/backoffice
-COPY Ruuter/private/v2/analytics /Ruuter/private/v2/analytics
-COPY Ruuter/private/v2/services /Ruuter/private/v2/services
-COPY Ruuter/private/v2/training /Ruuter/private/v2/training
+COPY Ruuter/ /Ruuter/private/v2/backoffice
 
-# Set the default command
-CMD ["tail", "-f", "/var/log/myapp.log"]
+CMD ["python", "run.py"]
 
