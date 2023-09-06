@@ -445,11 +445,7 @@ jobs:
 
       - name: Docker Build
         run: |
-          docker image build --tag $DOCKER_TAG_CUSTOM .
-           if [ $? -ne 0 ]; then
-          echo "Docker build failed, retrying..."
-          docker image build --tag $DOCKER_TAG_CUSTOM .
-          fi
+          docker image build --tag $DOCKER_TAG_CUSTOM --no-cache .
 
 
       - name: Log in to GitHub Container Registry
