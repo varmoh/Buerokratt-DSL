@@ -373,9 +373,9 @@ jobs:
           rm -rf source-repo-service
           rm -rf source-repo-training
 
-      - name: Check and Create Folder Structure and copy DSLs for Opensearch
+      - name: Check and Create Folder Structure and copy DSLs for OpenSearch 2
         run: |
-          FOLDER_PATH=Opensearch/
+          FOLDER_PATH=OpenSearch2/
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
@@ -414,7 +414,7 @@ jobs:
           git add DataMapper
           git add Liquibase
           git add OpenSearch
-          git add Opensearch
+          git add OpenSearch2
           git diff-index --quiet HEAD || git commit -m "Copy contents and update folder structure using GitHub Actions"
           git push
 
