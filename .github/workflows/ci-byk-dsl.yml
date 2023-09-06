@@ -449,6 +449,9 @@ jobs:
       - name: Docker Build
         run: |
           docker image build --tag $DOCKER_TAG_CUSTOM .
+            if [ $? -ne 0 ]; then
+          echo "Docker build failed, retrying..."
+          docker image build --tag $DOCKER_TAG_CUSTOM .
 
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
