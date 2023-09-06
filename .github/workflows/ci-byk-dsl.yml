@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - dev # Adjust the branch name if needed
-    paths:
-      - '.env' #this trigger is for testing purposes only
+#    paths:
+#      - '.env' #this trigger is for testing purposes only
 
 jobs:
   setup_directories:
@@ -429,6 +429,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dsl-files
-          path: ./Ruuter ./Resql ./DataMapper ./Liquibase ./OpenSearch ./OpenSearch2
+          path: Ruuter/
 
     
