@@ -355,6 +355,10 @@ jobs:
         run: |
           rm -rf source-repo-chatbot
 
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+
       - name: Check and Create Folder Structure and copy DSLs for OpenSearch
         run: |
           FOLDER_PATH=OpenSearch/
@@ -390,8 +394,6 @@ jobs:
 
       - name: Clean Up Cloned Repositories
         run: |
-          rm -rf source-repo-chatbot
-          rm -rf source-repo-analytics
           rm -rf source-repo-service
           rm -rf source-repo-training
 
@@ -425,10 +427,7 @@ jobs:
 
       - name: Clean Up Cloned Repositories
         run: |
-          rm -rf source-repo-chatbot
-          rm -rf source-repo-analytics
           rm -rf source-repo-service
-          rm -rf source-repo-training
 
       - name: Commit and Push Folder Structure with Copied Contents
         run: |
