@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - dev # Adjust the branch name if needed
-    paths:
-      - '.env' #this trigger is for testing purposes only
+#    paths:
+#      - '.env' #this trigger is for testing purposes only
 
 jobs:
   setup_directories:
@@ -148,6 +148,13 @@ jobs:
           SOURCE_FOLDER_TRAINING=DSL/Resql
           git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+          rm -rf source-repo-analytics
+          rm -rf source-repo-service
+          rm -rf source-repo-training
 
       - name: Check and Create Folder Structure and copy DSLs for DATAMAPPER v1
         run: |
