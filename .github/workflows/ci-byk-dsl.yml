@@ -419,11 +419,11 @@ jobs:
           git push
 
       # Add a debugging step to list the contents of a directory
-      - name: Debugging - List Contents of a Directory
-        run: |
-          ls -R
-          # or
-          find . -type f
+  #    - name: Debugging - List Contents of a Directory
+  #      run: |
+  #        ls -R
+  #        # or
+  #        find . -type f
       # Set up artifact
       - name: Archive DSL Files
         uses: actions/upload-artifact@v2
