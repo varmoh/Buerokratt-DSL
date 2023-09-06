@@ -429,7 +429,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dsl-files
-          path: Ruuter/ Resql/ DataMapper/ Liquibase/ OpenSearch/ OpenSearch2/
+          path: Ruuter/
+                Resql/
 
   build:
      needs: setup_directories
