@@ -1,0 +1,26 @@
+assign_values:
+  assign:
+    params: ${incoming.body}
+
+getIntentsWithName:
+  call: http.post
+  args:
+    url: "[#TRAINING_OPENSEARCH]:[#TRAINING_OPENSEARCH_PORT]/intents/_search/template"
+    body:
+      id: "intent-with-name"
+      params: ${incoming.params}
+  result: getIntentsResult
+  next: mapIntentsData
+
+mapIntentsData:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]:[#TRAINING_DMAPPER_PORT]/dmapper/get-examples"
+    body:
+      hits: ${getIntentsResult.response.body.hits.hits}
+  result: intentsData
+  next: returnSuccess
+
+returnSuccess:
+  return: ${intentsData.response.body}
+  next: end
