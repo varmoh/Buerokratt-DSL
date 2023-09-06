@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - dev # Adjust the branch name if needed
- #   paths:
- #     - '.env' #this trigger is for testing purposes only
+    paths:
+      - '.env' #this trigger is for testing purposes only
 
 jobs:
   setup_directories:
@@ -466,7 +466,7 @@ jobs:
         run: |
           docker image build --tag $DOCKER_TAG_CUSTOM .
           docker create --name dsl-container $DOCKER_TAG_CUSTOM
-          docker exec -it dsl-container mkdir -p /app
+          docker exec dsl-container mkdir -p /app
           docker cp dsl-container:/Ruuter /app/Ruuter
           docker cp dsl-container:/Resql /app/Resql
           docker cp dsl-container:/DataMapper /app/DataMapper
