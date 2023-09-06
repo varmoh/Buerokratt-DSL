@@ -424,4 +424,12 @@ jobs:
           rm -rf source-repo-analytics
           rm -rf source-repo-service
           rm -rf source-repo-training
-
+  trigger_docker_build:
+      runs-on: ubuntu-latest
+      needs: [setup_directories]
+    
+      steps:
+      - name: Trigger Docker Build Workflow
+        uses: actions/workflow-dispatch@v2
+        with:
+          workflow: Docker Build and Push
