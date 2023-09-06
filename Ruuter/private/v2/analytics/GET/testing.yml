@@ -1,8 +1,0 @@
-get_message:
-  call: http.post
-  args:
-    url: "[#ANALYTICS_RESQL]:[#ANALYTICS_RESQL_PORT]/testing"
-  result: the_message
-
-return_value:
-  return: ${the_message.response.body}
