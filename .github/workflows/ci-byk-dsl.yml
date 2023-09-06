@@ -302,20 +302,8 @@ jobs:
             echo "Folder structure already exists."
           fi
 
-          SUBFOLDERS=("backoffice")
-          for folder in "${SUBFOLDERS[@]}"; do
-            SUBFOLDER_PATH="$FOLDER_PATH$folder"
-            if [ ! -d "$SUBFOLDER_PATH" ]; then
-              echo "Creating $folder folder..."
-              mkdir -p "$SUBFOLDER_PATH"
-              touch "$SUBFOLDER_PATH/README.md"
-            else
-              echo "$folder folder already exists."
-            fi
-          done
-
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
-          SOURCE_FOLDER_CHATBOT=DSL.Liquibase
+          SOURCE_FOLDER_CHATBOT=DSL.Ruuter-v1.private
           git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
@@ -334,20 +322,8 @@ jobs:
             echo "Folder structure already exists."
           fi
 
-          SUBFOLDERS=("backoffice")
-          for folder in "${SUBFOLDERS[@]}"; do
-            SUBFOLDER_PATH="$FOLDER_PATH$folder"
-            if [ ! -d "$SUBFOLDER_PATH" ]; then
-              echo "Creating $folder folder..."
-              mkdir -p "$SUBFOLDER_PATH"
-              touch "$SUBFOLDER_PATH/README.md"
-            else
-              echo "$folder folder already exists."
-            fi
-          done
-
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
-          SOURCE_FOLDER_CHATBOT=DSL.Liquibase
+          SOURCE_FOLDER_CHATBOT=DSL.Ruuter-v1.public
           git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
