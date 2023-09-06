@@ -430,7 +430,7 @@ jobs:
         with:
           name: dsl-files
           path: Ruuter/
-                Resql/
+                
 
   build:
      needs: setup_directories
