@@ -4,6 +4,9 @@ FROM python:3.8
 # Install Flask
 RUN pip install Flask
 
+# Create the /app directory
+RUN mkdir -p /app
+
 # Create the application directory
 WORKDIR /app
 
