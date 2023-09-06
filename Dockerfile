@@ -10,6 +10,8 @@ WORKDIR /app
 # Copy the Python script and other files
 COPY run.py .
 
+RUN touch /tmp/invalidate_cache
+
 # Define the directory structure
 ENV APP_DIRS="/Ruuter/private/v2 /Ruuter/public/v2 Ruuter/private/v1 /Ruuter/public/v1 /Resql /DataMapper /Liquibase"
 RUN mkdir -p $APP_DIRS
