@@ -466,6 +466,8 @@ jobs:
         run: |
           docker image build --tag $DOCKER_TAG_CUSTOM .
           docker create --name dsl-container $DOCKER_TAG_CUSTOM
+          docker start dsl-container
+          sleep 5
           docker exec dsl-container mkdir -p /app
           docker cp dsl-container:/Ruuter /app/Ruuter
           docker cp dsl-container:/Resql /app/Resql
