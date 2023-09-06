@@ -293,7 +293,7 @@ jobs:
 
       - name: Check and Create Folder Structure and copy DSLs for Ruuter v1 private
         run: |
-          FOLDER_PATH=Ruuter/v1/private
+          FOLDER_PATH=Ruuter/private/v1/
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
@@ -325,7 +325,7 @@ jobs:
 
       - name: Check and Create Folder Structure and copy DSLs for Ruuter v1 public
         run: |
-          FOLDER_PATH=Ruuter/v1/public
+          FOLDER_PATH=Ruuter/public/v1/
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
