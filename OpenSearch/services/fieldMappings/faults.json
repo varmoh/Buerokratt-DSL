@@ -1,0 +1,33 @@
+{
+  "mappings": {
+    "properties": {
+      "requestId": {
+        "type": "number"
+      },
+      "serviceId": {
+        "type": "text"
+      },
+      "timestamp": {
+        "type": "number"
+      },
+      "level": {
+        "type": "text"
+      },
+      "statusCode": {
+        "type": "number"
+      },
+      "content": {
+        "type": "text"
+      },
+      "elements": {
+        "type": "text"
+      },
+      "environment": {
+        "type": "text"
+      },
+      "problems": {
+        "type": "number"
+      }
+    }
+  }
+}
