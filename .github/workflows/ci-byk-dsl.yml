@@ -158,7 +158,7 @@ jobs:
 
       - name: Check and Create Folder Structure and copy DSLs for DATAMAPPER v1
         run: |
-          FOLDER_PATH=Datamapper/v1/
+          FOLDER_PATH=DataMapper/v1/
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
@@ -208,7 +208,7 @@ jobs:
 
       - name: Check and Create Folder Structure and copy DSLs for DATAMAPPER v2
         run: |
-          FOLDER_PATH=Datamapper/v2/
+          FOLDER_PATH=DataMapper/v2/
           if [ ! -d "$FOLDER_PATH" ]; then
             echo "Folder structure does not exist, creating..."
             mkdir -p "$FOLDER_PATH"
