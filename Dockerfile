@@ -25,7 +25,7 @@ COPY DataMapper/v1 /DataMapper/v1
 COPY DataMapper/v2 /DataMapper/v2
 COPY Liquibase /Liquibase
 COPY OpenSearch /OpenSearch
-COPY Opensearch /Opensearch
+COPY Opensearch /Opensearch/
 
 LABEL org.opencontainers.image.description Docker PRE-ALPHA image for Buerokratt-DSL
 
