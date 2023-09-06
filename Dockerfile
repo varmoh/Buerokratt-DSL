@@ -9,14 +9,22 @@ WORKDIR /app
 
 # Copy the Python script and other files
 COPY run.py .
+# ...
 
-# Create a shell script for conditional copying
-COPY copy_directories.sh /usr/local/bin/copy_directories.sh
-RUN chmod +x /usr/local/bin/copy_directories.sh
+# Create directories in the image before copying
+RUN mkdir -p \
+    /Ruuter/private/v2 /Ruuter/public/v2 /Ruuter/private/v1 /Ruuter/public/v1 /Resql /DataMapper /Liquibase /OpenSearch /OpenSearch2
 
-# Define the directory structure
-ENV APP_DIRS="/Ruuter/private/v2 /Ruuter/public/v2 /Ruuter/private/v1 /Ruuter/public/v1 /Resql /DataMapper /Liquibase /OpenSearch /OpenSearch2"
-RUN mkdir -p $APP_DIRS
+# Copy files for each directory
+COPY Ruuter/private/v2 /Ruuter/private/v2
+COPY Ruuter/public/v2 /Ruuter/public/v2
+COPY Ruuter/private/v1 /Ruuter/private/v1
+COPY Ruuter/public/v1 /Ruuter/public/v1
+COPY Resql /Resql
+COPY DataMapper /DataMapper
+COPY Liquibase /Liquibase
+COPY OpenSearch /OpenSearch
+COPY Opensearch /OpenSearch2
 
 # Run the shell script to copy directories only if they exist
-CMD ["copy_directories.sh"]
+CMD ["python", "run.py"]
