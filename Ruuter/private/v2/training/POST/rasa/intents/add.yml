@@ -1,0 +1,107 @@
+assign_values:
+  assign:
+    intent: ${incoming.body.intent.replaceAll(/\s+/g, "_")}
+
+validateInputLength:
+  switch:
+    - condition: ${intent.length > 5}
+      next: getDomainFile
+  next: returnTooShortError
+
+getDomainFile:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]:[#TRAINING_PUBLIC_RUUTER_PORT]/domain-file"
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: domainData
+
+validateIntentExists:
+  switch:
+    - condition: ${domainData.response.body.response.intents.includes(intent)}
+      next: returnIntentExists
+  next: getFileLocations
+
+getFileLocations:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]:[#TRAINING_PUBLIC_RUUTER_PORT]/return-file-locations"
+  result: fileLocations
+
+mapIntentsData:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]:[#TRAINING_DMAPPER_PORT]/dmapper/get-intent-file"
+    body:
+      intent: ${intent}
+  result: intentFileJson
+
+convertJsonToYaml:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]:[#TRAINING_DMAPPER_PORT]/convert/json-to-yaml"
+    body:
+      version: "3.0"
+      nlu: ${intentFileJson.response.body}
+  result: intentYaml
+
+saveIntentFile:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]:[#TRAINING_DMAPPER_PORT]/file/write"
+    body:
+      file_path: ${fileLocations.response.body.response.intents_location + intent + "_nlu.yml.tmp"}
+      content: ${intentYaml.response.body.json}
+  result: fileResult
+
+mergeIntents:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]:[#TRAINING_DMAPPER_PORT]/merge"
+    body:
+      array1: ${[intent]}
+      array2: ${domainData.response.body.response.intents}
+  result: mergedIntents
+
+convertDomainJsonToYaml:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]:[#TRAINING_DMAPPER_PORT]/convert/json-to-yaml"
+    body:
+      version: ${domainData.response.body.response.version}
+      intents: ${mergedIntents.response.body}
+      entities: ${domainData.response.body.response.entities}
+      slots: ${domainData.response.body.response.slots}
+      forms: ${domainData.response.body.response.forms}
+      actions: ${domainData.response.body.response.actions}
+      responses: ${domainData.response.body.response.responses}
+      session_config: ${domainData.response.body.response.session_config}
+  result: domainYaml
+
+saveDomainFile:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]:[#TRAINING_DMAPPER_PORT]/file/write"
+    body:
+      file_path: ${fileLocations.response.body.response.domain_location}
+      content: ${domainYaml.response.body.json}
+  result: fileResult
+  next: returnSuccess
+
+returnSuccess:
+  return: "Intent created"
+  next: end
+
+returnTooShortError:
+  status: 409
+  return: "Intent name is too short"
+  next: end
+
+returnIntentExists:
+  status: 409
+  return: "Intent with that name already exists"
+  next: end
+
+returnUnauthorized:
+  return: "error: unauthorized"
+  next: end

@@ -1,0 +1,10 @@
+get_status:
+  call: http.post
+  args:
+    url: "[#SERVICE_RESQL]:[#SERVICE_RESQL_PORT]/status"
+    body:
+      id: ${incoming.body.id}
+  result: res
+
+return_value:
+  return: ${res.response.body}
