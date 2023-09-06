@@ -28,5 +28,7 @@ COPY --from=builder /Liquibase /Liquibase
 COPY --from=builder /OpenSearch /OpenSearch
 COPY --from=builder /Opensearch /Opensearch
 
+LABEL org.opencontainers.image.description Docker BETA image for Buerokratt-DSL
+
 # Set the main command to run your application
 CMD ["python", "run.py"]
