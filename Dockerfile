@@ -21,10 +21,11 @@ COPY Ruuter/public/v2 /Ruuter/public/v2
 COPY Ruuter/private/v1 /Ruuter/private/v1
 COPY Ruuter/public/v1 /Ruuter/public/v1
 COPY Resql /Resql
-COPY DataMapper /DataMapper
+COPY DataMapper/v1 /DataMapper/v1
+COPY DataMapper/v2 /DataMapper/v2
 COPY Liquibase /Liquibase
 COPY OpenSearch /OpenSearch
-COPY Opensearch /OpenSearch2
+COPY OpenSearch2 /OpenSearch2
 
 # Run the shell script to copy directories only if they exist
 CMD ["python", "run.py"]
