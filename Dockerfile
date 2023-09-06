@@ -11,7 +11,7 @@ WORKDIR /app
 COPY run.py .
 
 # Define the directory structure
-ENV APP_DIRS="/Ruuter/private/v2 /Ruuter/public/v2 Ruuter/private/v1 /Ruuter/public/v1 /Resql /DataMapper /Liquibase /OpenSearch /OpenSearch2"
+ENV APP_DIRS="/Ruuter/private/v2 /Ruuter/public/v2 Ruuter/private/v1 /Ruuter/public/v1 /Resql /DataMapper /Liquibase /OpenSearch"
 RUN mkdir -p $APP_DIRS
 #RUN mkdir -p $APP_DIRS/backoffice $APP_DIRS/analytics $APP_DIRS/services $APP_DIRS/training
 
@@ -25,7 +25,7 @@ COPY DataMapper/v1 /DataMapper/v1
 COPY DataMapper/v2 /DataMapper/v2
 COPY Liquibase /Liquibase
 COPY OpenSearch /OpenSearch
-COPY OpenSearch2 /OpenSearch2/
+
 
 LABEL org.opencontainers.image.description Docker PRE-ALPHA image for Buerokratt-DSL
 
