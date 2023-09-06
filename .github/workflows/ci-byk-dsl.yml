@@ -149,9 +149,91 @@ jobs:
           git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
- #     - name: Create Empty README.md
- #       run: touch Ruuter/private/v2/backoffice/README.md
- #            touch Resql/v2/backoffice/README.md
+      - name: Check and Create Folder Structure and copy DSLs for DATAMAPPER v1
+        run: |
+          FOLDER_PATH=Datamapper/v1/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/README.md"
+          else
+            echo "Folder structure already exists."
+          fi
+
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/README.md"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
+
+          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+          SOURCE_FOLDER_CHATBOT=DSL.DMapper
+          git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
+
+          SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
+          SOURCE_FOLDER_ANALYTICS=DSL/DMapper
+          git clone --depth=1 "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
+          cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics"
+
+          SOURCE_REPO_SERVICE=buerokratt/Service-Module
+          SOURCE_FOLDER_SERVICE=DSL/DMapper
+          git clone --depth=1 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
+          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
+
+          SOURCE_REPO_TRAINING=buerokratt/Training-Module
+          SOURCE_FOLDER_TRAINING=DSL/DataMapper
+          git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+          rm -rf source-repo-analytics
+          rm -rf source-repo-service
+          rm -rf source-repo-training
+
+      - name: Check and Create Folder Structure and copy DSLs for DATAMAPPER v2
+        run: |
+          FOLDER_PATH=Datamapper/v2/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/README.md"
+          else
+            echo "Folder structure already exists."
+          fi
+
+          SUBFOLDERS=("backoffice")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH"
+              touch "$SUBFOLDER_PATH/README.md"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
+
+          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
+          SOURCE_FOLDER_CHATBOT=DSL.DMapper-v2
+          git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-chatbot
+          rm -rf source-repo-analytics
+          rm -rf source-repo-service
+          rm -rf source-repo-training
+
 
       - name: Commit and Push Folder Structure with Copied Contents
         run: |
@@ -159,6 +241,7 @@ jobs:
           git config --local user.name "GitHub Actions"
           git add Ruuter
           git add Resql
+          git add DataMapper
           git diff-index --quiet HEAD || git commit -m "Copy contents and update folder structure using GitHub Actions"
           git push
 
