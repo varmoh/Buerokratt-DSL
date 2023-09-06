@@ -424,13 +424,15 @@ jobs:
           rm -rf source-repo-analytics
           rm -rf source-repo-service
           rm -rf source-repo-training
-  notify:
+  build:
      needs: setup_directories
      runs-on: ubuntu-22.04
 
      steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+         path: dev
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
