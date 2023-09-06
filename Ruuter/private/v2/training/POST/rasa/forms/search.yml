@@ -1,0 +1,43 @@
+assign_values:
+  assign:
+    params: ${incoming.body}
+
+authenticate:
+  template: extract-token
+  requestType: post
+  headers:
+    cookie: ${incoming.headers.cookie}
+  body:
+    role: "ROLE_ADMINISTRATOR"
+  result: permission
+
+validatePermission:
+  switch:
+    - condition: ${permission}
+      next: getFormsSlots
+  next: returnUnauthorized
+
+getFormsSlots:
+  call: http.post
+  args:
+    url: "[#TRAINING_OPENSEARCH]:[#TRAINING_OPENSEARCH_PORT]/forms/_search/template"
+    body:
+      id: "form-with-slot"
+      params: ${params}
+  result: getFormsResultSlots
+
+mapFormsSlotsData:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]:[#TRAINING_DMAPPER_PORT]/dmapper/get-forms-search-slots"
+    body:
+      hits: ${getFormsResultSlots.response.body.hits.hits}
+  result: formsData
+
+returnSuccess:
+  return: ${formsData.response.body}
+  next: end
+
+returnUnauthorized:
+  return: "error: unauthorized"
+  next: end
