@@ -13,7 +13,7 @@ COPY run.py .
 # Define the directory structure
 ENV APP_DIRS="/Ruuter/private/v2 /Ruuter/public/v2 Ruuter/private/v1 /Ruuter/public/v1 /Resql /DataMapper /Liquibase /OpenSearch /Opensearch"
 RUN mkdir -p $APP_DIRS
-RUN mkdir -p $APP_DIRS/backoffice $APP_DIRS/analytics $APP_DIRS/services $APP_DIRS/training
+#RUN mkdir -p $APP_DIRS/backoffice $APP_DIRS/analytics $APP_DIRS/services $APP_DIRS/training
 
 # Copy files for each directory
 COPY Ruuter/private/v2 /Ruuter/private/v2
