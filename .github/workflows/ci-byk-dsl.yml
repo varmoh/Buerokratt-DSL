@@ -418,12 +418,7 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Copy contents and update folder structure using GitHub Actions"
           git push
 
-      - name: Clean Up Cloned Repositories
-        run: |
-          rm -rf source-repo-chatbot
-          rm -rf source-repo-analytics
-          rm -rf source-repo-service
-          rm -rf source-repo-training
+    
   build:
      needs: setup_directories
      runs-on: ubuntu-22.04
@@ -431,8 +426,6 @@ jobs:
      steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-        with:
-         path: dev
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
