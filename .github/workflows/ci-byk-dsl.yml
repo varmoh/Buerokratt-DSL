@@ -469,12 +469,7 @@ jobs:
           docker start dsl-container
           sleep 5
           docker exec dsl-container mkdir -p /app
-          docker cp dsl-container:/Ruuter /Ruuter
-          docker cp dsl-container:/Resql /Resql
-          docker cp dsl-container:/DataMapper /DataMapper
-          docker cp dsl-container:/Liquibase /Liquibase
-          docker cp dsl-container:/OpenSearch /OpenSearch
-          docker cp dsl-container:/OpenSearch2 /OpenSearch2
+          docker cp  /OpenSearch2:dsl-container:/OpenSearch2
           docker rm dsl-container
 
       - name: Log in to GitHub Container Registry
