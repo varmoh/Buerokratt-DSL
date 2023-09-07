@@ -25,7 +25,7 @@ COPY Ruuter /Ruuter
 COPY Resql /Resql
 #COPY Dmapper/v1 /Dmapper/v1
 #COPY Dmapper/v2 /Dmapper/v2
-COPY Dmapper /Dmapper
+COPY DataMapper /DataMapper
 COPY Liquibase /Liquibase
 COPY OpenSearch /OpenSearch
 COPY OpenSearch2 /OpenSearch2
