@@ -1,2 +1,2 @@
 # Buerokratt-DSL
-Source of truth for Bürokratt-specific DSLs 
+Source of truth for Bürokratt-specific DSLs  
