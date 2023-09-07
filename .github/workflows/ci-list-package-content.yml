@@ -1,0 +1,23 @@
+name: List GitHub Packages Contents
+on:
+  push:
+    branches:
+      - dev # Adjust the branch name if needed
+    paths:
+      - 'README.md' #this trigger is for testing purposes only
+
+jobs:
+  list_contents:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install ghcr CLI
+        run: |
+          wget https://github.com/github/ghcr-cli/releases/latest/download/ghcr_$(uname -s)_$(uname -m) -O /usr/local/bin/ghcr
+          chmod +x /usr/local/bin/ghcr
+
+      - name: List Contents of GitHub Packages Repository
+        run: |
+          ghcr ls <OWNER>/<REPOSITORY> # Replace with your GitHub Packages repository details
