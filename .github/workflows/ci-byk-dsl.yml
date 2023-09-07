@@ -454,4 +454,31 @@ jobs:
 
       - name: Push Docker image to ghcr
         run: docker push $DOCKER_TAG_CUSTOM
+  delete_old_images:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Authenticate with GitHub Packages
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
+
+      - name: List Images
+        run: |
+          images=$(docker search docker.pkg.github.com/${{ github.repository }}/* | awk '{print $1}')
+          echo "$images" > images.txt
+
+      - name: Delete Old Images
+        run: |
+          images_to_delete=$(tail -n +4 images.txt | head -n -3)
+          for image in $images_to_delete; do
+            echo "Deleting image: $image"
+            docker image rm "$image" --force
+          done
 
