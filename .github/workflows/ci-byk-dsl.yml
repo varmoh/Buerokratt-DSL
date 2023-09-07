@@ -426,11 +426,7 @@ jobs:
      steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
- # Download the DSL files artifact
-      - name: Download DSL Files
-        uses: actions/download-artifact@v2
-        with:
-          name: dsl-files 
+
           
       - name: Load Environment Variables
         run: |
