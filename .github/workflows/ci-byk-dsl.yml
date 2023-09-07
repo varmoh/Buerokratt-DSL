@@ -471,8 +471,9 @@ jobs:
 
       - name: List Images
         run: |
-          images=$(docker search docker.pkg.github.com/${{ github.repository }}/* | awk '{print $1}')
-          echo "$images" > images.txt
+              docker search docker.pkg.github.com/${{ github.repository }}/* || true # Use || true to prevent the workflow from failing if there are no images
+              docker images # List all Docker images to debug the issue
+
 
       - name: Delete Old Images
         run: |
