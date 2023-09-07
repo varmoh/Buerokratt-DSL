@@ -418,20 +418,7 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Copy contents and update folder structure using GitHub Actions"
           git push
 
-      # Add a debugging step to list the contents of a directory
-  #    - name: Debugging - List Contents of a Directory
-  #      run: |
-  #        ls -R
-  #        # or
-  #        find . -type f
-      # Set up artifact
-      - name: Archive DSL Files
-        uses: actions/upload-artifact@v2
-        with:
-          name: dsl-files
-          path: OpenSearch2/
-                
-
+             
   build:
      needs: setup_directories
      runs-on: ubuntu-22.04
@@ -461,16 +448,10 @@ jobs:
           echo "DOCKER_TAG_CUSTOM=ghcr.io/${LOWER_CASE_GITHUB_REPOSITORY}:$RELEASE-$VERSION.$BUILD.$FIX" >> $GITHUB_ENV
           echo "$GITHUB_ENV"
 
-      # Build Docker image and copy the DSL files
       - name: Docker Build
-        run: |
-          docker image build --tag $DOCKER_TAG_CUSTOM .
-          docker create --name dsl-container $DOCKER_TAG_CUSTOM
-          docker start dsl-container
-          sleep 5
-          docker exec dsl-container mkdir -p /app
-          docker cp  /OpenSearch2:dsl-container:/OpenSearch2
-          docker rm dsl-container
+        run: | 
+           docker image build --tag $DOCKER_TAG_CUSTOM .
+
 
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
