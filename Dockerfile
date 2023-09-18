@@ -13,8 +13,8 @@ WORKDIR /app
 # Copy the Python script and other files
 COPY run.py .
 
-#ENV APP_DIRS="/Ruuter/private/v2 /Ruuter/public/v2 Ruuter/private/v1 /Ruuter/public/v1 /Resql /DataMapper /Liquibase /OpenSearch /OpenSearch2"
-ENV APP_DIRS="/Ruuter /Resql /DataMapper /Liquibase /OpenSearch /OpenSearch2"
+#ENV APP_DIRS="/Ruuter/private/v2 /Ruuter/public/v2 Ruuter/private/v1 /Ruuter/public/v1 /Resql /DataMapper /Liquibase /OpenSearch /OpenSearch2 /bot"
+ENV APP_DIRS="/Ruuter /Resql /DataMapper /Liquibase /OpenSearch /OpenSearch2 /bot"
 RUN mkdir -p $APP_DIRS
 
 #COPY Ruuter/private/v2 /Ruuter/private/v2
@@ -29,6 +29,7 @@ COPY DataMapper /DataMapper
 COPY Liquibase /Liquibase
 COPY OpenSearch /OpenSearch
 COPY OpenSearch2 /OpenSearch2
+COPY bot /bot
 
 LABEL org.opencontainers.image.description Docker PRE-ALPHA image for Buerokratt-DSL
 
