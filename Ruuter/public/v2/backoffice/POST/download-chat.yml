@@ -6,8 +6,7 @@ extractRequestData:
 getMessagesByChatId:
   call: http.post
   args:
-    # TODO: replace with env variable
-    url: http://resql:8082/get-chat-messages
+    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/get-chat-messages"
     body:
       chatId: ${chatId}
   result: getMessagesByChatIdResult
@@ -16,8 +15,7 @@ getMessagesByChatId:
 mapChatMessages:
   call: http.post
   args:
-    # TODO: replace with env variable
-    url: http://dmapper:3000/json/v2/format_chat_log
+    url: "[#CHATBOT_DMAPPER]:[#CHATBOT_DMAPPER_PORT]/json/v2/format_chat_log"
     body:
       data: ${getMessagesByChatIdResult.response.body}
   result: formattedChatMessages
@@ -26,8 +24,7 @@ mapChatMessages:
 convertDataToPdf:
   call: http.post
   args:
-    # TODO: replace with env variable
-    url: http://dmapper-v2:3005/js/convert/pdf
+    url: "[#CHATBOT_DMAPPER_V2]:[#CHATBOT_DMAPPER_V2_PORT]/js/convert/pdf"
     body:
       data: ${formattedChatMessages.response.body}
   result: pdfFile
@@ -49,8 +46,7 @@ checkIsEmailPresent:
 sendPdfToEmail:
   call: http.post
   args:
-    # TODO: replace with env variable
-    url: http://dmapper-v2:3005/js/email/sendMockEmail
+    url: "[#CHATBOT_DMAPPER_V2]:[#CHATBOT_DMAPPER_V2_PORT]/js/email/sendMockEmail"
     body:
       to: ${email}
       subject: "Chat history"

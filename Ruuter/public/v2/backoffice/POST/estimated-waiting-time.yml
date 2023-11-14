@@ -5,15 +5,13 @@ assignIncoming:
 getDurationTotalInSeconds:
   call: http.post
   args:
-    # TODO: replace with env variable
-    url: https://byk-resql:8443/get-ended-chats-total-duration-in-seconds
+    url: "[#CHATBOT_BYK_RESQL]:[#CHATBOT_BYK_RESQL_PORT]/get-ended-chats-total-duration-in-seconds"
   result: durationTotalInSeconds
 
 getUnassignedChats:
   call: http.post
   args:
-    # TODO: replace with env variable
-    url: https://byk-resql:8443/get-unassigned-chat-total-with-position-by-chat-id
+    url: "[#CHATBOT_BYK_RESQL]:[#CHATBOT_BYK_RESQL_PORT]/get-unassigned-chat-total-with-position-by-chat-id"
     body:
       chatId: "${chatId ? chatId : ''}"
   result: unassignedChats
@@ -35,8 +33,7 @@ calculateDuration:
 getEstimatedWaitingTime:
   call: http.post
   args:
-    # TODO: replace with env variable
-    url: https://byk-dmapper:8443/json/v2/reflect_waiting_time
+    url: "[#CHATBOT_BYK_DMAPPER]:[#CHATBOT_BYK_DMAPPER_PORT]/json/v2/reflect_waiting_time"
     body:
       durationInSeconds: '${calculatedDuration}'
       positionInUnassignedChats: '${position}'
