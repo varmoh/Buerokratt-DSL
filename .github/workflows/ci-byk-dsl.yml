@@ -448,7 +448,7 @@ jobs:
           find . -name "README.md" -type f -delete
       - name: Docker Build
         run: | 
-           docker image build --tag $DOCKER_TAG_CUSTOM .
+           docker image build --no-cache --tag $DOCKER_TAG_CUSTOM .
 
 
       - name: Log in to GitHub Container Registry
