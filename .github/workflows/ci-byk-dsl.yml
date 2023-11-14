@@ -41,33 +41,21 @@ jobs:
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL.Ruuter.private/DSL
           git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cd Buerokratt-Chatbot
-          git -C source-repo-chatbot checkout dev
-          cd ..
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
           SOURCE_FOLDER_ANALYTICS=DSL/Ruuter
           git clone --depth=1 "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
-          cd source-repo-analytics
-          git -C source-repo-analytics checkout dev
-          cd ..
           cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics"
 
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
           SOURCE_FOLDER_SERVICE=DSL/Ruuter
           git clone --depth=1 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
-          cd source-repo-service
-          git -C source-repo-service checkout dev
-          cd ..
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/Ruuter.private
           git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
-          cd source-repo-training
-          git -C source-repo-training checkout dev
-          cd ..
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
       - name: Clean Up Cloned Repositories
@@ -103,18 +91,12 @@ jobs:
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL.Ruuter.public/DSL
           git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cd source-repo-chatbot
-          git -C source-repo-chatbot checkout dev
-          cd ..
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/Ruuter.public
           git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
-          cd source-repo-training
-          git -C source-repo-training checkout dev
-          cd ..
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
       - name: Clean Up Cloned Repositories
@@ -150,33 +132,21 @@ jobs:
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL.Resql
           git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cd source-repo-chatbot
-          git -C source-repo-chatbot checkout dev
-          cd ..
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
           SOURCE_FOLDER_ANALYTICS=DSL/Resql
           git clone --depth=1 "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
-          cd source-repo-analytics
-          git -C source-repo-chatbot checkout dev
-          cd ..
           cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics"
 
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
           SOURCE_FOLDER_SERVICE=DSL/Resql
           git clone --depth=1 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
-          cd source-repo-service
-          git -C source-repo-service checkout dev
-          cd ..
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/Resql
           git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
-          cd source-repo-training
-          git -C source-repo-training checkout dev
-          cd ..
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
       - name: Clean Up Cloned Repositories
@@ -212,33 +182,21 @@ jobs:
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL.DMapper
           git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cd source-repo-chatbot
-          git -C source-repo-chatbot checkout dev
-          cd ..
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
           SOURCE_FOLDER_ANALYTICS=DSL/DMapper
           git clone --depth=1 "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
-          cd source-repo-analytics
-          git -C source-repo-analytics checkout dev
-          cd ..
           cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics"
 
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
           SOURCE_FOLDER_SERVICE=DSL/DMapper
           git clone --depth=1 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
-          cd source-repo-service
-          git -C source-repo-service checkout dev
-          cd ..
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/DataMapper
           git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
-          cd source-repo-training
-          git -C source-repo-training checkout dev
-          cd ..
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
       - name: Clean Up Cloned Repositories
@@ -274,9 +232,6 @@ jobs:
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL.DMapper-v2
           git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cd source-repo-chatbot
-          git -C source-repo-chatbot checkout dev
-          cd ..
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
       - name: Clean Up Cloned Repositories
@@ -312,33 +267,21 @@ jobs:
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL.Liquibase
           git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cd source-repo-chatbot
-          git -C source-repo-chatbot checkout dev
-          cd ..
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
           SOURCE_FOLDER_ANALYTICS=DSL/Liquibase
           git clone --depth=1 "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
-          cd source-repo-analytics
-          git -C source-repo-analytics checkout dev
-          cd ..
           cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics"
 
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
           SOURCE_FOLDER_SERVICE=DSL/Liquibase
           git clone --depth=1 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
-          cd source-repo-service
-          git -C source-repo-service checkout dev
-          cd ..
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/Liquibase
           git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
-          cd source-repo-training
-          git -C source-repo-training checkout dev
-          cd ..
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
       - name: Clean Up Cloned Repositories
@@ -362,9 +305,6 @@ jobs:
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL.Ruuter-v1.private
           git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cd source-repo-chatbot
-          git -C source-repo-chatbot checkout dev
-          cd ..
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH"
 
       - name: Clean Up Cloned Repositories
@@ -385,9 +325,6 @@ jobs:
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL.Ruuter-v1.public
           git clone --depth=1   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cd source-repo-chatbot
-          git -C source-repo-chatbot checkout dev
-          cd ..
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH"
 
       - name: Clean Up Cloned Repositories
@@ -424,17 +361,11 @@ jobs:
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
           SOURCE_FOLDER_SERVICE=DSL/OpenSearch
           git clone --depth=1 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
-          cd source-repo-service
-          git -C source-repo-service checkout dev
-          cd ..
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/OpenSearch
           git clone --depth=1  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
-          cd source-repo-training
-          git -C source-repo-training checkout dev
-          cd ..
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
       - name: Clean Up Cloned Repositories
@@ -468,9 +399,6 @@ jobs:
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
           SOURCE_FOLDER_SERVICE=DSL/Opensearch
           git clone --depth=1 "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
-          cd source-repo-service
-          git -C source-repo-service checkout dev
-          cd ..
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
 
       - name: Clean Up Cloned Repositories
@@ -528,32 +456,3 @@ jobs:
 
       - name: Push Docker image to ghcr
         run: docker push $DOCKER_TAG_CUSTOM
-#  delete_old_images:
-#    needs: build
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout Code
-#        uses: actions/checkout@v4
-
-#      - name: Set up Docker
-#        uses: actions/setup-python@v2
-#        with:
-#          python-version: '3.x'
-
-#      - name: Authenticate with GitHub Packages
-#        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
-
-#      - name: List Images
-#        run: |
-#              docker search docker.pkg.github.com/${{ github.repository }}/* || true # Use || true to prevent the workflow from failing if there are no images
-#              docker images # List all Docker images to debug the issue
-
-
- #     - name: Delete Old Images
- #       run: |
- #         images_to_delete=$(tail -n +4 images.txt | head -n -3)
- #         for image in $images_to_delete; do
- #           echo "Deleting image: $image"
- #           docker image rm "$image" --force
- #         done
-
