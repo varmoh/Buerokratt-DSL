@@ -1,0 +1,10 @@
+updateSettings:
+  call: http.post
+  args:
+    url: "[#SERVICE_RESQL]:[#SERVICE_RESQL_PORT]/get-settings"
+  result: results
+
+returnSuccess:
+  wrapper: false
+  status: 200
+  return: ${results.response.body}

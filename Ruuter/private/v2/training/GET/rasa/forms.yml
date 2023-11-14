@@ -1,0 +1,37 @@
+authenticate:
+  template: extract-token
+  requestType: post
+  headers:
+    cookie: ${incoming.headers.cookie}
+  body:
+    role: "ROLE_ADMINISTRATOR"
+  result: permission
+
+validatePermission:
+  switch:
+    - condition: ${permission}
+      next: getForms
+  next: returnUnauthorized
+
+getForms:
+  call: http.get
+  args:
+    url: "[#TRAINING_OPENSEARCH]:[#TRAINING_OPENSEARCH_PORT]/forms/_search?size=10000"
+  result: getFormsResult
+
+mapFormsData:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]:[#TRAINING_DMAPPER_PORT]/dmapper/get-forms"
+    body:
+      hits: ${getFormsResult.response.body.hits.hits}
+  result: formsData
+  next: returnSuccess
+
+returnSuccess:
+  return: ${formsData.response.body}
+  next: end
+
+returnUnauthorized:
+  return: "error: unauthorized"
+  next: end
