@@ -1,22 +1,22 @@
 name: Docker Build and Push
 
 on:
-  workflow_run:
-    workflows: ["Buerokratt DSL"]
-    types:
-      - completed
+  push:
+    branches:
+      - dev # Adjust the branch name if needed
+    paths:
+      - '.env.test' #this trigger is for testing purposes only
+
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
-    steps:
+     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
+          
       - name: Load Environment Variables
         run: |
           if [ -f .env ]; then
@@ -32,10 +32,13 @@ jobs:
           LOWER_CASE_GITHUB_REPOSITORY=$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')
           echo "DOCKER_TAG_CUSTOM=ghcr.io/${LOWER_CASE_GITHUB_REPOSITORY}:$RELEASE-$VERSION.$BUILD.$FIX" >> $GITHUB_ENV
           echo "$GITHUB_ENV"
-
-      - name: Docker Build
+      - name: Remove README.md files
         run: |
-          docker image build --tag $DOCKER_TAG_CUSTOM .
+          find . -name "README.md" -type f -delete
+      - name: Docker Build
+        run: | 
+           docker image build --no-cache --tag $DOCKER_TAG_CUSTOM .
+
 
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
