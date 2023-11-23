@@ -7,10 +7,9 @@ on:
     paths:
       - '.env.test' #this trigger is for testing purposes only
 
-
 jobs:
-  build-and-push:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-22.04
 
      steps:
       - name: Checkout Repository
