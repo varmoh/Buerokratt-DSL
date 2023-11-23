@@ -1,0 +1,16 @@
+[
+    {{#each data}}
+        {
+             "content": "{{content}}",
+             "buttons": "{{buttons}}",
+             "event": "{{event}}",
+             "authorFirstName": "{{authorFirstName}}",
+             "authorLastName": "{{authorLastName}}",
+             "authorRole": "{{authorRole}}",
+             "created": "{{created}}"
+        }
+        {{#unless @last}}
+            ,
+        {{/unless}}
+    {{/each}}
+]
