@@ -15,7 +15,7 @@ getMessagesByChatId:
 mapChatMessages:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]:[#CHATBOT_DMAPPER_PORT]/json/v2/format_chat_log"
+    url: "[#CHATBOT_DMAPPER]:[#CHATBOT_DMAPPER_PORT]/backoffice/format_chat_log"
     body:
       data: ${getMessagesByChatIdResult.response.body}
   result: formattedChatMessages

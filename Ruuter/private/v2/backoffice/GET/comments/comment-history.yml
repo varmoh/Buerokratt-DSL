@@ -30,7 +30,7 @@ getChatHistoryComment:
 mapChatHistoryCommentData:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]:[#CHATBOT_DMAPPER_PORT]/json/v2/return_chat_history_comment"
+    url: "[#CHATBOT_DMAPPER]:[#CHATBOT_DMAPPER_PORT]/backoffice/return_chat_history_comment"
     body:
       historyComment: ${getChatHistoryCommentResult.response.body}
   result: chatHistoryCommentData
