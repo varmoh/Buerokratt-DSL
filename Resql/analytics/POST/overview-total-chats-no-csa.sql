@@ -12,7 +12,7 @@ WITH chats AS (
             SELECT 1
             FROM message
             WHERE message.chat_base_id = chat.base_id
-                AND message.author_role = 'backoffice-user'
+                AND message.author_role = 'hbs/backoffice-user'
         )
         AND EXISTS (
             SELECT 1

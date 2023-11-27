@@ -13,7 +13,7 @@ validateWidgetConfigExists:
 mapWidgetConfigData:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]:[#CHATBOT_DMAPPER_PORT]/backoffice/return_widget_config"
+    url: "[#CHATBOT_DMAPPER]:[#CHATBOT_DMAPPER_PORT]/hbs/backoffice/return_widget_config"
     body:
       configurationArray: ${getWidgetConfigResult.response.body}
   result: widgetConfigData

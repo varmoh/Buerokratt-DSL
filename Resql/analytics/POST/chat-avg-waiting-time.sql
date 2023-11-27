@@ -15,7 +15,7 @@ average_waiting_time AS (
   FROM user_messages m
   JOIN message byk
   ON m.chat_base_id = byk.chat_base_id
-  AND byk.author_role = 'backoffice-user'
+  AND byk.author_role = 'hbs/backoffice-user'
   GROUP BY time
 )
 SELECT * FROM average_waiting_time

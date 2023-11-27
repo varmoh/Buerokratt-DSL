@@ -10,7 +10,7 @@ WITH closed_chats AS (
       SELECT 1
       FROM message m2
       WHERE m.chat_base_id = m2.chat_base_id
-      AND m2.author_role = 'backoffice-user'
+      AND m2.author_role = 'hbs/backoffice-user'
     )
     AND chat.created::date BETWEEN :start::date AND :end::date
     GROUP BY chat_base_id

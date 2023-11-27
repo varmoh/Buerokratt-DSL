@@ -3,7 +3,7 @@ WITH chats AS (
   FROM chat
   JOIN message ON message.chat_base_id = chat.base_id
   WHERE chat.created::date BETWEEN :start::date AND :end::date
-    AND message.author_role IN ('backoffice-user', 'end-user')
+    AND message.author_role IN ('hbs/backoffice-user', 'end-user')
     AND message.author_id IS NOT NULL
     AND message.author_id <> ''
     AND message.author_id <> 'null'

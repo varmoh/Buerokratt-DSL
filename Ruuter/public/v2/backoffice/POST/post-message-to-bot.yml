@@ -213,7 +213,7 @@ getInstant:
 convert_bot_responses_to_messages:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]:[#CHATBOT_DMAPPER_PORT]/backoffice/bot_responses_to_messages"
+    url: "[#CHATBOT_DMAPPER]:[#CHATBOT_DMAPPER_PORT]/hbs/backoffice/bot_responses_to_messages"
     body:
       botMessages: ${post_message_to_client_result.response.body}
       chatId: ${chatId}

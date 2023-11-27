@@ -54,7 +54,7 @@ second_query AS (
         FROM user_messages m
         JOIN message ms
         ON m.chat_base_id = ms.chat_base_id
-        AND ms.author_role = 'backoffice-user'
+        AND ms.author_role = 'hbs/backoffice-user'
         WHERE prev_message_time IS NOT NULL
         GROUP BY m.chat_base_id
     )

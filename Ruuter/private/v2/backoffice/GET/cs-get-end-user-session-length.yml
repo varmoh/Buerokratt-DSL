@@ -28,7 +28,7 @@ getConfigurationValue:
 mapData:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]:[#CHATBOT_DMAPPER_PORT]/backoffice/return_first_configuration_from_array"
+    url: "[#CHATBOT_DMAPPER]:[#CHATBOT_DMAPPER_PORT]/hbs/backoffice/return_first_configuration_from_array"
     body:
       configurationArray: ${getConfigurationValueResult.response.body}
   result: dataMapperData
