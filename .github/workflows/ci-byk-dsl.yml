@@ -122,7 +122,7 @@ jobs:
             SUBFOLDER_PATH="$FOLDER_PATH$folder"
             if [ ! -d "$SUBFOLDER_PATH" ]; then
               echo "Creating $folder folder..."
-              mkdir -p "$SUBFOLDER_PATH"
+              mkdir -p "$SUBFOLDER_PATH/GET"
               touch "$SUBFOLDER_PATH/readme.yml"
             else
               echo "$folder folder already exists."
