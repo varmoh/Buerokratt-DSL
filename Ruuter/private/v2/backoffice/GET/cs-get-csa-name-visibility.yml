@@ -20,7 +20,7 @@ check_authority_result:
 getConfigurationValue:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/get-configuration"
+    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/backoffice/get-configuration"
     body:
       key: "is_csa_name_visible"
   result: getConfigurationValueResult

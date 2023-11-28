@@ -40,7 +40,7 @@ check_authority_result:
 setOrganizationWorkingTime:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/set-organization-working-time"
+    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/backoffice/set-organization-working-time"
     body:
       organizationMondayWorkingTimeStartISO: ${organizationMondayWorkingTimeStartISO}
       organizationMondayWorkingTimeEndISO: ${organizationMondayWorkingTimeEndISO}

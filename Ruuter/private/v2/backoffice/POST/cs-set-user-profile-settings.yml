@@ -28,7 +28,7 @@ check_authority_result:
 setUserSettingValue:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/set-user-profile-settings"
+    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/backoffice/set-user-profile-settings"
     body:
       userId: ${userId}
       forwardedChatPopupNotifications: ${forwardedChatPopupNotifications}

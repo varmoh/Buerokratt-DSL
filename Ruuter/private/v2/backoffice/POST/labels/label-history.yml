@@ -22,7 +22,7 @@ check_authority_result:
 setChatLabels:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/insert-chat-history-labels"
+    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/backoffice/insert-chat-history-labels"
     body:
       labels: ${labels}
       chatId: ${chatId}

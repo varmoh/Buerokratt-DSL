@@ -21,7 +21,7 @@ check_authority_result:
 getChatHistoryComment:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/get-chat-history-comment-by-id"
+    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/backoffice/get-chat-history-comment-by-id"
     body:
       chatId: ${chatId}
   result: getChatHistoryCommentResult

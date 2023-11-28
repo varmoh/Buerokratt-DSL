@@ -20,7 +20,7 @@ check_authority_result:
 getEmergencyNotice:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/get-emergency-notice"
+    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/backoffice/get-emergency-notice"
   result: getEmergencyNoticeResult
   next: validateEmergencyNoticeExists
 
