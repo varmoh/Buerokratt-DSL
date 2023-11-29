@@ -107,26 +107,6 @@
           }
         }
       }
-    },
-    {
-      "blacklist_tara_jwt": {
-        "verify": {
-          "response": {
-            "ok": "proceed",
-            "nok": "stop"
-          }
-        },
-        "proceed": {
-          "method": "post",
-          "endpoint": "{tim_url}/jwt/blacklist",
-          "cookies": ["JWTTOKEN"],
-          "post_body_struct": {},
-          "response": {
-            "ok": "proceed",
-            "nok": "proceed"
-          }
-        }
-      }
     }
   ]
 }
