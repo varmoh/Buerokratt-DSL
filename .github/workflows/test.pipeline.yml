@@ -45,7 +45,7 @@ jobs:
           SOURCE_FOLDER_CHATBOT=DSL.Ruuter.private/DSL
           git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/hbs/backoffice"
-          find $FOLDER_PATH/Ruuter -iname '*.yml' -exec sed -i 's/\ templates/\ backoffice\/templates/g' {} \;
+          find $FOLDER_PATH/ -iname '*.yml' -exec sed -i 's/\ templates/\ backoffice\/templates/g' {} \;
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
           SOURCE_FOLDER_ANALYTICS=DSL/Ruuter
