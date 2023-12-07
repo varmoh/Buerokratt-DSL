@@ -10,7 +10,7 @@ extractRequestData:
   next: check_if_authorized 
 
 check_if_authorized:
-  template: templates/check-user-authority
+  template: backoffice/templates/check-user-authority
   requestType: post
   headers:
     cookie: ${cookie}
