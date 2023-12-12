@@ -42,5 +42,5 @@ returnUnauthorized:
   next: end
 
 returnNotFound:
-  return: "error: not found"
+  return: ${userId}
   next: end
