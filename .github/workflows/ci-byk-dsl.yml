@@ -26,7 +26,7 @@ jobs:
             echo "Folder structure already exists."
           fi
 
-          SUBFOLDERS=("analytics" "hbs/backoffice" "services" "training")
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
           for folder in "${SUBFOLDERS[@]}"; do
             SUBFOLDER_PATH="$FOLDER_PATH$folder"
             if [ ! -d "$SUBFOLDER_PATH" ]; then
@@ -81,7 +81,7 @@ jobs:
             echo "Folder structure already exists."
           fi
 
-          SUBFOLDERS=("analytics" "hbs/backoffice" "services" "training")
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
           for folder in "${SUBFOLDERS[@]}"; do
             SUBFOLDER_PATH="$FOLDER_PATH$folder"
             if [ ! -d "$SUBFOLDER_PATH" ]; then
@@ -94,7 +94,7 @@ jobs:
           done
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
-          SOURCE_FOLDER_CHATBOT=Ruuter.public/DSL
+          SOURCE_FOLDER_CHATBOT=DSL/Ruuter.public/DSL
           git clone --depth=1 --branch=dev   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/hbs/backoffice"
 
@@ -257,7 +257,7 @@ jobs:
             echo "Folder structure already exists."
           fi
 
-          SUBFOLDERS=("analytics" "hbs/backoffice" "services" "training")
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
           for folder in "${SUBFOLDERS[@]}"; do
             SUBFOLDER_PATH="$FOLDER_PATH$folder"
             if [ ! -d "$SUBFOLDER_PATH" ]; then
