@@ -42,9 +42,9 @@ jobs:
           done
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
-          SOURCE_FOLDER_CHATBOT=Ruuter.private/DSL
+          SOURCE_FOLDER_CHATBOT=DSL/Ruuter.private/DSL
           git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/hbs/backoffice"
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
           SOURCE_FOLDER_ANALYTICS=DSL/Ruuter
