@@ -10,7 +10,7 @@ extract_request_data:
   next: check_if_authorized
 
 check_if_authorized:
-  template: backoffice/templates/check-user-authority
+  template: templates/check-user-authority
   requestType: post
   headers:
     cookie: ${cookie}
@@ -26,7 +26,7 @@ check_authority_result:
 get_metrics_preferences:
   call: http.post
   args:
-    url: "[#ANALYTICS_RESQL]:[#ANALYTICS_RESQL_PORT]/overview-metric-preferences"
+    url: "[#ANALYTICS_RESQL]/overview-metric-preferences"
     body:
       user_id_code: ${authority_result.idCode}
   result: metrics

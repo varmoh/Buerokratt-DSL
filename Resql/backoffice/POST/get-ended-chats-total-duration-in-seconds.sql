@@ -15,7 +15,7 @@ SELECT SUM(ABS(EXTRACT(EPOCH FROM
                         WHERE id IN (SELECT min(id)
                                      FROM message
                                      WHERE chat_base_id = c.base_id
-                                       AND author_role = 'hbs/backoffice-user'))
+                                       AND author_role = 'backoffice-user'))
                            - (SELECT author_timestamp
                               FROM message
                               WHERE id IN (SELECT max(id)

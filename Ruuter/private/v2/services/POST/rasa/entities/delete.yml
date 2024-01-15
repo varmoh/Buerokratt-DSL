@@ -5,7 +5,7 @@ assign_values:
 getDomainFile:
   call: http.get
   args:
-    url: http://ruuter:8086/domain-file
+    url: "[#SERVICE_RUUTER]/domain-file"
   result: domainData
 
 validateEntities:
@@ -17,7 +17,7 @@ validateEntities:
 domainEntities:
   call: http.post
   args:
-    url: http://localhost:8080/rasa/entities
+    url: "[#TRAINING_RUUTER]/rasa/entities"
     body:
       entity: ${parameters.entity_name}
   result: domainEntities
@@ -31,7 +31,7 @@ validateDomainEntities:
 regexEntities:
   call: http.post
   args:
-    url: http://localhost:8080/rasa/regex
+    url: "[#TRAINING_RUUTER]/rasa/regex"
     body:
       regex: ${parameters.entity_name}
       examples: false
@@ -46,7 +46,7 @@ validateRegexEntities:
 intentEntities:
   call: http.post
   args:
-    url: http://localhost:8080/rasa/examples/entities
+    url: "[#TRAINING_RUUTER]/rasa/examples/entities"
     headers:
       cookie: ${cookie}
     body:
@@ -63,7 +63,7 @@ validateIntentEntities:
 deleteEntity:
   call: http.post
   args:
-    url: http://host.docker.internal:3000/dmapper/delete-entity
+    url: "[#TRAINING_NODE]/dmapper/delete-entity"
     body:
       entities: ${domainData.response.body.response.entities}
       entity_name: ${parameters.entity_name}
@@ -72,7 +72,7 @@ deleteEntity:
 convertJsonToYaml:
   call: http.post
   args:
-    url: "[#SERVICE_NODE]:[#SERVICE_NODE_PORT]/conversion/json_to_yaml"
+    url: "[#SERVICE_NODE]/conversion/json_to_yaml"
     body:
       version: ${domainData.response.body.response.version}
       intents: ${domainData.response.body.response.intents}
@@ -87,13 +87,13 @@ convertJsonToYaml:
 getFileLocations:
   call: http.get
   args:
-    url: http://ruuter:8086/return-file-locations
+    url: "[#SERVICE_RUUTER]/return-file-locations"
   result: fileLocations
 
 saveDomainFile:
   call: http.post
   args:
-    url: "[#SERVICE_NODE]:[#SERVICE_NODE_PORT]/file/write"
+    url: "[#SERVICE_NODE]/file/write"
     body:
       file_path: ${fileLocations.response.body.response.domain_location}
       content: ${domainYaml.response.body.json}

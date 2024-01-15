@@ -3,7 +3,7 @@ SELECT date_trunc(:metric, chat.created) AS date_time, message.event AS event,
 FROM chat JOIN message ON chat.base_id = message.chat_base_id
 AND status = 'ENDED'
 AND message.event IN (:events)
-AND message.author_role = 'hbs/backoffice-user'
+AND message.author_role = 'backoffice-user'
 AND chat.created::date BETWEEN :start::date AND :end::date
 GROUP BY date_time, event
 ORDER BY event

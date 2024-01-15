@@ -6,27 +6,18 @@ extractRequestData:
 getMessagesByChatId:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/backoffice/get-chat-messages"
+    url: "[#CHATBOT_RESQL]/get-chat-messages"
     body:
       chatId: ${chatId}
   result: getMessagesByChatIdResult
-  next: mapChatMessages
-
-mapChatMessages:
-  call: http.post
-  args:
-    url: "[#CHATBOT_DMAPPER]:[#CHATBOT_DMAPPER_PORT]/hbs/backoffice/format_chat_log"
-    body:
-      data: ${getMessagesByChatIdResult.response.body}
-  result: formattedChatMessages
   next: convertDataToPdf
 
 convertDataToPdf:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER_V2]:[#CHATBOT_DMAPPER_V2_PORT]/js/convert/pdf"
+    url: "[#CHATBOT_DMAPPER]/js/convert/pdf"
     body:
-      data: ${formattedChatMessages.response.body}
+      data: ${getMessagesByChatIdResult.response.body}
   result: pdfFile
   next: checkPdfExists
 
@@ -46,7 +37,7 @@ checkIsEmailPresent:
 sendPdfToEmail:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER_V2]:[#CHATBOT_DMAPPER_V2_PORT]/js/email/sendMockEmail"
+    url: "[#CHATBOT_DMAPPER]/js/email/sendMockEmail"
     body:
       to: ${email}
       subject: "Chat history"
