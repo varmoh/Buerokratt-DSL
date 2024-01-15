@@ -96,7 +96,7 @@ jobs:
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL/Ruuter.public/DSL
           git clone --depth=1 --branch=dev   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/hbs/backoffice"
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
@@ -122,7 +122,7 @@ jobs:
             echo "Folder structure already exists."
           fi
 
-          SUBFOLDERS=("analytics" "hbs/backoffice" "services" "training")
+          SUBFOLDERS=("analytics" "backoffice" "services" "training")
           for folder in "${SUBFOLDERS[@]}"; do
             SUBFOLDER_PATH="$FOLDER_PATH$folder"
             if [ ! -d "$SUBFOLDER_PATH" ]; then
@@ -137,7 +137,7 @@ jobs:
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL.Resql
           git clone --depth=1 --branch=dev   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/hbs/backoffice/POST"
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice/POST"
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
           SOURCE_FOLDER_ANALYTICS=DSL/Resql
@@ -272,7 +272,7 @@ jobs:
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL.Liquibase
           git clone --depth=1 --branch=dev   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/hbs/backoffice"
+          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
           SOURCE_FOLDER_ANALYTICS=DSL/Liquibase
