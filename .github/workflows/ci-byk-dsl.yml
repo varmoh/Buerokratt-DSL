@@ -42,7 +42,7 @@ jobs:
           done
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
-          SOURCE_FOLDER_CHATBOT=DSL.Ruuter.private/DSL
+          SOURCE_FOLDER_CHATBOT=Ruuter.private/DSL
           git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/hbs/backoffice"
 
@@ -94,7 +94,7 @@ jobs:
           done
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
-          SOURCE_FOLDER_CHATBOT=DSL.Ruuter.public/DSL
+          SOURCE_FOLDER_CHATBOT=Ruuter.public/DSL
           git clone --depth=1 --branch=dev   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/hbs/backoffice"
 
@@ -296,49 +296,7 @@ jobs:
           rm -rf source-repo-service
           rm -rf source-repo-training
 
-      - name: Check and Create Folder Structure and copy DSLs for Ruuter v1 private
-        run: |
-          FOLDER_PATH=Ruuter/private/v1/
-          if [ ! -d "$FOLDER_PATH" ]; then
-            echo "Folder structure does not exist, creating..."
-            mkdir -p "$FOLDER_PATH"
-            touch "$FOLDER_PATH/readme.yml"
-          else
-            echo "Folder structure already exists."
-          fi
 
-          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
-          SOURCE_FOLDER_CHATBOT=DSL.Ruuter-v1.private
-          git clone --depth=1 --branch=dev   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH"
-
-      - name: Clean Up Cloned Repositories
-        run: |
-          rm -rf source-repo-chatbot
-
-      - name: Check and Create Folder Structure and copy DSLs for Ruuter v1 public
-        run: |
-          FOLDER_PATH=Ruuter/public/v1/
-          if [ ! -d "$FOLDER_PATH" ]; then
-            echo "Folder structure does not exist, creating..."
-            mkdir -p "$FOLDER_PATH"
-            touch "$FOLDER_PATH/readme.yml"
-          else
-            echo "Folder structure already exists."
-          fi
-
-          SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
-          SOURCE_FOLDER_CHATBOT=DSL.Ruuter-v1.public
-          git clone --depth=1 --branch=dev   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
-          cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH"
-
-      - name: Clean Up Cloned Repositories
-        run: |
-          rm -rf source-repo-chatbot
-
-      - name: Clean Up Cloned Repositories
-        run: |
-          rm -rf source-repo-chatbot
 
       - name: Check and Create Folder Structure and copy DSLs for OpenSearch
         run: |
