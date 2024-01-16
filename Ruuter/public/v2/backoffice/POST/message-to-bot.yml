@@ -9,7 +9,7 @@ extractRequestData:
 check_bot_is_active:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-configuration"
+    url: "[#CHATBOT_RESQL]/backoffice/get-configuration"
     body:
       key: "is_bot_active"
   result: is_bot_active_result
@@ -24,7 +24,7 @@ check_for_bot_active_result:
 get_bot_name:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-configuration"
+    url: "[#CHATBOT_RESQL]/backoffice/get-configuration"
     body:
       key: "bot_institution_id"
   result: get_bot_name_result
@@ -39,7 +39,7 @@ check_for_bot_name_result:
 get_chat:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-chat-by-id"
+    url: "[#CHATBOT_RESQL]/backoffice/get-chat-by-id"
     body:
       id: ${chatId}
   result: get_chat_result
@@ -82,7 +82,7 @@ check_if_bot_is_unable_to_reply:
 get_organization_working_details:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-is-organization-available"
+    url: "[#CHATBOT_RESQL]/backoffice/get-is-organization-available"
     body:
       holidays: ${holidays}
       holiday_names: ${holidayNames}
@@ -108,7 +108,7 @@ check_if_organization_is_available:
 return_is_a_holiday:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/insert-bot-message"
+    url: "[#CHATBOT_RESQL]/backoffice/insert-bot-message"
     body:
       messages: 
          -
@@ -126,7 +126,7 @@ return_is_a_holiday:
 return_organization_is_not_available:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/insert-bot-message"
+    url: "[#CHATBOT_RESQL]/backoffice/insert-bot-message"
     body:
       messages: 
          -
@@ -144,7 +144,7 @@ return_organization_is_not_available:
 get_all_available_csas:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-all-available-customer-support-agents"
+    url: "[#CHATBOT_RESQL]/backoffice/get-all-available-customer-support-agents"
   result: csas_res
   next: assign_available_csas
 
@@ -162,7 +162,7 @@ check_if_csas_are_available:
 send_csas_not_available_message:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/insert-bot-message"
+    url: "[#CHATBOT_RESQL]/backoffice/insert-bot-message"
     body:
       messages: 
          -
@@ -180,7 +180,7 @@ send_csas_not_available_message:
 redirect_chat_to_back_office:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/remove_cs_agent_from_chat"
+    url: "[#CHATBOT_RESQL]/backoffice/remove_cs_agent_from_chat"
     body:
       chatId: ${chatId}
   result: redirect_chat_to_back_office_result
@@ -208,7 +208,7 @@ convert_bot_responses_to_messages:
 add_bot_message_to_db:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/insert-bot-message"
+    url: "[#CHATBOT_RESQL]/backoffice/insert-bot-message"
     body:
       messages: ${converted_messages_res.response.body}
   result: add_bot_message_to_bot_result

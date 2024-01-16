@@ -20,7 +20,7 @@ check_authority_result:
 getConfigurationValue:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/get-configuration"
+    url: "[#CHATBOT_RESQL]/backoffice/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/get-configuration"
     body:
       key: "end_user_session_length"
   result: getConfigurationValueResult
