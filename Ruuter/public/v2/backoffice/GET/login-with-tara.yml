@@ -52,7 +52,7 @@ generate_cookie:
         "displayName": "${user.displayName}",
         "firstName": "${user.firstName}",
         "lastName": "${user.lastName}",
-        "csaEmail": null,
+        "csaEmail": "${user.csaEmail}",
         "csaTitle": "${user.csaTitle}",
         "authorities": "${user.authorities}",
         "authMethod": "${tara_info.response.body.authMethod}",
