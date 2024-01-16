@@ -1,3 +1,6 @@
+logstep1:
+  log: "Hello World"
+
 get_tara_user_info:
   call: http.get
   args:
