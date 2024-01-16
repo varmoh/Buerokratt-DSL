@@ -35,7 +35,7 @@ assignChatId:
 getActiveChatById:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-active-chat-by-id"
+    url: "[#CHATBOT_RESQL]/backoffice/get-active-chat-by-id"
     body:
       id: ${chatId}
   result: activeChatRes
@@ -64,7 +64,7 @@ assignUuid:
 insertMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/insert-message"
+    url: "[#CHATBOT_RESQL]/backoffice/insert-message"
     body:
       chatId: ${chatId}
       messageId: ${uuid}

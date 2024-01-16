@@ -30,7 +30,7 @@ validateBody:
 setEmergencyNotice:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/backoffice/set-emergency-notice"
+    url: "[#CHATBOT_RESQL]/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/set-emergency-notice"
     body:
       emergencyNoticeText: ${emergencyNoticeText}
       emergencyNoticeStartISO: ${emergencyNoticeStartISO}

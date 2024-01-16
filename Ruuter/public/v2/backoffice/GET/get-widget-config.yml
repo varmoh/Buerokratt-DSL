@@ -1,7 +1,7 @@
 getWidgetConfig:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/backoffice/get-widget-config"
+    url: "[#CHATBOT_RESQL]/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/get-widget-config"
   result: getWidgetConfigResult
 
 validateWidgetConfigExists:

@@ -26,7 +26,7 @@ check_authority_result:
 setWidgetConfig:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/backoffice/set-widget-config"
+    url: "[#CHATBOT_RESQL]/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/set-widget-config"
     body:
       widgetProactiveSeconds: ${widgetProactiveSeconds}
       widgetDisplayBubbleMessageSeconds: ${widgetDisplayBubbleMessageSeconds}

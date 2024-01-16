@@ -5,7 +5,7 @@ extractRequestData:
 getUserEmailByChatId:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/backoffice/get-user-email-by-chat-id"
+    url: "[#CHATBOT_RESQL]/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/get-user-email-by-chat-id"
     body:
       chatId: ${chatId}
   result: getUserEmailByChatIdResult
@@ -14,7 +14,7 @@ getUserEmailByChatId:
 getMessagesByChatId:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/backoffice/get-chat-messages"
+    url: "[#CHATBOT_RESQL]/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/get-chat-messages"
     body:
       chatId: ${chatId}
   result: getMessagesByChatIdResult
@@ -43,7 +43,7 @@ sendDataToEmail:
 registerEmailSentEvent:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]:[#CHATBOT_RESQL_PORT]/backoffice/insert-message"
+    url: "[#CHATBOT_RESQL]/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/insert-message"
     body:
       chatId: ${chatId}
       messageId: ""
