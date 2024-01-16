@@ -43,7 +43,7 @@ assignUser:
 #  next: generate_cookie  
 
 logstep:
-  log: ${user}
+  log: ${session_result.response}
 
 generate_cookie:
   call: http.post
