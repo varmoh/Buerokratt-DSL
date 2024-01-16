@@ -24,7 +24,7 @@ assignIdCode:
 getCustomerSupportActivity:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-customer-support-activity-by-id-code"
+    url: "[#CHATBOT_RESQL]/get-customer-support-activity-by-id-code"
     body:
       customerSupportId: ${idCode}
   result: res

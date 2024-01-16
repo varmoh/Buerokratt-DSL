@@ -24,7 +24,7 @@ assignChatId:
 getChat:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-chat-by-id"
+    url: "[#CHATBOT_RESQL]/get-chat-by-id"
     body:
       id: ${chatId}
   result: res

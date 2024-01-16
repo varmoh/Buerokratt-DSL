@@ -46,7 +46,7 @@ assignMessageUuid:
 get_session_length:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-configuration"
+    url: "[#CHATBOT_RESQL]/get-configuration"
     body:
       key: "session_length"
   result: session_result
@@ -88,7 +88,7 @@ postGreetingMessage:
 postClientMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/insert-message"
+    url: "[#CHATBOT_RESQL]/insert-message"
     body:
       chatId: ${chatUuid}
       messageId: ${messageUuid}
@@ -110,7 +110,7 @@ postClientMessage:
 insertChat:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/init-chat"
+    url: "[#CHATBOT_RESQL]/init-chat"
     body:
       id: ${chatUuid}
       endUserId: ${endUserId}
@@ -149,7 +149,7 @@ postMessageToBot:
 getChat:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-chat-by-id"
+    url: "[#CHATBOT_RESQL]/get-chat-by-id"
     body:
       id: ${chatUuid}
   result: chat_result

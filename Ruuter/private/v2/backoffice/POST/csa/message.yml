@@ -50,7 +50,7 @@ assignUuid:
 insertMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/insert-message"
+    url: "[#CHATBOT_RESQL]/insert-message"
     body:
       chatId: ${chatId}
       messageId: ${uuid}

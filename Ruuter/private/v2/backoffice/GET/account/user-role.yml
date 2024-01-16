@@ -24,7 +24,7 @@ assignIdCode:
 getUserRole:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-user-role"
+    url: "[#CHATBOT_RESQL]/get-user-role"
     body:
       userIdCode: ${idCode}
   result: roles_res

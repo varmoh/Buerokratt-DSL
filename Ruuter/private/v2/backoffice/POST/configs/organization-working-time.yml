@@ -24,7 +24,7 @@ extractRequestData:
 setOrganizationWorkingTime:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/set-organization-working-time"
+    url: "[#CHATBOT_RESQL]/set-organization-working-time"
     body:
       organizationMondayWorkingTimeStartISO: ${organizationMondayWorkingTimeStartISO}
       organizationMondayWorkingTimeEndISO: ${organizationMondayWorkingTimeEndISO}

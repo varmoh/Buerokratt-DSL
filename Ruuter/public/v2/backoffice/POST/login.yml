@@ -7,7 +7,7 @@ extractRequestData:
 getUserWithRole:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-user-with-roles"
+    url: "[#CHATBOT_RESQL]/get-user-with-roles"
     body:
       login: ${login}
       password: ${password}
@@ -23,7 +23,7 @@ check_user_result:
 get_session_length:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-configuration"
+    url: "[#CHATBOT_RESQL]/get-configuration"
     body:
       key: "session_length"
   result: session_result
@@ -52,7 +52,7 @@ assign_cookie:
 setCustomerSupportAgentAway:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/set-customer-support-status"
+    url: "[#CHATBOT_RESQL]/set-customer-support-status"
     body:
       active: false
       userIdCode: ${login}
