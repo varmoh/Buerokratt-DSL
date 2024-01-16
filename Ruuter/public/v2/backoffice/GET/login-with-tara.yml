@@ -39,6 +39,9 @@ assignUser:
     user: ${user_info.response.body[0]}
   next: generate_cookie  
 
+logstep:
+  log: ${tara_info}
+
 generate_cookie:
   call: http.post
   args:
