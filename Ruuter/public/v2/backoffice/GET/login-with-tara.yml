@@ -43,7 +43,7 @@ assignUser:
 #  next: generate_cookie  
 
 logstep:
-  log: ${tara_info}
+  log: ${tara_info.response.body}
 
 generate_cookie:
   call: http.post
