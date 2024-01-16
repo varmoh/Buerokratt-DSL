@@ -52,9 +52,9 @@ generate_cookie:
         "displayName": "${user.displayName}",
         "firstName": "${user.firstName}",
         "lastName": "${user.lastName}",
-        "csaEmail": "${user.csaEmail}",
-        "csaTitle": "${user.csaTitle}",
-        "authorities": "${user.authorities}",
+#        "csaEmail": "${user.csaEmail}",
+#        "csaTitle": "${user.csaTitle}",
+#        "authorities": "${user.authorities}",
 #        "authMethod": "${tara_info.response.body.authMethod}",
 #        "fullName": "${tara_info.response.body.fullName}"
       }
