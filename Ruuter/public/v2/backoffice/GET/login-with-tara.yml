@@ -40,7 +40,7 @@ checkIfUserExists:
 assignUser:
   assign:
     user: ${user_info.response.body[0]}
-  next: generate_cookie  
+#  next: generate_cookie  
 
 logstep:
   log: ${tara_info}
