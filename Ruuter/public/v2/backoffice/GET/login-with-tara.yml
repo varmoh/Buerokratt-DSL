@@ -27,7 +27,7 @@ getUser:
   args:
     url: "[#CHATBOT_RESQL]/backoffice/get-user-with-roles-by-id-code"
     body:
-      userIdCode: ${tara_info.response.body.personalCode}
+      userIdCode: ${tara_info.response.body.idCode}
   result: user_info
   next: checkIfUserExists
 
