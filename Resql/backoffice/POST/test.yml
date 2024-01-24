@@ -1,0 +1,19 @@
+extractRequestData:
+  assign:
+    login: ${incoming.body.login}
+    password: ${incoming.body.password}
+  next: getUserWithRole
+ 
+getUserWithRole:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/get-user-with-roles"
+    body:
+      login: ${login}
+      password: ${password}
+  result: user_result
+  next: return_result
+ 
+return_result:
+  return: ${user_result.response.body}
+  next: end
