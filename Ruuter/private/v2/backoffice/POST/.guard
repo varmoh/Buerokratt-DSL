@@ -1,5 +1,5 @@
 authenticate:
-  template: backofice/check-user-authority
+  template: backoffice/check-user-authority
   requestType: post
   headers:
     cookie: ${incoming.headers.cookie}
