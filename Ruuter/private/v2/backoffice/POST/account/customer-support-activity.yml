@@ -29,7 +29,7 @@ assignIdCode:
 setCustomerSupportActivity:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/set-customer-support-status"
+    url: "[#CHATBOT_RESQL]/set-customer-support-status"
     body:
       active: ${active}
       userIdCode: ${idCode}

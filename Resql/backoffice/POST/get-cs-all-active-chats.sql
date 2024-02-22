@@ -30,7 +30,6 @@ SELECT c.base_id AS id,
        c.received_from,
        c.received_from_name,
        last_content_message.content AS last_message,
-
   (SELECT content
    FROM message
    WHERE id IN (
@@ -39,7 +38,6 @@ SELECT c.base_id AS id,
                    WHERE event = 'contact-information-fulfilled'
                      AND chat_base_id = c.base_id))) AS contacts_message,
        m.updated AS last_message_timestamp,
-
   (SELECT event
    FROM message
    WHERE id IN (

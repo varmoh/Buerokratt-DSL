@@ -1,15 +1,15 @@
 extractRequestData:
   assign:
-    messageId: ${incoming.body.id}
+    id: ${incoming.body.id}
     event: ${incoming.body.event}
     authorTimestamp: ${incoming.body.authorTimestamp}
 
 getMessageById:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-message-by-id"
+    url: "[#CHATBOT_RESQL]/get-message-by-id"
     body:
-      id: ${messageId}
+      id: ${id}
   result: res
   next: assignMessage
 
@@ -21,9 +21,9 @@ assignMessage:
 insertMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/insert-message"
+    url: "[#CHATBOT_RESQL]/insert-message"
     body:
-      messageId: ${messageId}
+      messageId: ${id}
       chatId: ${message.chatBaseId}
       authorId: ${message.authorId ?? ""}
       authorTimestamp: ${authorTimestamp}
@@ -59,7 +59,8 @@ postNotificationAboutAddedChat:
      channelId: "chat-list"
      timestamp: ${new Date().toISOString()}
      payload: {
-        "status": "Chat Status Changed"
+        "status": "Chat Status Changed",
+        "chatId": "${message.chatBaseId}"
      }
   result: chat_notification_result
   next: clearMessages

@@ -1,15 +1,16 @@
 extractRequestData:
   assign:
-    chatId: "${incoming.body.chatId}"
-    event: "${incoming.body.event}"
-    authorRole: ${incoming.body.authorRole}
-    authorTimestamp: "${incoming.body.authorTimestamp}"
+    chatId: "${incoming.body.message.chatId}"
+    event: "${incoming.body.message.event}"
+    authorRole: ${incoming.body.message.authorRole}
+    authorTimestamp: "${incoming.body.message.authorTimestamp}"
+    status: "${incoming.body.status}"
   next: deleteMessagePreview  
 
 deleteMessagePreview:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/delete-message-preview"
+    url: "[#CHATBOT_RESQL]/delete-message-preview"
     body:
       chatId: ${chatId}
   result: res
@@ -32,7 +33,7 @@ assignMessageUuid:
 getActiveChatById:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-active-chat-by-id"
+    url: "[#CHATBOT_RESQL]/get-active-chat-by-id"
     body:
       id: ${chatId}
   result: activeChatRes
@@ -52,7 +53,7 @@ assignChat:
 postMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/insert-message"
+    url: "[#CHATBOT_RESQL]/insert-message"
     body:
       chatId: ${chatId}
       messageId: ${messageUuid}
@@ -73,7 +74,7 @@ postMessage:
 endChat:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/insert-chat"
+    url: "[#CHATBOT_RESQL]/insert-chat"
     body:
       id: ${activeChat.id}
       customerSupportId: ${activeChat.customerSupportId ?? ""}
@@ -82,7 +83,7 @@ endChat:
       endUserId: ${activeChat.endUserId ?? ""}
       endUserFirstName: ${activeChat.endUserFirstName ?? ""}
       endUserLastName: ${activeChat.endUserLastName ?? ""}
-      status: "ENDED"
+      status: ${status ?? "ENDED"}
       created: ${activeChat.created ?? new Date().toISOString()}
       ended: ${new Date().toISOString()}
       feedbackRating: ${activeChat.feedbackRating ?? ""}
@@ -162,7 +163,8 @@ postNotificationAboutAddedChat:
      channelId: "chat-list"
      timestamp: ${new Date().toISOString()}
      payload: {
-        "status": "Chat Status Changed"
+        "status": "Chat Status Changed",
+        "chatId": "${chatId}"
      }
   result: chat_notification_result
   next: return_result

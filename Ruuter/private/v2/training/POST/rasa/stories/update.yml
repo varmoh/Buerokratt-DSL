@@ -3,6 +3,20 @@ assign_values:
     id: ${incoming.body.id}
     storyData: ${incoming.body.data}
 
+validateStoriesForDuplicates:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/validate/validate-stories-rules"
+    body:
+      story: ${storyData}
+  result: validateStoriesResult
+
+validateStoriesCheck:
+  switch:
+    - condition: ${validateStoriesResult.response.body.result == false}
+      next: returnDuplicateIntentOrEntity
+  next: getStoriesWithName
+
 getStoriesWithName:
   call: http.post
   args:
@@ -13,12 +27,10 @@ getStoriesWithName:
       story: ${id}
   result: storiesResult
 
-validateStories:
+validateStoryExists:
   switch:
-    - condition: ${storiesResult.response.body.response.story != id}
+    - condition: ${storiesResult.response.body.response.data.id == id}
       next: returnStoryIsMissing
-    - condition: ${storyData.story != id && storiesResult.response.body.response.story == storyData.story}
-      next: returnStoryExists
   next: getFileLocations
 
 getFileLocations:
@@ -50,7 +62,7 @@ deleteStory:
   args:
     url: "[#TRAINING_DMAPPER]/dmapper/delete-story"
     body:
-      stories: ${storiesData.response.body.stories}
+      stories: ${storiesData.response.body}
       story_name: ${id}
   result: deleteStoriesData
 
@@ -59,7 +71,7 @@ mergeStories:
   args:
     url: "[#TRAINING_DMAPPER]/merge"
     body:
-      array1: ${deleteStoriesData.response.body.data}
+      array1: ${deleteStoriesData.response.body.data[1]}
       array2: ${[storyData]}
       iteratee: "story"
   result: mergedStories
@@ -67,9 +79,8 @@ mergeStories:
 convertJsonToYaml:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml"
+    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml-stories"
     body:
-      version: "3.0"
       stories: ${mergedStories.response.body}
   result: storiesYaml
 
@@ -83,18 +94,19 @@ saveStoriesFile:
   result: fileResult
 
 deleteOldOpenSearchEntry:
-  call: http.delete
-  args:
-    url: "[#TRAINING_OPENSEARCH]/stories/_doc/${storiesResult.response.body.response.id}"
-  result: updateSearchResult
-
-addNewOpenSearchEntry:
   call: http.post
   args:
-    url: "[#TRAINING_OPENSEARCH]/stories/_doc"
+    url: "[#TRAINING_PIPELINE]/delete/object/stories"
     body:
-      story: ${storyData.story}
-      steps: ${storyData.steps}
+      id: ${id}
+  result: deleteSearchResult
+
+updateOpenSearch:
+  call: http.post
+  args:
+    url: "[#TRAINING_PIPELINE]/bulk/stories/story"
+    body:
+      input: ${storiesYaml.response.body.json}
   result: updateSearchResult
   next: returnSuccess
 
@@ -104,9 +116,11 @@ returnSuccess:
 
 returnStoryIsMissing:
   return: "Can't find story to update"
-  next: end
-
-returnStoryExists:
-  return: "Story exists"
   status: 409
   next: end
+
+returnDuplicateIntentOrEntity:
+  return: "Story may not have duplicate consecutive intents or entities"
+  status: 406
+  next: end
+

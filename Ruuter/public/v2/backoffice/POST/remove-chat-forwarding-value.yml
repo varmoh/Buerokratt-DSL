@@ -24,7 +24,7 @@ assignChatId:
 getActiveChatById:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-active-chat-by-id"
+    url: "[#CHATBOT_RESQL]/get-active-chat-by-id"
     body:
       id: ${chatId}
   result: activeChatRes
@@ -44,7 +44,7 @@ assignChat:
 insertChat:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/insert-chat"
+    url: "[#CHATBOT_RESQL]/insert-chat"
     body:
       id: ${chatId}
       customerSupportId: ${activeChat.customerSupportId}

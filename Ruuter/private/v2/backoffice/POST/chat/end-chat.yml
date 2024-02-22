@@ -8,7 +8,7 @@ extractRequestData:
 deleteMessagePreview:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/delete-message-preview"
+    url: "[#CHATBOT_RESQL]/delete-message-preview"
     body:
       chatId: ${chatId}
   result: res
@@ -31,7 +31,7 @@ assignMessageUuid:
 getActiveChatById:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-active-chat-by-id"
+    url: "[#CHATBOT_RESQL]/get-chat-by-id"
     body:
       id: ${chatId}
   result: activeChatRes
@@ -51,14 +51,14 @@ assignChat:
 postMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/insert-message"
+    url: "[#CHATBOT_RESQL]/insert-message"
     body:
       chatId: ${chatId}
       messageId: ${messageUuid}
       content: ""
       authorTimestamp: ${authorTimestamp}
-      authorId: ""
-      authorFirstName: ""
+      authorId: ${activeChat.customerSupportId ?? ""}
+      authorFirstName: ${activeChat.customerSupportDisplayName ?? ""}
       authorLastName: ""
       authorRole: "backoffice-user"
       created: ${new Date().toISOString()}
@@ -73,7 +73,7 @@ postMessage:
 endChat:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/insert-chat"
+    url: "[#CHATBOT_RESQL]/insert-chat"
     body:
       id: ${activeChat.id}
       customerSupportId: ${activeChat.customerSupportId ?? ""}
@@ -118,7 +118,8 @@ postNotificationAboutAddedChat:
      channelId: "chat-list"
      timestamp: ${new Date().toISOString()}
      payload: {
-        "status": "Chat Status Changed"
+        "status": "Chat Status Changed",
+        "chatId": "${chatId}"
      }
   result: chat_notification_result
   next: return_result

@@ -2,17 +2,10 @@ WITH n_chats AS
   (SELECT base_id,
           max(created) AS created
    FROM chat
-   WHERE feedback_rating IS NOT null
-     AND feedback_rating <> ''
-     AND feedback_rating <> 'null'
+   WHERE feedback_rating IS NOT NULL
      AND STATUS = 'ENDED'
      AND feedback_rating::int <= 5
      AND created::date BETWEEN :start::date AND :end::date
-     AND EXISTS
-       (SELECT 1
-        FROM message
-        WHERE message.chat_base_id = chat.base_id
-          AND message.event IN (:events))
    GROUP BY base_id
    ORDER BY created DESC)
 SELECT n_chats.base_id,
@@ -23,4 +16,6 @@ SELECT n_chats.base_id,
 FROM n_chats
 LEFT JOIN chat ON n_chats.base_id = chat.base_id
 AND n_chats.created = chat.created
-ORDER BY created desc
+WHERE chat.feedback_rating IS NOT NULL
+AND chat.ended IS NOT NULL
+ORDER BY created DESC

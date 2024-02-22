@@ -24,7 +24,7 @@ assignIdCode:
 getUserSettings:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-user-profile-settings"
+    url: "[#CHATBOT_RESQL]/get-user-profile-settings"
     body:
       userId: ${idCode}
   result: getUserSettingsResult

@@ -1,6 +1,3 @@
-logstep1:
-  log: "Hello World"
-
 get_tara_user_info:
   call: http.get
   args:
@@ -16,7 +13,7 @@ get_tara_user_info:
 get_session_length:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-configuration"
+    url: "[#CHATBOT_RESQL]/get-configuration"
     body:
       key: "session_length"
   result: session_result
@@ -25,7 +22,7 @@ get_session_length:
 getUser:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/get-user-with-roles-by-id-code"
+    url: "[#CHATBOT_RESQL]/get-user-with-roles-by-id-code"
     body:
       userIdCode: ${tara_info.response.body.personalCode}
   result: user_info
@@ -41,9 +38,6 @@ assignUser:
   assign:
     user: ${user_info.response.body[0]}
   next: generate_cookie  
-
-logstep:
-  log: ${session_result.response}
 
 generate_cookie:
   call: http.post
@@ -79,7 +73,7 @@ assign_cookie:
 setCustomerSupportAgentAway:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/set-customer-support-status"
+    url: "[#CHATBOT_RESQL]/set-customer-support-status"
     body:
       active: false
       userIdCode: ${tara_info.response.body.personalCode}
