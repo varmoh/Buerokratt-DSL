@@ -21,7 +21,7 @@ getMessagesByChatId:
 sendDataToEmail:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/js/email/sendMockEmail"
+    url: "[#CHATBOT_DMAPPER]/backoffice/js/email/sendMockEmail"
     body:
       to: ${getUserEmailByChatIdResult.response.body[0].csaEmail}
       subject: "Chat history"

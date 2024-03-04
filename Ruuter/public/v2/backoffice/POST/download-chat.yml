@@ -30,7 +30,7 @@ getCsaNameVisibility:
 convertDataToPdf:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/js/convert/pdf"
+    url: "[#CHATBOT_DMAPPER]/backoffice/js/convert/pdf"
     body:
       messages: ${getMessagesByChatIdResult.response.body}
       csaTitleVisible: ${titleVisibilityResult.response.body[0].value}
@@ -54,7 +54,7 @@ checkIsEmailPresent:
 sendPdfToEmail:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/js/email/sendMockEmail"
+    url: "[#CHATBOT_DMAPPER]/backoffice/js/email/sendMockEmail"
     body:
       to: ${email}
       subject: "Chat history"

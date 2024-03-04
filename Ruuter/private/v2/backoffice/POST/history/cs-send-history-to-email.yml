@@ -23,7 +23,7 @@ getMessagesByChatId:
 mapChatMessages:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]:[#CHATBOT_DMAPPER_PORT]/hbs/backoffice/format_chat_log"
+    url: "[#CHATBOT_DMAPPER]/backoffice:[#CHATBOT_DMAPPER_PORT]/hbs/backoffice/format_chat_log"
     body:
       data: ${getMessagesByChatIdResult.response.body}
   result: chatMessagesData
