@@ -1,7 +1,7 @@
 getEmergencyNotice:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/get-emergency-notice"
+    url: "[#CHATBOT_RESQL]/backoffice/backoffice/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/get-emergency-notice"
   result: getEmergencyNoticeResult
 
 validateEmergencyNoticeExists:

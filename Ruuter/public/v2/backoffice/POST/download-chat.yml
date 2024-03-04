@@ -6,7 +6,7 @@ extractRequestData:
 getMessagesByChatId:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-chat-messages-to-print"
+    url: "[#CHATBOT_RESQL]/backoffice/get-chat-messages-to-print"
     body:
       chatId: ${chatId}
   result: getMessagesByChatIdResult
@@ -14,7 +14,7 @@ getMessagesByChatId:
 getCsaTitleVisibility:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-configuration"
+    url: "[#CHATBOT_RESQL]/backoffice/get-configuration"
     body:
       key: "is_csa_title_visible"
   result: titleVisibilityResult
@@ -22,7 +22,7 @@ getCsaTitleVisibility:
 getCsaNameVisibility:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-configuration"
+    url: "[#CHATBOT_RESQL]/backoffice/get-configuration"
     body:
       key: "is_csa_name_visible"
   result: nameVisibilityResult

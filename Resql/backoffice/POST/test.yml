@@ -7,7 +7,7 @@ extractRequestData:
 getUserWithRole:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-user-with-roles"
+    url: "[#CHATBOT_RESQL]/backoffice/get-user-with-roles"
     body:
       login: ${login}
       password: ${password}

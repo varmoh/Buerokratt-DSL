@@ -1,7 +1,7 @@
 getPendingChats:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-cs-all-pending-chats"
+    url: "[#CHATBOT_RESQL]/backoffice/get-cs-all-pending-chats"
   result: res
 
 return_result:

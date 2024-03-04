@@ -21,7 +21,7 @@ check_authority_result:
 getChatById:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/get-chat-by-id"
+    url: "[#CHATBOT_RESQL]/backoffice/backoffice/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/get-chat-by-id"
     body:
       id: ${chatId}
   result: chatResult

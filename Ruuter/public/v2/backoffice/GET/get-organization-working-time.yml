@@ -1,7 +1,7 @@
 getOrganizationWorkingTime:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/get-organization-working-time"
+    url: "[#CHATBOT_RESQL]/backoffice/backoffice/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/get-organization-working-time"
   result: getOrganizationWorkingTimeValueResult
 
 validateOrganizationWorkingTimeExists:

@@ -11,7 +11,7 @@ extractRequestData:
 getActiveChatById:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-active-chat-by-id"
+    url: "[#CHATBOT_RESQL]/backoffice/get-active-chat-by-id"
     body:
       id: ${id}
   result: activeChatRes
@@ -31,7 +31,7 @@ assignChat:
 redirectChat:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/insert-chat"
+    url: "[#CHATBOT_RESQL]/backoffice/insert-chat"
     body:
       id: ${id}
       customerSupportId: ${customerSupportId}
@@ -74,7 +74,7 @@ assignUuid:
 insertMessage:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/insert-message"
+    url: "[#CHATBOT_RESQL]/backoffice/insert-message"
     body:
       chatId: ${activeChat.id ?? uuid}
       messageId: ${uuid}
@@ -121,7 +121,7 @@ postNotificationAboutAddedChat:
 getRedirectedChat:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-active-chat-by-id"
+    url: "[#CHATBOT_RESQL]/backoffice/get-active-chat-by-id"
     body:
       id: ${id}
   result: redirectedChatRes
