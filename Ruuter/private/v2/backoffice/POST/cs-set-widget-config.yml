@@ -26,7 +26,7 @@ check_authority_result:
 setWidgetConfig:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/backoffice/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/set-widget-config"
+    url: "[#CHATBOT_RESQL]/backoffice/set-widget-config"
     body:
       widgetProactiveSeconds: ${widgetProactiveSeconds}
       widgetDisplayBubbleMessageSeconds: ${widgetDisplayBubbleMessageSeconds}
@@ -41,7 +41,7 @@ setWidgetConfig:
 mapWidgetConfigData:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice:[#CHATBOT_DMAPPER_PORT]/hbs/backoffice/return_widget_config"
+    url: "[#CHATBOT_DMAPPER]/hbs/backoffice/return_widget_config"
     body:
       configurationArray: ${setWidgetConfigResult.response.body}
   result: widgetConfigData

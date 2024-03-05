@@ -40,7 +40,7 @@ check_authority_result:
 setOrganizationWorkingTime:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/backoffice/backoffice:[#CHATBOT_RESQL_PORT]/backoffice/set-organization-working-time"
+    url: "[#CHATBOT_RESQL]/backoffice/set-organization-working-time"
     body:
       organizationMondayWorkingTimeStartISO: ${organizationMondayWorkingTimeStartISO}
       organizationMondayWorkingTimeEndISO: ${organizationMondayWorkingTimeEndISO}
@@ -69,7 +69,7 @@ setOrganizationWorkingTime:
 mapOrganizationWorkingTimeData:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER_V2]:[#CHATBOT_DMAPPER_V2_PORT]/hbs/chat-bot/return_organization_working_time"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/chat-bot/return_organization_working_time"
     headers:
       type: json
     body:

@@ -1,7 +1,7 @@
 getScheduledReports:
   call: http.post
   args:
-    url: "[#ANALYTICS_RESQL]/get-scheduled-reports"
+    url: "[#ANALYTICS_RESQL]/analytics/get-scheduled-reports"
   result: scheduledReports
 
 return:
