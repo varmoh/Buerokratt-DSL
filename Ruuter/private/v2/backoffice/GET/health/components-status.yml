@@ -31,7 +31,7 @@ getResqlHealth:
 # formatHealthResponse:
 #   call: http.post
 #   args:
-#     url: "[#CHATBOT_DMAPPER]/backoffice/hbs/chat-bot/return_components_health"
+#     url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_components_health"
 #     headers:
 #       type: json
 #     body:

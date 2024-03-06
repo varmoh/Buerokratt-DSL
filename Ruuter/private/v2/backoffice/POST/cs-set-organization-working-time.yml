@@ -69,7 +69,7 @@ setOrganizationWorkingTime:
 mapOrganizationWorkingTimeData:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/chat-bot/return_organization_working_time"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_organization_working_time"
     headers:
       type: json
     body:

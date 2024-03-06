@@ -14,7 +14,7 @@ validate_response:
 mapWidgetConfigData:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/chat-bot/return_widget_config"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_widget_config"
     headers:
       type: json
     body:

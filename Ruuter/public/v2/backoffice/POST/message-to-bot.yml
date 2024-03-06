@@ -189,7 +189,7 @@ redirect_chat_to_back_office:
 convert_bot_responses_to_messages:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/chat-bot/bot_responses_to_messages"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/bot_responses_to_messages"
     headers:
       type: json
     body:

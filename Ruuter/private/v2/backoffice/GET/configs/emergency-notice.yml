@@ -14,7 +14,7 @@ validate_res:
 mapEmergencyNoticeData:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/chat-bot/return_emergency_notice"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_emergency_notice"
     headers:
       type: json
     body:

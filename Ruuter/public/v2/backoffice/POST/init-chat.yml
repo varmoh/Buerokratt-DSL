@@ -18,7 +18,7 @@ extractRequestData:
 getChatUuid:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/chat-bot/return_uuid"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_uuid"
     headers:
       type: json
   result: chat_uuid_result
@@ -32,7 +32,7 @@ assignChatUuid:
 getMessageUuid:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/chat-bot/return_uuid"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/return_uuid"
     headers:
       type: json
   result: message_uuid_result
