@@ -1,0 +1,8 @@
+healthz:
+  call: http.get
+  args:
+    url: "[#CHATBOT_RUUTER]/healthz"
+  result: res
+
+return_result:
+  return: ${res.response.body}
