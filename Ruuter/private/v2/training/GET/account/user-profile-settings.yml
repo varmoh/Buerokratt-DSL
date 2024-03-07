@@ -1,18 +1,50 @@
-step_1:
-  call: reflect.mock
+get_user_info:
+  call: http.post
   args:
-    response:
-      response:
-        - userId: EE30303039914
-          forwardedChatPopupNotifications: false
-          forwardedChatSoundNotifications: false
-          forwardedChatEmailNotifications: false
-          newChatPopupNotifications: false
-          newChatSoundNotifications: false
-          newChatEmailNotifications: false
-          useAutocorrect: true
-  result: reflected_request
+   url: "[#CHATBOT_TIM]/jwt/custom-jwt-userinfo"
+   contentType: plaintext
+   headers:
+    cookie: ${incoming.headers.cookie}
+   plaintext: 
+      "customJwtCookie"
+  result: res
+  next: check_user_info_response
 
-step_2:
-  wrapper: false
-  return: ${reflected_request.response.body}
+check_user_info_response:
+  switch:
+    - condition: ${200 <= res.response.statusCodeValue && res.response.statusCodeValue < 300}
+      next: assignIdCode
+  next: return_bad_request
+
+assignIdCode:
+  assign:
+    idCode: ${res.response.body.idCode}
+  next: getUserSettings
+
+getUserSettings:
+  call: http.post
+  args:
+    url: "[#CHATBOT_RESQL]/backoffice/get-user-profile-settings"
+    body:
+      userId: ${idCode}
+  result: getUserSettingsResult
+  next: validateUserSettingsResultExists
+
+validateUserSettingsResultExists:
+  switch:
+    - condition: "${getUserSettingsResult.response.body.length > 0}"
+      next: returnSuccess
+  next: return_not_found
+
+returnSuccess:
+  return: ${getUserSettingsResult.response.body}
+  next: end
+
+return_bad_request:
+  return: "error: bad request"
+  next: end
+
+return_not_found:
+  return: "error: User not found"
+  next: end
+
