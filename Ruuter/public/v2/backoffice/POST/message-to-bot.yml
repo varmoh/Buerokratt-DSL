@@ -77,7 +77,8 @@ check_if_bot_is_unable_to_reply:
   switch:
     - condition: ${post_message_to_client_result.response.body[0].text == 'Suunan teid klienditeenindajale. Varuge natukene kannatust.'}
       next: get_organization_working_details
-  next: convert_bot_responses_to_messages
+#  next: convert_bot_responses_to_messages
+  next: prepare_object
 
 get_organization_working_details:
   call: http.post
