@@ -206,7 +206,7 @@ convert_bot_responses_to_messages:
 #  next: add_bot_message_to_db
 
 log_step_msg:
-  log: ${converted_messages_res.response.body}
+  log: ${post_message_to_client_result.response.body}
 
 add_bot_message_to_db:
   call: http.post
