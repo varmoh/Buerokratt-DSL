@@ -137,7 +137,7 @@ insertChat:
 postMessageToBot:
   call: http.post
   args:
-    url: "[#CHATBOT_RUUTER_PUBLIC]/message-to-bot"
+    url: "[#CHATBOT_RUUTER_PUBLIC]/backoffice/message-to-bot"
     body:
       chatId: ${chatUuid}
       content: ${content}
