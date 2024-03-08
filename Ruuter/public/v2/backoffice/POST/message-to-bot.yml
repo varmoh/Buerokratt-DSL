@@ -177,23 +177,19 @@ send_csas_not_available_message:
   result: csas_not_available_message_result
   next: return_csa_is_not_available
 
+
 redirect_chat_to_back_office:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/backoffice/remove_cs_agent_from_chat"
+    url: "[#CHATBOT_RESQL]/remove_cs_agent_from_chat"
     body:
       chatId: ${chatId}
   result: redirect_chat_to_back_office_result
-  next: convert_bot_responses_to_messages
+#  next: convert_bot_responses_to_messages
 
-convert_bot_responses_to_messages:
-  call: http.post
-  args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/bot_responses_to_messages"
-    headers:
-      type: json
-    body:
-      data: {
+prepare_object:
+  assign:
+    botresponse: {
         "botMessages": "${post_message_to_client_result.response.body}",
         "chatId": "${chatId}",
         "authorId": "${get_bot_name_result.response.body[0].value}",
@@ -202,8 +198,21 @@ convert_bot_responses_to_messages:
         "authorTimestamp": "${new Date().toISOString()}",
         "created": "${new Date().toISOString()}"
       }
+
+log_prepared_object:
+  log: ${botresponse}
+
+convert_bot_responses_to_messages:
+  call: http.post
+  args:
+    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/bot_responses_to_messages"
+    headers:
+      type: json
+    body:
+      data: §{botresponse}
   result: converted_messages_res
 #  next: add_bot_message_to_db
+
 
 log_step_msg:
   log: ${post_message_to_client_result.response.body}
