@@ -205,6 +205,9 @@ convert_bot_responses_to_messages:
   result: converted_messages_res
   next: add_bot_message_to_db
 
+log_step_msg:
+  log: ${converted_messages_res.response.body}
+
 add_bot_message_to_db:
   call: http.post
   args:
