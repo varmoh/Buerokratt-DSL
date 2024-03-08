@@ -194,7 +194,7 @@ convert_bot_responses_to_messages:
       type: json
     body:
       data: {
-        "botMessages": "${post_message_to_client_result.response.body}",
+        "botMessages": ${post_message_to_client_result.response.body},
         "chatId": "${chatId}",
         "authorId": "${get_bot_name_result.response.body[0].value}",
         "authorFirstName": "",
