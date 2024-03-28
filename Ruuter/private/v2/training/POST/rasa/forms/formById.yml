@@ -5,7 +5,7 @@ assign_values:
 getResponses:
   call: http.get
   args:
-    url: "[#TRAINING_PUBLIC_RUUTER]/rasa/responses"
+    url: "[#TRAINING_PUBLIC_RUUTER]/training/rasa/responses"
     headers:
       cookie: ${incoming.headers.cookie}
   result: responses

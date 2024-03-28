@@ -20,7 +20,7 @@ validateStoriesCheck:
 getStoryNames:
   call: http.get
   args:
-    url: "[#TRAINING_PUBLIC_RUUTER]/rasa/story-names"
+    url: "[#TRAINING_PUBLIC_RUUTER]/training/rasa/story-names"
     headers:
       cookie: ${incoming.headers.cookie}
   result: storiesResult
@@ -34,7 +34,7 @@ validateStoryName:
 getFileLocations:
   call: http.get
   args:
-    url: "[#TRAINING_PUBLIC_RUUTER]/return-file-locations"
+    url: "[#TRAINING_PUBLIC_RUUTER]/training/return-file-locations"
     headers:
       cookie: ${incoming.headers.cookie}
   result: fileLocations

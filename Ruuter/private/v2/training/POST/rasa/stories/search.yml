@@ -16,7 +16,7 @@ checkForIncomingType:
 getStoriesSearch:
   call: http.get
   args:
-    url: "[#TRAINING_PUBLIC_RUUTER]/rasa/stories"
+    url: "[#TRAINING_PUBLIC_RUUTER]/training/rasa/stories"
   result: getStoriesResult
   next: returnNoSearchSpecified
 

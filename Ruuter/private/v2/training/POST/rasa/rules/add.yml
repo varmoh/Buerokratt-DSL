@@ -20,7 +20,7 @@ validateRulesCheck:
 getRuleNames:
   call: http.get
   args:
-    url: "[#TRAINING_PUBLIC_RUUTER]/rasa/rule-names"
+    url: "[#TRAINING_PUBLIC_RUUTER]/training/rasa/rule-names"
     headers:
       cookie: ${incoming.headers.cookie}
   result: ruleResult
@@ -34,7 +34,7 @@ validateRuleName:
 getFileLocations:
   call: http.get
   args:
-    url: "[#TRAINING_PUBLIC_RUUTER]/return-file-locations"
+    url: "[#TRAINING_PUBLIC_RUUTER]/training/return-file-locations"
     headers:
       cookie: ${incoming.headers.cookie}
   result: fileLocations

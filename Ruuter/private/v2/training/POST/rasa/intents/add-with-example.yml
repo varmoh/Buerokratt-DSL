@@ -12,7 +12,7 @@ assign_values:
 addIntent:
   call: http.post
   args:
-    url: "[#TRAINING_PUBLIC_RUUTER]/rasa/intents/add"
+    url: "[#TRAINING_PUBLIC_RUUTER]/training/rasa/intents/add"
     headers:
       cookie: ${incoming.headers.cookie}
     body:
@@ -22,7 +22,7 @@ addIntent:
 addIntentExample:
   call: http.post
   args:
-    url: "[#TRAINING_PUBLIC_RUUTER]/rasa/intents/examples/add"
+    url: "[#TRAINING_PUBLIC_RUUTER]/training/rasa/intents/examples/add"
     headers:
       cookie: ${incoming.headers.cookie}
     body:
