@@ -28,7 +28,8 @@ jobs:
         run: |
           ls -la $GITHUB_WORKSPACE
           ls -la $GITHUB_WORKSPACE/scripts 
-
+      - name: Change to Script Directory
+        run: cd ..
       - name: Change Script Permissions
         run: chmod +x $GITHUB_WORKSPACE/scripts/module_based_image_builder.py
 
