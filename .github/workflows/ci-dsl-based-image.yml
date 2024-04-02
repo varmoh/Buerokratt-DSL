@@ -23,9 +23,15 @@ jobs:
 
       - name: Install Dependencies
         run: pip install -r requirements.txt
+
       - name: List Workspace Contents
         run: |
           ls -la $GITHUB_WORKSPACE
+          ls -la $GITHUB_WORKSPACE/scripts 
+
+      - name: Change Script Permissions
+        run: chmod +x $GITHUB_WORKSPACE/module_based_image_builder.py
+
       - name: Run Python Script
         run: python $GITHUB_WORKSPACE/module_based_image_builder.py
         env:
