@@ -28,6 +28,7 @@ jobs:
         run: |
           ls -la $GITHUB_WORKSPACE
           ls -la $GITHUB_WORKSPACE/scripts 
+          cd $GITHUB_WORKSPACE && pwd
       - name: Change to Script Directory
         run: cd ..
       - name: Change Script Permissions
