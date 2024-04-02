@@ -26,7 +26,6 @@ jobs:
       - name: List Workspace Contents
         run: |
           ls -la $GITHUB_WORKSPACE
-          ls -la $GITHUB_WORKSPACE/Buerokratt-DSL
       - name: Run Python Script
         run: python $GITHUB_WORKSPACE/module_based_image_builder.py
         env:
