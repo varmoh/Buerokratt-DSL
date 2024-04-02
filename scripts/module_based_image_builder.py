@@ -6,7 +6,7 @@ STATE_FILE = ".env_state.txt"
 GITHUB_REGISTRY = "ghcr.io/varmoh"
 
 def build_and_publish_image(release, version, build, fix):
-    DOCKER_TAG_CUSTOM = f"{GITHUB_REGISTRY}/{release}:{release}-{version}.{build}.{fix}"
+    DOCKER_TAG_CUSTOM = f"{GITHUB_REGISTRY}/buerokratt-dsl:{release}-{version}.{build}.{fix}"
     print(f"Building Docker image for {release} with tag: {DOCKER_TAG_CUSTOM}")
     # Run the actual docker build command
     subprocess.run(["docker", "image", "build", "--no-cache", "--tag", DOCKER_TAG_CUSTOM, "-f", f"Dockerfile.{release}", "."])
