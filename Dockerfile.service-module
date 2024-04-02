@@ -1,0 +1,21 @@
+FROM python:3.8
+
+RUN pip install Flask
+
+#RUN mkdir -p /app
+
+WORKDIR /app
+
+COPY run.py .
+
+ENV APP_DIRS="/Ruuter /Resql /DataMapper /Liquibase /OpenSearch /bot"
+RUN mkdir -p $APP_DIRS
+
+COPY Ruuter/private/v2/services /Ruuter/services
+COPY Resql/services /Resql/services
+COPY DataMapper/v1/services /DataMapper/services
+COPY Liquibase/services /Liquibase/services
+
+LABEL org.opencontainers.image.description Docker PRE-ALPHA image for Buerokratt-DSL
+
+CMD ["python", "run.py"]
