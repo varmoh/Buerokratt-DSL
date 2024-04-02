@@ -26,5 +26,5 @@ jobs:
 
       - name: Run Python Script
         run: python module_based_image_builder.py
-        env:
+#        env:
 #          GITHUB_REPOSITORY: ${{ github.repository }}
