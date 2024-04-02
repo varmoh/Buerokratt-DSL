@@ -29,10 +29,10 @@ jobs:
           ls -la $GITHUB_WORKSPACE
           ls -la $GITHUB_WORKSPACE/scripts 
           cd $GITHUB_WORKSPACE && pwd
-      - name: Change to Script Directory
-        run: cd ..
       - name: Change Script Permissions
         run: chmod +x $GITHUB_WORKSPACE/scripts/module_based_image_builder.py
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
 
       - name: Run Python Script
         run: python $GITHUB_WORKSPACE/scripts/module_based_image_builder.py
