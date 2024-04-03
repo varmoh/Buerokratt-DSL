@@ -1,0 +1,27 @@
+FROM python:3.8
+
+RUN apt-get update && apt-get install -y curl apt-transport-https gnupg2
+
+RUN curl -LO "https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl" \
+    && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+RUN pip install Flask
+
+#RUN mkdir -p /app
+
+WORKDIR /app
+
+COPY run.py .
+
+ENV APP_DIRS="/Ruuter /Resql /DataMapper /Liquibase /OpenSearch /bot"
+RUN mkdir -p $APP_DIRS
+
+COPY Ruuter/private/v2/training /Ruuter/training
+COPY Resql/training /Resql/training
+COPY DataMapper/v1/training /DataMapper/training
+COPY Liquibase/training /Liquibase/training
+COPY OpenSearch/training /OpenSearch/training
+
+LABEL org.opencontainers.image.description Docker PRE-ALPHA image for Buerokratt-DSL
+
+CMD ["python", "run.py"]
