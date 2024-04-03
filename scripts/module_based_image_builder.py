@@ -3,7 +3,7 @@ import subprocess
 
 ENV_FILE = ".env.img"
 STATE_FILE = ".env_state.txt"
-GITHUB_REGISTRY = "ghcr.io/varmoh"
+GITHUB_REGISTRY = "ghcr.io/buerokratt"
 
 def build_and_publish_image(release, version, build, fix):
     DOCKER_TAG_CUSTOM = f"{GITHUB_REGISTRY}/buerokratt-dsl:{release}-{version}.{build}.{fix}"
