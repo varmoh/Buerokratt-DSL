@@ -11,7 +11,7 @@ getResponses:
 mapResponsesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-responses-list"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-responses-list"
     body:
       response: ${getResponsesResult.response.body.hits.hits}
   result: responsesData
