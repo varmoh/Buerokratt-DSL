@@ -7,7 +7,7 @@ assign_values:
 validateArrayExampleLength:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/validate/array-elements-length"
+    url: "[#TRAINING_DMAPPER]/training/hbs/validate/array-elements-length"
     body:
       array: ${intentExamples}
       length: 500
@@ -34,7 +34,7 @@ assignFilePath:
 checkIntentFileYaml:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/check"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/check"
     body:
       file_path: ${fileLocations.response.body.response.intents_location + intentName + file_end}
   result: fileExists
@@ -52,7 +52,7 @@ assignTmpFilePath:
 checkIntentFileTmp:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/check"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/check"
     body:
       file_path: ${fileLocations.response.body.response.intents_location + intentName + file_end}
   result: tmpFileExists
@@ -66,7 +66,7 @@ validateTmpFileExists:
 getIntentFile:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/read"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/read"
     body:
       file_path: ${fileLocations.response.body.response.intents_location + intentName + file_end}
   result: intentFile
@@ -74,7 +74,7 @@ getIntentFile:
 convertYamlToJson:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
+    url: "[#TRAINING_DMAPPER]/training/hbs/convert/yaml-to-json"
     body:
       file: ${intentFile.response.body.file}
   result: intentData
@@ -92,7 +92,7 @@ assignEmptyExamples:
 convertStringToArray:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/string/toArray"
+    url: "[#TRAINING_DMAPPER]/training/hbs/convert/string/toArray"
     body:
       data: ${intentData.response.body.nlu[0].examples}
   result: convertedArray
@@ -115,7 +115,7 @@ makeArrayFromExamples:
 mergeExamples:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/merge"
+    url: "[#TRAINING_DMAPPER]/training/hbs/merge"
     body:
       array1: ${newExamples}
       array2: ${examplesToWriteIntoYml}
@@ -124,7 +124,7 @@ mergeExamples:
 mapIntentsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-intent-file"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-intent-file"
     body:
       intent: ${intentName}
       examples: ${mergedExamples.response.body}
@@ -133,7 +133,7 @@ mapIntentsData:
 convertJsonToYaml:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml"
+    url: "[#TRAINING_DMAPPER]/training/hbs/convert/json-to-yaml"
     body:
       version: "3.0"
       nlu: ${intentFileJson.response.body.data}
@@ -142,7 +142,7 @@ convertJsonToYaml:
 saveIntentFile:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/write"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/write"
     body:
       file_path: ${fileLocations.response.body.response.intents_location + intentName + file_end}
       content: ${intentYaml.response.body.json}
@@ -151,7 +151,7 @@ saveIntentFile:
 removePipe:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/string/replace"
+    url: "[#TRAINING_DMAPPER]/training/hbs/convert/string/replace"
     body:
       data: ${intentYaml.response.body.json}
       search: "|"

@@ -9,7 +9,7 @@ getFileLocations:
 getRulesFile:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/read"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/read"
     body:
       file_path: ${fileLocations.response.body.response.rules_location}
   result: rulesFile
@@ -17,7 +17,7 @@ getRulesFile:
 convertYamlToJson:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
+    url: "[#TRAINING_DMAPPER]/training/hbs/convert/yaml-to-json"
     body:
       file: ${rulesFile.response.body.file}
   result: rulesData

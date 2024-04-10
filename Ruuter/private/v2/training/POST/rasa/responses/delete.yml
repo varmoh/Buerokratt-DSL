@@ -54,7 +54,7 @@ validateStoriesResponses:
 deleteKey:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/merge/remove-key"
+    url: "[#TRAINING_DMAPPER]/training/hbs/merge/remove-key"
     body:
       object: ${domainData.response.body.response.responses}
       key: ${responseName}
@@ -63,7 +63,7 @@ deleteKey:
 convertJsonToYaml:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml"
+    url: "[#TRAINING_DMAPPER]/training/hbs/convert/json-to-yaml"
     body:
       version: ${domainData.response.body.response.version}
       intents: ${domainData.response.body.response.intents}
@@ -86,7 +86,7 @@ getFileLocations:
 saveDomainFile:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/write"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/write"
     body:
       file_path: ${fileLocations.response.body.response.domain_location}
       content: ${domainYaml.response.body.json}

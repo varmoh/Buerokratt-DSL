@@ -30,7 +30,7 @@ getFileLocations:
 getRulesFile:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/read"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/read"
     body:
       file_path: ${fileLocations.response.body.response.rules_location}
   result: ruleFile
@@ -38,7 +38,7 @@ getRulesFile:
 convertYamlToJson:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
+    url: "[#TRAINING_DMAPPER]/training/hbs/convert/yaml-to-json"
     body:
       file: ${ruleFile.response.body.file}
   result: rulesData
@@ -46,7 +46,7 @@ convertYamlToJson:
 deleteRule:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/delete-rule"
+    url: "[#TRAINING_DMAPPER]/training/hbs/delete-rule"
     body:
       rules: ${rulesData.response.body}
       rule_name: ${body.id}
@@ -55,7 +55,7 @@ deleteRule:
 mergeRules:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/merge"
+    url: "[#TRAINING_DMAPPER]/training/hbs/merge"
     body:
       array1: ${deleteRulesData.response.body.data[1]}
       array2: ${[ruleData]}
@@ -65,7 +65,7 @@ mergeRules:
 convertJsonToYaml:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml-stories"
+    url: "[#TRAINING_DMAPPER]/training/hbs/convert/json-to-yaml-stories"
     headers:
       content-type: "application/json"
     body:
@@ -75,7 +75,7 @@ convertJsonToYaml:
 saveRulesFile:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/write"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/write"
     body:
       file_path: ${fileLocations.response.body.response.rules_location}
       content: ${rulesYaml.response.body.json}

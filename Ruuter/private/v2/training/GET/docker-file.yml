@@ -9,7 +9,7 @@ getFileLocations:
 getDockerFile:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/read"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/read"
     body:
       file_path: ${fileLocations.response.body.response.docker_location}
   result: dockerFile
@@ -17,7 +17,7 @@ getDockerFile:
 convertYamlToJson:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
+    url: "[#TRAINING_DMAPPER]/training/hbs/convert/yaml-to-json"
     body:
       file: ${dockerFile.response.body.file}
   result: configData

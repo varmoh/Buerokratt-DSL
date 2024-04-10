@@ -17,7 +17,7 @@ validateDbRecords:
 checkCronFile:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/check"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/check"
     body:
       file_path: ${cronFileLocation}
   result: fileExists
@@ -40,7 +40,7 @@ checkForDeletion:
 deleteCronTask:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/delete"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/delete"
     body:
       file_path: ${cronTask}
   result: deleted
@@ -49,7 +49,7 @@ deleteCronTask:
 generateCronExpression:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/cron/generate-expression-date-days"
+    url: "[#TRAINING_DMAPPER]/training/hbs/cron/generate-expression-date-days"
     body:
       date: ${fromDate}
       days: ${daysOfWeek}
@@ -58,7 +58,7 @@ generateCronExpression:
 createCronJson:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-cron-file"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-cron-file"
     body:
       cronExpression: ${cronExpression.response.body.expression}
       type: "http"
@@ -70,7 +70,7 @@ createCronJson:
 convertJsonToYaml:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml"
+    url: "[#TRAINING_DMAPPER]/training/hbs/convert/json-to-yaml"
     body:
       train_bot: ${cronJson.response.body.data}
   result: cronYaml
@@ -78,7 +78,7 @@ convertJsonToYaml:
 saveCronFile:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/write"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/write"
     body:
       file_path: ${cronFileLocation}
       content: ${cronYaml.response.body.json}

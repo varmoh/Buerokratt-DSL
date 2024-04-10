@@ -5,7 +5,7 @@ assign_values:
 validateStories:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/validate/validate-stories-rules"
+    url: "[#TRAINING_DMAPPER]/training/hbs/validate/validate-stories-rules"
     body:
       story: ${body}
       category: "stories"
@@ -42,7 +42,7 @@ getFileLocations:
 getStoriesFile:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/read"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/read"
     body:
       file_path: ${fileLocations.response.body.response.stories_location}
   result: storiesFile
@@ -50,7 +50,7 @@ getStoriesFile:
 convertYamlToJson:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
+    url: "[#TRAINING_DMAPPER]/training/hbs/convert/yaml-to-json"
     body:
       file: ${storiesFile.response.body.file}
   result: storiesData
@@ -58,7 +58,7 @@ convertYamlToJson:
 mergeStories:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/merge"
+    url: "[#TRAINING_DMAPPER]/training/hbs/merge"
     body:
       array1: ${storiesData.response.body.stories}
       array2: ${[body]}
@@ -68,7 +68,7 @@ mergeStories:
 convertJsonToYaml:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml-stories"
+    url: "[#TRAINING_DMAPPER]/training/hbs/convert/json-to-yaml-stories"
     headers:
       content-type: "application/json"
     body:
@@ -78,7 +78,7 @@ convertJsonToYaml:
 saveStoriesFile:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/write"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/write"
     body:
       file_path: ${fileLocations.response.body.response.stories_location}
       content: ${storiesYaml.response.body.json}

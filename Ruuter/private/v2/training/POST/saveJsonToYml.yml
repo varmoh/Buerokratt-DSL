@@ -1,7 +1,7 @@
 saveFile:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/write"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/write"
     body:
       file_path: ${incoming.body.location}
       content: ${incoming.body.yaml}

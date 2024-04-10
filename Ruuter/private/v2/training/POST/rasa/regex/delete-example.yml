@@ -17,7 +17,7 @@ assignFilePath:
 getRegexFile:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/read"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/read"
     body:
       file_path: ${filePath}
   result: regexFile
@@ -25,7 +25,7 @@ getRegexFile:
 convertYamlToJson:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
+    url: "[#TRAINING_DMAPPER]/training/hbs/convert/yaml-to-json"
     body:
       file: ${regexFile.response.body.file}
   result: regexData
@@ -33,7 +33,7 @@ convertYamlToJson:
 mapRegexesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-regex-with-regex"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-regex-with-regex"
     body:
       regexes: ${regexData.response.body.nlu}
       regex_name: ${parameters.regex_name}
@@ -48,7 +48,7 @@ validateExampleExists:
 convertStringToArray:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/string/toArray"
+    url: "[#TRAINING_DMAPPER]/training/hbs/convert/string/toArray"
     body:
       data: ${regexesData.response.body.data.examples}
   result: convertedArray
@@ -56,7 +56,7 @@ convertStringToArray:
 removeExample:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/merge/remove-array-value"
+    url: "[#TRAINING_DMAPPER]/training/hbs/merge/remove-array-value"
     body:
       array: ${convertedArray.response.body}
       value: ${parameters.example}
@@ -65,7 +65,7 @@ removeExample:
 mapUpdatedRegexesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-regex-examples"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-regex-examples"
     body:
       regex: ${parameters.regex_name}
       examples: ${removedExample.response.body}
@@ -74,7 +74,7 @@ mapUpdatedRegexesData:
 mergeRegexes:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/merge"
+    url: "[#TRAINING_DMAPPER]/training/hbs/merge"
     body:
       array1: ${regexData.response.body.nlu}
       array2: ${mappedUpdatedExamples.response.body.data}
@@ -84,7 +84,7 @@ mergeRegexes:
 convertJsonToYaml:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml"
+    url: "[#TRAINING_DMAPPER]/training/hbs/convert/json-to-yaml"
     body:
       version: "3.0"
       nlu: ${mergedRegexes.response.body}
@@ -94,7 +94,7 @@ convertJsonToYaml:
 saveRegexFile:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/file/write"
+    url: "[#TRAINING_DMAPPER]/training/hbs/file/write"
     body:
       file_path: ${filePath}
       content: ${regexYaml.response.body.json}
