@@ -19,7 +19,7 @@ getTestStories:
 mapLinksData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-links"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-links"
     body:
       rules: ${getRulesResult.response.body.hits.hits}
       stories: ${getStoriesResult.response.body.hits.hits}
