@@ -59,7 +59,7 @@ getIntentFile:
 convertYamlToJson:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/yaml-to-json"
+    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
     body:
       file: ${intentFile.response.body.file}
   result: intentData
@@ -67,7 +67,7 @@ convertYamlToJson:
 convertStringToArray:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/string/toArray"
+    url: "[#TRAINING_DMAPPER]/convert/string/toArray"
     body:
       data: ${intentData.response.body.nlu[0].examples}
   result: convertedArray
@@ -104,7 +104,7 @@ mapIntentsData:
 convertJsonToYaml:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/json-to-yaml"
+    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml"
     body:
       version: "3.0"
       nlu: ${intentFileJson.response.body.data}
@@ -113,7 +113,7 @@ convertJsonToYaml:
 removePipe:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/string/replace"
+    url: "[#TRAINING_DMAPPER]/convert/string/replace"
     body:
       data: ${intentYaml.response.body.json}
       search: "|"

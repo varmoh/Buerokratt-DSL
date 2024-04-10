@@ -52,7 +52,7 @@ getStoriesFile:
 convertYamlToJson:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/yaml-to-json"
+    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
     body:
       file: ${storiesFile.response.body.file}
   result: storiesData
@@ -79,7 +79,7 @@ mergeStories:
 convertJsonToYaml:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/json-to-yaml-stories"
+    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml-stories"
     body:
       stories: ${mergedStories.response.body}
   result: storiesYaml

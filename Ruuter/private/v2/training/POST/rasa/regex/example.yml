@@ -21,7 +21,7 @@ getRegexFile:
 convertYamlToJson:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/yaml-to-json"
+    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
     body:
       file: ${regexFile.response.body.file}
   result: regexData
@@ -38,7 +38,7 @@ mapRegexesData:
 replaceJsonString:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/string/replace"
+    url: "[#TRAINING_DMAPPER]/convert/string/replace"
     body:
       data: ${regexesData.response.body.examples}
       search: "&quot;"
@@ -48,7 +48,7 @@ replaceJsonString:
 replaceString:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/string/replace"
+    url: "[#TRAINING_DMAPPER]/convert/string/replace"
     body:
       data: ${replacedJsonString.response.body}
       search: "- "
@@ -58,7 +58,7 @@ replaceString:
 splitExamples:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/string/split"
+    url: "[#TRAINING_DMAPPER]/convert/string/split"
     body:
       data: ${replacedString.response.body}
       separator: "\n"

@@ -51,7 +51,7 @@ get_existing_intent_file:
 convert_yaml_to_json:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/yaml-to-json"
+    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
     body:
       file: ${intentFile.response.body.file}
   result: intentData
@@ -59,7 +59,7 @@ convert_yaml_to_json:
 manipulate_existing_examples:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/string/replace"
+    url: "[#TRAINING_DMAPPER]/convert/string/replace"
     body:
       data: ${intentData.response.body.nlu[0].examples}
       search: "- "
@@ -69,7 +69,7 @@ manipulate_existing_examples:
 split_existing_examles:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/string/split"
+    url: "[#TRAINING_DMAPPER]/convert/string/split"
     body:
       data: ${manipulateExistingExamplesResult.response.body}
       separator: "\n"
@@ -87,7 +87,7 @@ get_new_service_intent_file:
 convert_intent_json_to_yaml:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/json-to-yaml"
+    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml"
     body:
       version: "3.0"
       nlu: ${intentFileJson.response.body}
@@ -134,7 +134,7 @@ update_existing_domain_response:
 convert_domain_json_to_yaml:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/json-to-yaml"
+    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml"
     body:
       version: ${domainData.response.body.response.version}
       intents: ${mergedIntents.response.body}
@@ -167,7 +167,7 @@ get_rules_file:
 convert_rules_yaml_to_json:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/yaml-to-json"
+    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
     body:
       file: ${ruleFile.response.body.file}
   result: rulesData
@@ -184,7 +184,7 @@ find_rule_by_intent_name:
 rules_json_to_yaml:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/json-to-yaml"
+    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml"
     body: 
       version: "3.0"
       rules: ${rulesResult.response.body}

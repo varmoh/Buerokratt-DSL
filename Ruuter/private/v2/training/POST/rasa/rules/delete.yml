@@ -37,7 +37,7 @@ getRulesFile:
 convertYamlToJson:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/yaml-to-json"
+    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
     body:
       file: ${ruleFile.response.body.file}
   result: rulesData
@@ -54,7 +54,7 @@ deleteRule:
 convertJsonToYaml:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/convert/json-to-yaml-stories"
+    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml-stories"
     headers:
       content-type: "application/json"
     body:
