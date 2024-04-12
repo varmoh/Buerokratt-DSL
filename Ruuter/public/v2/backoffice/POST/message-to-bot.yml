@@ -210,7 +210,7 @@ convert_bot_responses_to_messages:
     headers:
       type: json
     body:
-      data: §{botresponse}
+      data: ${botresponse}
   result: converted_messages_res
 #  next: add_bot_message_to_db
 
