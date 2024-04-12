@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - dev-tmp # Adjust the branch name if needed
+    # Remove paths filter to trigger on any change
     paths:
-      - '.env' #this trigger is for testing purposes only
+       - '.env'
 
 jobs:
   setup_directories:
@@ -14,7 +15,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-        
+
       - name: Check and Create Folder Structure and copy DSLs for Ruuter v2 private
         run: |
           FOLDER_PATH=Ruuter/private/v2/
@@ -33,7 +34,7 @@ jobs:
               echo "Creating $folder folder..."
               mkdir -p "$SUBFOLDER_PATH"
               touch "$SUBFOLDER_PATH/readme.yml"
-              echo "Creating  GET $folder ..."
+              echo "Creating GET $folder ..."
               mkdir -p "$SUBFOLDER_PATH/GET"
               touch "$SUBFOLDER_PATH/GET/readme.yml"
             else
@@ -43,7 +44,7 @@ jobs:
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL/Ruuter.private/DSL
-          git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
@@ -58,10 +59,8 @@ jobs:
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/Ruuter.private
-          git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
-
-
 
       - name: Clean Up Cloned Repositories
         run: |
@@ -95,13 +94,12 @@ jobs:
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL/Ruuter.public/DSL
-          git clone --depth=1 --branch=dev   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
-
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/Ruuter.public
-          git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
       - name: Clean Up Cloned Repositories
@@ -110,7 +108,7 @@ jobs:
           rm -rf source-repo-analytics
           rm -rf source-repo-service
           rm -rf source-repo-training
-          
+
       - name: Check and Create Folder Structure and copy DSLs for RESQL
         run: |
           FOLDER_PATH=Resql/
@@ -136,7 +134,7 @@ jobs:
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL/Resql
-          git clone --depth=1 --branch=dev   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice/POST"
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
@@ -151,7 +149,7 @@ jobs:
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/Resql
-          git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training/POST"
 
       - name: Clean Up Cloned Repositories
@@ -186,7 +184,7 @@ jobs:
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL/DMapper
-          git clone --depth=1 --branch=dev   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/hbs/backoffice/hbs"
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
@@ -201,7 +199,7 @@ jobs:
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/DataMapper
-          git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training/hbs"
 
       - name: Clean Up Cloned Repositories
@@ -210,7 +208,6 @@ jobs:
           rm -rf source-repo-analytics
           rm -rf source-repo-service
           rm -rf source-repo-training
-
 
       - name: Check and Create Folder Structure and copy DSLs for Liquibase
         run: |
@@ -237,7 +234,7 @@ jobs:
 
           SOURCE_REPO_CHATBOT=buerokratt/Buerokratt-Chatbot
           SOURCE_FOLDER_CHATBOT=DSL/Liquibase
-          git clone --depth=1 --branch=dev   "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_CHATBOT.git" source-repo-chatbot
           cp -R "source-repo-chatbot/$SOURCE_FOLDER_CHATBOT/." "$FOLDER_PATH/backoffice"
 
           SOURCE_REPO_ANALYTICS=buerokratt/Analytics-Module
@@ -252,7 +249,7 @@ jobs:
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/Liquibase
-          git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
       - name: Clean Up Cloned Repositories
@@ -261,8 +258,6 @@ jobs:
           rm -rf source-repo-analytics
           rm -rf source-repo-service
           rm -rf source-repo-training
-
-
 
       - name: Check and Create Folder Structure and copy DSLs for OpenSearch
         run: |
@@ -294,7 +289,7 @@ jobs:
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
           SOURCE_FOLDER_TRAINING=DSL/OpenSearch
-          git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
       - name: Clean Up Cloned Repositories
@@ -338,50 +333,7 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add Ruuter
-          git add Resql
-          git add DataMapper
-          git add Liquibase
-          git add OpenSearch
-          git add OpenSearch2
+          # Add all changes
+          git add .
           git diff-index --quiet HEAD && git commit -am "Copy contents and update folder structure using GitHub Actions"
           git push
-
-             
-  build:
-     needs: setup_directories
-     runs-on: ubuntu-22.04
-
-     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-          
-      - name: Load Environment Variables
-        run: |
-          if [ -f .env ]; then
-            export $(cat .env | grep -v '^#' | xargs)
-          fi
-          echo "RELEASE=$RELEASE" >> $GITHUB_ENV
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "BUILD=$BUILD" >> $GITHUB_ENV
-          echo "FIX=$FIX" >> $GITHUB_ENV
-
-      - name: Set Docker Tag
-        run: |
-          LOWER_CASE_GITHUB_REPOSITORY=$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')
-          echo "DOCKER_TAG_CUSTOM=ghcr.io/${LOWER_CASE_GITHUB_REPOSITORY}:$RELEASE-$VERSION.$BUILD.$FIX" >> $GITHUB_ENV
-          echo "$GITHUB_ENV"
-      - name: Remove README.md files
-        run: |
-          find . -name "README.md" -type f -delete
-      - name: Docker Build
-        run: | 
-           docker image build --no-cache --tag $DOCKER_TAG_CUSTOM .
-
-
-      - name: Log in to GitHub Container Registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
-
-      - name: Push Docker image to ghcr
-        run: docker push $DOCKER_TAG_CUSTOM
