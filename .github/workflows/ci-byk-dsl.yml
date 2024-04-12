@@ -3,9 +3,9 @@ name: Buerokratt DSL
 on:
   push:
     branches:
-      - dev # Adjust the branch name if needed
+      - dev-tmp # Adjust the branch name if needed
     paths:
-      - '.env-tmp' #this trigger is for testing purposes only
+      - '.env' #this trigger is for testing purposes only
 
 jobs:
   setup_directories:
