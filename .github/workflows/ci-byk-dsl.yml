@@ -62,14 +62,6 @@ jobs:
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
 
 
-
-      - name: Clean Up Cloned Repositories
-        run: |
-          rm -rf source-repo-chatbot
-          rm -rf source-repo-analytics
-          rm -rf source-repo-service
-          rm -rf source-repo-training
-
       - name: Check and Create Folder Structure and copy DSLs for Ruuter v2 public
         run: |
           FOLDER_PATH=Ruuter/public/v2/
@@ -103,13 +95,6 @@ jobs:
           SOURCE_FOLDER_TRAINING=DSL/Ruuter.public
           git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
-
-      - name: Clean Up Cloned Repositories
-        run: |
-          rm -rf source-repo-chatbot
-          rm -rf source-repo-analytics
-          rm -rf source-repo-service
-          rm -rf source-repo-training
           
       - name: Check and Create Folder Structure and copy DSLs for RESQL
         run: |
@@ -154,13 +139,6 @@ jobs:
           git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training/POST"
 
-      - name: Clean Up Cloned Repositories
-        run: |
-          rm -rf source-repo-chatbot
-          rm -rf source-repo-analytics
-          rm -rf source-repo-service
-          rm -rf source-repo-training
-
       - name: Check and Create Folder Structure and copy DSLs for DATAMAPPER v1
         run: |
           FOLDER_PATH=DataMapper/v1/
@@ -203,13 +181,6 @@ jobs:
           SOURCE_FOLDER_TRAINING=DSL/DataMapper
           git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training/hbs"
-
-      - name: Clean Up Cloned Repositories
-        run: |
-          rm -rf source-repo-chatbot
-          rm -rf source-repo-analytics
-          rm -rf source-repo-service
-          rm -rf source-repo-training
 
 
       - name: Check and Create Folder Structure and copy DSLs for Liquibase
@@ -254,13 +225,6 @@ jobs:
           SOURCE_FOLDER_TRAINING=DSL/Liquibase
           git clone --depth=1 --branch=dev  "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training"
-
-      - name: Clean Up Cloned Repositories
-        run: |
-          rm -rf source-repo-chatbot
-          rm -rf source-repo-analytics
-          rm -rf source-repo-service
-          rm -rf source-repo-training
 
 
 
@@ -330,20 +294,13 @@ jobs:
           git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
           cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services"
 
-      - name: Clean Up Cloned Repositories
-        run: |
-          rm -rf source-repo-service
+
 
       - name: Commit and Push Folder Structure with Copied Contents
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add Ruuter
-          git add Resql
-          git add DataMapper
-          git add Liquibase
-          git add OpenSearch
-          git add OpenSearch2
+          git add .
           git diff-index --quiet HEAD && git commit -am "Copy contents and update folder structure using GitHub Actions"
           git push
 
