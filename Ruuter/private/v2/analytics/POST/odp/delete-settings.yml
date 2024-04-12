@@ -1,8 +1,0 @@
-deleteOdpKey:
-  call: http.post
-  args:
-    url: "[#ANALYTICS_RESQL]/analytics/delete-odp-settings"
-  result: delete
-
-return:
-  return: ${true}
