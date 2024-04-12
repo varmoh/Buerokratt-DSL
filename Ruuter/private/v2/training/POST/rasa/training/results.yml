@@ -1,0 +1,46 @@
+extractRequestData:
+  assign:
+    parameters: ${incoming.body}
+  next: getFileLocations
+
+getFileLocations:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/return-file-locations"
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: fileLocations
+
+checkModelExists:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file/check"
+    body:
+      file_path: ${fileLocations.response.body.response.training_result_location + '/' + parameters.trained_model}
+  result: modelExists
+
+validateModelExists:
+  switch:
+    - condition: ${modelExists.response.body}
+      next: getTrainedModel
+  next: returnTrainedModelMissing
+
+getTrainedModel:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file/read-directory"
+    body:
+      file_path: ${fileLocations.response.body.response.training_result_location + '/' + parameters.trained_model}
+  result: trainingResults
+
+returnSuccess:
+  return: ${trainingResults.response.body}
+  next: end
+
+returnTrainedModelMissing:
+  return: "Trained model directory is missing"
+  next: end
+
+returnUnauthorized:
+  return: "error: unauthorized"
+  next: end

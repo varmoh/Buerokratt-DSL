@@ -1,0 +1,109 @@
+assign_values:
+  assign:
+    body: ${incoming.body}
+
+validateRules:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/validate/validate-stories-rules"
+    body:
+      story: ${body}
+      category: "rules"
+  result: validateRulesResult
+
+validateRulesCheck:
+  switch:
+    - condition: ${validateRulesResult.response.body.result == true}
+      next: getRuleNames
+  next: returnDuplicateIntentOrEntity
+
+getRuleNames:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/rasa/rule-names"
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: ruleResult
+
+validateRuleName:
+  switch:
+    - condition: ${!ruleResult.response.body.response.data.names.includes(body.id)}
+      next: getFileLocations
+  next: returnStoryExists
+
+getFileLocations:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/return-file-locations"
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: fileLocations
+
+getRulesFile:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file/read"
+    body:
+      file_path: ${fileLocations.response.body.response.rules_location}
+  result: ruleFile
+
+convertYamlToJson:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
+    body:
+      file: ${ruleFile.response.body.file}
+  result: rulesData
+
+mergeRules:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/merge"
+    body:
+      array1: ${rulesData.response.body.rules}
+      array2: ${[body]}
+      iteratee: "rule"
+  result: mergedRules
+
+convertJsonToYaml:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml-stories"
+    headers:
+      content-type: "application/json"
+    body:
+      rules: ${mergedRules.response.body}
+  result: rulesYaml
+
+saveRulesFile:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file/write"
+    body:
+      file_path: ${fileLocations.response.body.response.rules_location}
+      content: ${rulesYaml.response.body.json}
+  result: fileResult
+  next: updateOpenSearch
+
+updateOpenSearch:
+  call: http.post
+  args:
+    url: "[#TRAINING_PIPELINE]/bulk/rules/rule"
+    body:
+      input: ${rulesYaml.response.body.json}
+  result: updateSearchResult
+  next: returnSuccess
+
+returnSuccess:
+  return: "Rule added"
+  next: end
+
+returnRuleExists:
+  return: "Rule exists"
+  status: 409
+  next: end
+
+returnDuplicateIntentOrEntity:
+  return: "Rule may not have duplicate consecutive intents or entities"
+  status: 406
+  next: end

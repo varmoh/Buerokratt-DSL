@@ -1,0 +1,109 @@
+assign_values:
+  assign:
+    body: ${incoming.body}
+    ruleData: ${incoming.body.data}
+
+getRuleWithName:
+  call: http.post
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/rasa/rules"
+    headers:
+      cookie: ${incoming.headers.cookie}
+    body:
+      rule: ${body.id}
+  result: ruleResult
+
+validateRules:
+  switch:
+    - condition: ${ruleResult.response.body.response.data.rule == body.id}
+      next: getFileLocations
+  next: returnRulesIsMissing
+
+getFileLocations:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/return-file-locations"
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: fileLocations
+
+getRulesFile:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file/read"
+    body:
+      file_path: ${fileLocations.response.body.response.rules_location}
+  result: ruleFile
+
+convertYamlToJson:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
+    body:
+      file: ${ruleFile.response.body.file}
+  result: rulesData
+
+deleteRule:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/dmapper/delete-rule"
+    body:
+      rules: ${rulesData.response.body}
+      rule_name: ${body.id}
+  result: deleteRulesData
+
+mergeRules:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/merge"
+    body:
+      array1: ${deleteRulesData.response.body.data[1]}
+      array2: ${[ruleData]}
+      iteratee: "rule"
+  result: mergedRules
+
+convertJsonToYaml:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml-stories"
+    headers:
+      content-type: "application/json"
+    body:
+      rules: ${mergedRules.response.body}
+  result: rulesYaml
+
+saveRulesFile:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file/write"
+    body:
+      file_path: ${fileLocations.response.body.response.rules_location}
+      content: ${rulesYaml.response.body.json}
+  result: fileResult
+  next: updateOpenSearch
+
+deleteOldOpenSearchEntry:
+  call: http.post
+  args:
+    url: "[#TRAINING_PIPELINE]/delete/object/rules"
+    body:
+      id: ${body.id}
+  result: deleteSearchResult
+
+updateOpenSearch:
+  call: http.post
+  args:
+    url: "[#TRAINING_PIPELINE]/bulk/rules/rule"
+    body:
+      input: ${rulesYaml.response.body.json}
+  result: updateSearchResult
+  next: returnSuccess
+
+returnSuccess:
+  return: "Rule updated"
+  next: end
+
+returnRulesIsMissing:
+  return: "Can't find rule to update"
+  status: 409
+  next: end

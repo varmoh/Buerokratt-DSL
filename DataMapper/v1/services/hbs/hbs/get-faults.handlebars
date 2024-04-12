@@ -1,0 +1,30 @@
+[
+  {{#each data.hits}}
+    {
+      "id": "{{_id}}",
+      "service": "{{_source.dslName}}",
+      "serviceMethod": "{{_source.dslMethod}}",
+      "requestId": "{{_source.requestId}}",
+      "timestamp": "{{_source.timestamp}}",
+      "errorCode": "{{_source.errorCode}}",
+      "requestBody": [
+              {{#each _source.requestBody}}
+              "{{@key}}: {{this}}"{{#unless @last}},{{/unless}}
+              {{/each}}
+      ],
+      "requestHeaders": [
+             {{#each _source.requestHeaders}}
+              "{{@key}}: {{this}}"{{#unless @last}},{{/unless}}
+             {{/each}}
+      ],
+      "requestParams": [
+              {{#each _source.requestParams}}
+              "{{@key}}: {{this}}"{{#unless @last}},{{/unless}}
+              {{/each}}
+      ],
+      "message": "{{_source.message}}",
+      "stepName": "{{_source.stepName}}"
+    }
+    {{#unless @last}},{{/unless}}
+  {{/each}}
+]

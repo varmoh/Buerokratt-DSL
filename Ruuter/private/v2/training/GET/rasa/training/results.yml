@@ -1,0 +1,23 @@
+getFileLocations:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/return-file-locations"
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: fileLocations
+
+getTrainingResultsDirectory:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file/read-directory"
+    body:
+      file_path: ${fileLocations.response.body.response.training_result_location}
+  result: trainingResults
+
+returnSuccess:
+  return: ${trainingResults.response.body}
+  next: end
+
+returnUnauthorized:
+  return: "error: unauthorized"
+  next: end

@@ -1,0 +1,27 @@
+getFileLocations:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/return-file-locations"
+    headers:
+      cookie: {incoming.headers.cookie}
+  result: fileLocations
+
+getDomainFile:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file/read"
+    body:
+      file_path: ${fileLocations.response.body.response.domain_location}
+  result: domainFile
+
+convertYamlToJson:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
+    body:
+      file: ${domainFile.response.body.file}
+  result: domainData
+
+returnSuccess:
+  return: ${domainData.response.body}
+  next: end

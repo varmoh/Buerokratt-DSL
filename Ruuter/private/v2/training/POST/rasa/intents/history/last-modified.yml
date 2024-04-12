@@ -1,0 +1,28 @@
+assign_values:
+  assign:
+    params: ${incoming.body}
+
+getIntentLastChanged:
+  call: http.post
+  args:
+    url: "[TRAINING_RESQL]/get-intent-last-changed"
+    body:
+      intent: ${params.intent}
+  result: getIntentLastChangedResult
+
+mapIntentsData:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/dmapper/get-intent-last-changed"
+    body:
+      intent: ${getIntentLastChangedResult.response.body}
+  result: intentsData
+  next: returnSuccess
+
+returnSuccess:
+  return: ${intentsData.response.body}
+  next: end
+
+returnUnauthorized:
+  return: "error: unauthorized"
+  next: end

@@ -1,0 +1,29 @@
+{
+  "mappings": {
+    "properties": {
+      "story": {
+        "type": "text",
+        "fielddata": true,
+        "fields": {
+          "raw": {
+            "type": "keyword"
+          }
+        }
+      },
+      "steps": {
+        "type": "nested",
+        "properties": {
+          "user": {
+            "type": "text"
+          },
+          "intent": {
+            "type": "text"
+          },
+          "action": {
+            "type": "text"
+          }
+        }
+      }
+    }
+  }
+}

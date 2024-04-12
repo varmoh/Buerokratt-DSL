@@ -1,0 +1,18 @@
+getStories:
+  call: http.get
+  args:
+    url: "[#TRAINING_OPENSEARCH]/stories/_search?size=1000"
+  result: getStoriesResult
+
+mapStoriesData:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/dmapper/get-stories"
+    body:
+      hits: ${getStoriesResult.response.body.hits.hits}
+  result: storiesData
+  next: returnSuccess
+
+returnSuccess:
+  return: ${storiesData.response.body.data.stories}
+  next: end

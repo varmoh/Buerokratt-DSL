@@ -1,0 +1,126 @@
+assign_values:
+  assign:
+    id: ${incoming.body.id}
+    storyData: ${incoming.body.data}
+
+validateStoriesForDuplicates:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/validate/validate-stories-rules"
+    body:
+      story: ${storyData}
+  result: validateStoriesResult
+
+validateStoriesCheck:
+  switch:
+    - condition: ${validateStoriesResult.response.body.result == false}
+      next: returnDuplicateIntentOrEntity
+  next: getStoriesWithName
+
+getStoriesWithName:
+  call: http.post
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/rasa/stories"
+    headers:
+      cookie: ${incoming.headers.cookie}
+    body:
+      story: ${id}
+  result: storiesResult
+
+validateStoryExists:
+  switch:
+    - condition: ${storiesResult.response.body.response.data.id == id}
+      next: returnStoryIsMissing
+  next: getFileLocations
+
+getFileLocations:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/return-file-locations"
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: fileLocations
+
+getStoriesFile:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file/read"
+    body:
+      file_path: ${fileLocations.response.body.response.stories_location}
+  result: storiesFile
+
+convertYamlToJson:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
+    body:
+      file: ${storiesFile.response.body.file}
+  result: storiesData
+
+deleteStory:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/dmapper/delete-story"
+    body:
+      stories: ${storiesData.response.body}
+      story_name: ${id}
+  result: deleteStoriesData
+
+mergeStories:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/merge"
+    body:
+      array1: ${deleteStoriesData.response.body.data[1]}
+      array2: ${[storyData]}
+      iteratee: "story"
+  result: mergedStories
+
+convertJsonToYaml:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml-stories"
+    body:
+      stories: ${mergedStories.response.body}
+  result: storiesYaml
+
+saveStoriesFile:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file/write"
+    body:
+      file_path: ${fileLocations.response.body.response.stories_location}
+      content: ${storiesYaml.response.body.json}
+  result: fileResult
+
+deleteOldOpenSearchEntry:
+  call: http.post
+  args:
+    url: "[#TRAINING_PIPELINE]/delete/object/stories"
+    body:
+      id: ${id}
+  result: deleteSearchResult
+
+updateOpenSearch:
+  call: http.post
+  args:
+    url: "[#TRAINING_PIPELINE]/bulk/stories/story"
+    body:
+      input: ${storiesYaml.response.body.json}
+  result: updateSearchResult
+  next: returnSuccess
+
+returnSuccess:
+  return: "Story updated"
+  next: end
+
+returnStoryIsMissing:
+  return: "Can't find story to update"
+  status: 409
+  next: end
+
+returnDuplicateIntentOrEntity:
+  return: "Story may not have duplicate consecutive intents or entities"
+  status: 406
+  next: end
+

@@ -1,0 +1,25 @@
+assign_values:
+  assign:
+    params: ${incoming.body}
+  next: getFormsSlots
+
+getFormsSlots:
+  call: http.post
+  args:
+    url: "[#TRAINING_OPENSEARCH]/forms/_search/template"
+    body:
+      id: "form-with-slot"
+      params: ${params}
+  result: getFormsResultSlots
+
+mapFormsSlotsData:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/dmapper/get-forms-search-slots"
+    body:
+      hits: ${getFormsResultSlots.response.body.hits.hits}
+  result: formsData
+
+returnSuccess:
+  return: ${formsData.response.body}
+  next: end

@@ -1,0 +1,33 @@
+getJobDetails:
+  call: http.post
+  args:
+    url: "[#ANALYTICS_RESQL]/get-scheduled-report"
+    body:
+      datasetId: ${incoming.body.datasetId}
+  result: jobDetails
+
+removeCronjobIfExists:
+  call: http.post
+  args:
+    url: "[#ANALYTICS_DMAPPER]/file-manager/delete"
+    body:
+      file_path: "/CronManager/${incoming.body.datasetId}.yml"
+  result: fileResult
+
+deleteScheduledReport:
+  call: http.post
+  args:
+    url: "[#ANALYTICS_RESQL]/delete-scheduled-report"
+    body:
+      id: ${incoming.body.datasetId}
+  result: delete
+
+refreshCronManagerIfChanged:
+  call: http.post
+  args:
+    url: "[#CRON_MANAGER]/reload/CronManager"
+  result: cronResult
+
+return:
+  reloadDsl: true
+  return: "Scheduled report deleted successfully"

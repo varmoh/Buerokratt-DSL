@@ -1,0 +1,29 @@
+getFaults:
+  call: http.post
+  args:
+    url: "[#SERVICE_OPENSEARCH]/ruuterlog/_search"
+    query:
+      size: 20
+      _source_excludes: "stackTrace,statusCode"
+    body:
+      query:
+        match_phrase_prefix:
+          dslName:
+            query: "services/active"  
+  result: getFaultsResult
+
+mapFaultsData:
+  call: http.post
+  args:
+    url: "[#SERVICE_DMAPPER]/hbs/services/get-faults"
+    headers:
+      type: 'json'
+    body:
+      data: {
+        "hits": "${getFaultsResult.response.body.hits.hits}"
+      }
+  result: faultsData
+
+returnSuccess:
+  wrapper: false
+  return: ${faultsData.response.body}

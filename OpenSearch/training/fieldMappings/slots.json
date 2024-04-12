@@ -1,0 +1,31 @@
+{
+  "mappings": {
+    "properties": {
+      "slot": {
+        "type": "text"
+      },
+      "influence_conversation": {
+        "type": "boolean"
+      },
+      "mappings": {
+        "properties": {
+          "type": {
+            "type": "text"
+          },
+          "active_loop": {
+            "type": "text"
+          },
+          "requested_slot": {
+            "type": "text"
+          },
+          "entity": {
+            "type": "text"
+          },
+          "intent": {
+            "type": "text"
+          }
+        }
+      }
+    }
+  }
+}

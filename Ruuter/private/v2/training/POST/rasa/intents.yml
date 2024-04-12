@@ -1,0 +1,30 @@
+assign_values:
+  assign:
+    params: ${incoming.body}
+
+getIntentsWithName:
+  call: http.post
+  args:
+    url: "[#TRAINING_OPENSEARCH]/intents/_search/template"
+    body:
+      id: "intent-with-name"
+      params: ${params}
+  result: getIntentsResult
+  next: mapIntentsData
+
+mapIntentsData:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/dmapper/get-intent-with-name"
+    body:
+      hits: ${getIntentsResult.response.body.hits.hits}
+  result: intentsData
+  next: returnSuccess
+
+returnSuccess:
+  return: ${intentsData.response.body}
+  next: end
+
+returnUnauthorized:
+  return: "error: unauthorized"
+  next: end

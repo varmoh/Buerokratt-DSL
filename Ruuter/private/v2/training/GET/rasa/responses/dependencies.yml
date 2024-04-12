@@ -1,0 +1,39 @@
+getRulesData:
+  call: http.get
+  args:
+    url: "[#TRAINING_OPENSEARCH]/rules/_search?size=1000"
+  result: getRulesResult
+
+getStoriesData:
+  call: http.get
+  args:
+    url: "[#TRAINING_OPENSEARCH]/stories/_search?size=1000"
+  result: getStoriesResult
+
+getResponses:
+  call: http.get
+  args:
+    url: "[#TRAINING_OPENSEARCH]/domain/_search?size=1000"
+  result: getResponsesResult
+
+mapResponsesData:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/dmapper/get-responses"
+    body:
+      hits: ${getResponsesResult.response.body.hits.hits}
+  result: responsesData
+
+mapDependenciesData:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/dmapper/get-responses-dependencies"
+    body:
+      rules: ${getRulesResult.response.body.hits.hits}
+      stories: ${getStoriesResult.response.body.hits.hits}
+      responses: ${responsesData.response.body.data.responses}
+  result: dependenciesData
+
+returnSuccess:
+  return: ${dependenciesData.response.body.data}
+  next: end

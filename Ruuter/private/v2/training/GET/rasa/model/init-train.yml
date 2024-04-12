@@ -1,0 +1,10 @@
+initTraining:
+  call: http.post
+  args:
+    url: "[#CRON_INSTANCE]/execute/train_bot/train_bot_now"
+  result: trainingData
+
+returnSuccess:
+  return: 'Training been initialized.'
+  wrapper: false
+  next: end

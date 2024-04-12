@@ -1,0 +1,87 @@
+assign_values:
+  assign:
+    story: ${incoming.body.story}
+
+getStoriesWithName:
+  call: http.post
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/rasa/stories"
+    headers:
+      cookie: ${incoming.headers.cookie}
+    body:
+      story: ${story}
+  result: storiesResult
+
+validateStories:
+  switch:
+    - condition: ${storiesResult.response.body.response.data.story == story}
+      next: getFileLocations
+  next: returnStoryIsMissing
+
+getFileLocations:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/return-file-locations"
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: fileLocations
+
+getStoriesFile:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file/read"
+    body:
+      file_path: ${fileLocations.response.body.response.stories_location}
+  result: storiesFile
+
+convertYamlToJson:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/convert/yaml-to-json"
+    body:
+      file: ${storiesFile.response.body.file}
+  result: storiesData
+
+deleteStory:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/dmapper/delete-story"
+    body:
+      stories: ${storiesData.response.body.stories}
+      story_name: ${story}
+  result: deleteStoriesData
+
+convertJsonToYaml:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/convert/json-to-yaml-stories"
+    headers:
+      content-type: "application/json"
+    body:
+      stories: ${deleteStoriesData.response.body.data}
+  result: storiesYaml
+
+saveStoriesFile:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/file/write"
+    body:
+      file_path: ${fileLocations.response.body.response.stories_location}
+      content: ${storiesYaml.response.body.json}
+  result: fileResult
+
+deleteOpenSearchEntry:
+  call: http.post
+  args:
+    url: "[#TRAINING_PIPELINE]/delete/object/stories"
+    body:
+      id: ${story}
+  result: deleteSearchResult
+
+returnSuccess:
+  return: "Story deleted"
+  next: end
+
+returnStoryIsMissing:
+  return: "Can't find story to delete"
+  next: end

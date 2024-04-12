@@ -1,0 +1,11 @@
+getDomainFile:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/domain-file"
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: domainData
+
+returnSuccess:
+  return: ${domainData.response.body.response.intents}
+  next: end

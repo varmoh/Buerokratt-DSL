@@ -1,0 +1,82 @@
+assign_values:
+  assign:
+    intentName: ${incoming.body.intentName.replaceAll(/\s+/g, "_")}
+
+getFileLocations:
+  call: http.get
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/return-file-locations"
+    headers:
+      cookie: ${incoming.headers.cookie}
+  result: fileLocations
+
+getIntentFile:
+  call: http.post
+  args:
+    url: "[#TRAINING_PUBLIC_RUUTER]/rasa/intents/get-intent-file"
+    headers:
+      cookie: ${incoming.headers.cookie}
+    body:
+      intentName: ${incoming.body.intentName}
+      returnType: "json"
+  result: intentFile
+
+checkIfIntentEmpty:
+  switch:
+    - condition: ${intentFile.response.body.response.nlu[0] != undefined}
+      next: replaceString
+  next: returnIntentExamplesMissing
+
+replaceString:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/convert/string/replace"
+    body:
+      data: ${intentFile.response.body.response.nlu[0].examples}
+      search: "- "
+      replace: ""
+  result: replacedString
+
+splitExamples:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/convert/string/split"
+    body:
+      data: ${replacedString.response.body}
+      separator: "\n"
+  result: splitExamples
+
+mapIntentsData:
+  call: http.post
+  args:
+    url: "[#TRAINING_DMAPPER]/dmapper/get-intent-csv"
+    body:
+      examples: ${splitExamples.response.body}
+    headers:
+      type: 'csv'
+  result: csvData
+
+checkResponse:
+  switch:
+    - condition: ${csvData.response.body != undefined}
+      next: returnSuccess
+  next: returnIntentExamplesMissing
+
+returnSuccess:
+  wrapper: false
+  headers:
+    "Content-disposition": ${"attachment;filename=" + intentName + ".csv"}
+  return: ${csvData.response.body.response}
+  next: end
+
+returnIntentFileMissing:
+  return: "Intent file is missing"
+  wrapper: false
+  status: 409
+  next: end
+
+returnIntentExamplesMissing:
+  return: "Intent has no examples"
+  wrapper: false
+  status: 409
+  next: end
