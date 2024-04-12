@@ -5,7 +5,7 @@ on:
     branches:
       - dev # Adjust the branch name if needed
     paths:
-      - '.env' #this trigger is for testing purposes only
+      - '.env-tmp' #this trigger is for testing purposes only
 
 jobs:
   setup_directories:
