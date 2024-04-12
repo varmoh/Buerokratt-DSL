@@ -333,7 +333,6 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          # Add all changes
-          git add .
-          git diff-index --quiet HEAD && git commit -am "Copy contents and update folder structure using GitHub Actions"
+          git add -uA .
+          git commit --amend --no-edit
           git push
