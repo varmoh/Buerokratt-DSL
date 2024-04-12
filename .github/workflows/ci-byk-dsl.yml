@@ -344,7 +344,7 @@ jobs:
           git add Liquibase
           git add OpenSearch
           git add OpenSearch2
-          git diff-index --quiet HEAD && git commit -m "Copy contents and update folder structure using GitHub Actions"
+          git diff-index --quiet HEAD && git commit -am "Copy contents and update folder structure using GitHub Actions"
           git push
 
              
