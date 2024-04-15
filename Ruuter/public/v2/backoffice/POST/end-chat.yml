@@ -180,7 +180,6 @@ remove_chat_id_from_queue_notification_node_if_existed:
 return_result:
   headers:
     Set-Cookie: ${chatCookie}
-    "\0Set-Cookie": ${clientCookie}
   return: "Ended Chat Successfully"
   next: end
 
