@@ -196,7 +196,7 @@ add_chat_id_to_queue_notification_node:
 convert_bot_responses_to_messages:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/hbs/chat-bot/bot_responses_to_messages"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/hbs/bot_responses_to_messages"
     headers:
       type: json
     body:
