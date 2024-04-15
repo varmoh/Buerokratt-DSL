@@ -18,7 +18,7 @@ RUN mkdir -p $APP_DIRS
 
 COPY Ruuter/private/v2/analytics /Ruuter/analytics
 COPY Resql/analytics /Resql/analytics
-COPY DataMapper/v1/analytics /DataMapper/analytics
+COPY DataMapper/v1/analytics/hbs /DataMapper/analytics
 COPY Liquibase/analytics /Liquibase/analytics
 
 LABEL org.opencontainers.image.description Docker PRE-ALPHA image for Buerokratt-DSL
