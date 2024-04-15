@@ -5,13 +5,13 @@ assignIncoming:
 getDurationTotalInSeconds:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-ended-chats-total-duration-in-seconds"
+    url: "[#CHATBOT_RESQL]/backoffice/get-ended-chats-total-duration-in-seconds"
   result: durationTotalInSeconds
 
 getUnassignedChats:
   call: http.post
   args:
-    url: "[#CHATBOT_RESQL]/get-unassigned-chat-total-with-position-by-chat-id"
+    url: "[#CHATBOT_RESQL]/backoffice/get-unassigned-chat-total-with-position-by-chat-id"
     body:
       chatId: "${chatId ? chatId : ''}"
   result: unassignedChats
