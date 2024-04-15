@@ -22,7 +22,7 @@ validateForms:
 mapForm:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-form"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-form"
     body:
       form: ${parameters.form}
   result: mappedForm
@@ -39,7 +39,7 @@ mergeForms:
 convertResponseInput:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-form-responses"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-form-responses"
     body:
       responses: ${parameters.responses}
       form_name: ${parameters.form.name}

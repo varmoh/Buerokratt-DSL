@@ -14,7 +14,7 @@ getEntitiesWithName:
 mapEntitiesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-entity-with-name"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-entity-with-name"
     body:
       hits: ${getEntitiesResult.response.body.hits.hits}
   result: entitiesData

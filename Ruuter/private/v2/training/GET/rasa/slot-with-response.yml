@@ -21,7 +21,7 @@ getResponses:
 mapSlotsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-slots-with-response"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-slots-with-response"
     body:
       slots: ${getSlotsResult.response.body.hits.hits}
       responses: ${getResponsesResult.response.body.hits.hits[0]._source.responses}

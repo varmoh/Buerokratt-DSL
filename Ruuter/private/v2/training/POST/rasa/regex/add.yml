@@ -29,7 +29,7 @@ getFileLocations:
 mapRegexData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/new-regex-file"
+    url: "[#TRAINING_DMAPPER]/training/hbs/new-regex-file"
     body:
       regex: ${regex}
       examples: ""

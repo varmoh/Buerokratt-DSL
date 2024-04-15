@@ -43,7 +43,7 @@ gatherFormDetails:
 mapFormsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-form-details"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-form-details"
     body:
       name: ${form}
       details: ${formDetails.response.body}

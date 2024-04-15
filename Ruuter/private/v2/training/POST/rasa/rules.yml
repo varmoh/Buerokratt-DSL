@@ -15,7 +15,7 @@ getRulesWithName:
 mapRulesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-rule-with-name"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-rule-with-name"
     body:
       hits: ${getRulesResult.response.body.hits.hits}
   result: rulesData

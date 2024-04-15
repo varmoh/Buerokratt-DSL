@@ -95,7 +95,7 @@ replaceExistingExample:
 mapIntentsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-intent-file"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-intent-file"
     body:
       intent: ${intent}
       examples: ${replacedExamples.response.body}

@@ -19,7 +19,7 @@ getResponses:
 mapResponsesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-responses"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-responses"
     body:
       hits: ${getResponsesResult.response.body.hits.hits}
   result: responsesData
@@ -27,7 +27,7 @@ mapResponsesData:
 mapDependenciesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-responses-dependencies"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-responses-dependencies"
     body:
       rules: ${getRulesResult.response.body.hits.hits}
       stories: ${getStoriesResult.response.body.hits.hits}

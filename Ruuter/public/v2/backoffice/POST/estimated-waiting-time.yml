@@ -33,7 +33,7 @@ calculateDuration:
 getEstimatedWaitingTime:
   call: http.post
   args:
-    url: "[#CHATBOT_DMAPPER]/hbs/chat-bot/reflect_waiting_time"
+    url: "[#CHATBOT_DMAPPER]/backoffice/hbs/chat-bot/reflect_waiting_time"
     body:
       durationInSeconds: "${calculatedDuration}"
       positionInUnassignedChats: "${position}"

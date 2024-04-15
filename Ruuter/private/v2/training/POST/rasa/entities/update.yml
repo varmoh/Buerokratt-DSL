@@ -106,7 +106,7 @@ switchMapFileType:
 mapRegexesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-regex-file"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-regex-file"
     body:
       regex: ${parameters.entity}
       examples: ${intentData.response.body.nlu[0].examples}
@@ -116,7 +116,7 @@ mapRegexesData:
 mapIntentsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/dmapper/get-intent-file"
+    url: "[#TRAINING_DMAPPER]/training/hbs/get-intent-file"
     body:
       intent: ${parameters.entity}
       examples: ${splitExamples.response.body}
