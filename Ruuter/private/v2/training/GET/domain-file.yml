@@ -13,7 +13,7 @@ getDomainFile:
     headers:
       type: "json"
     body:
-      file_path: ${fileLocations.response.body.domain_location}
+      file_path: ${fileLocations.response.body.response.domain_location}
   result: domainFile
 
 convertYamlToJson:
