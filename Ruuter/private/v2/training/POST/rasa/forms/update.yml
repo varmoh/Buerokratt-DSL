@@ -34,7 +34,7 @@ updateFormData:
 convertResponseInput:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/get-form-responses"
+    url: "[#TRAINING_DMAPPER]/dmapper/get-form-responses"
     body:
       responses: ${form.responses}
       form_name: ${parameters.form_name}

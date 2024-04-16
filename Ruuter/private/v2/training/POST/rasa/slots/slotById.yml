@@ -31,7 +31,7 @@ checkSlotIsPresent:
 mapSlotsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/get-slot-details"
+    url: "[#TRAINING_DMAPPER]/dmapper/get-slot-details"
     body:
       name: ${slot}
       hits: ${slotResponse[0]._source.slots[slot]}

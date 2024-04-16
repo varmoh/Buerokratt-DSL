@@ -7,7 +7,7 @@ getStories:
 mapStoriesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/get-story-names"
+    url: "[#TRAINING_DMAPPER]/dmapper/get-story-names"
     body:
       hits: ${getStoriesResult.response.body.hits.hits}
   result: storiesData

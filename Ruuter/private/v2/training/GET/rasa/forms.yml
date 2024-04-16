@@ -7,7 +7,7 @@ getForms:
 mapFormsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/get-forms"
+    url: "[#TRAINING_DMAPPER]/dmapper/get-forms"
     body:
       hits: ${getFormsResult.response.body.hits.hits}
   result: formsData

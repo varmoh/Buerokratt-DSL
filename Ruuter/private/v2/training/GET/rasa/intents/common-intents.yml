@@ -11,7 +11,7 @@ getIntents:
 getIntentsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/get-intents-with-examples"
+    url: "[#TRAINING_DMAPPER]/dmapper/get-intents-with-examples"
     body:
       hits: ${getIntentsResult.response.body.hits.hits}
   result: getIntentDataResult
@@ -55,7 +55,7 @@ assignResults:
 mapIntentsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/get-intents-full"
+    url: "[#TRAINING_DMAPPER]/dmapper/get-intents-full"
     body:
       intents: ${intents}
   result: getIntentDataResult

@@ -30,7 +30,7 @@ reassignExamples:
 mapRegexesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/get-regex-details"
+    url: "[#TRAINING_DMAPPER]/dmapper/get-regex-details"
     body:
       hits: ${getRegexesResult.response.body.hits.hits}
       examplesArray: ${examplesArray}

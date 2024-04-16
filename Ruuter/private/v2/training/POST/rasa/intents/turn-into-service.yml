@@ -78,7 +78,7 @@ split_existing_examles:
 get_new_service_intent_file:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/get-intent-file"
+    url: "[#TRAINING_DMAPPER]/dmapper/get-intent-file"
     body:
       intent: ${"service_" + intentName}
       examples: ${splitedExamples.response.body}

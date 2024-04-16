@@ -7,7 +7,7 @@ getEntities:
 mapEntitiesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/get_entities"
+    url: "[#TRAINING_DMAPPER]/dmapper/get_entities"
     body:
       hits: ${getEntitiesResult.response.body.hits.hits}
   result: entitiesData
@@ -16,7 +16,7 @@ mapEntitiesData:
 sortEntities:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/sort_entities"
+    url: "[#TRAINING_DMAPPER]/dmapper/sort_entities"
     body:
       hits: ${entitiesData.response.body.data.entities}
   result: sortedEntities

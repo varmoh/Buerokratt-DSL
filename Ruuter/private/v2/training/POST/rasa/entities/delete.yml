@@ -69,7 +69,7 @@ validateIntentEntities:
 deleteEntity:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/delete-entity"
+    url: "[#TRAINING_DMAPPER]/dmapper/delete-entity"
     body:
       entities: ${domainData.response.body.response.entities}
       entity_name: ${parameters.entity_name}

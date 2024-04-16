@@ -48,7 +48,7 @@ convertYamlToJson:
 mapRegexesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/new-regex-file"
+    url: "[#TRAINING_DMAPPER]/dmapper/new-regex-file"
     body:
       examples: ${JSON.stringify(regexData.response.body.nlu[0].examples)}
       regex: ${regex.newName}

@@ -29,7 +29,7 @@ convertYamlToJson:
 mapRegexesData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/get-regex-with-regex"
+    url: "[#TRAINING_DMAPPER]/dmapper/get-regex-with-regex"
     body:
       regexes: ${regexData.response.body.nlu}
       regex_name: ${parameters.regex_name}
@@ -67,7 +67,7 @@ splitExamples:
 mapExamples:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/get-regex-with-example"
+    url: "[#TRAINING_DMAPPER]/dmapper/get-regex-with-example"
     body:
       examples: ${splitExamples.response.body}
       example_name: ${parameters.example}

@@ -177,7 +177,7 @@ assignExamples:
 mapIntentsData:
   call: http.post
   args:
-    url: "[#TRAINING_DMAPPER]/training/hbs/get-intent-file"
+    url: "[#TRAINING_DMAPPER]/dmapper/get-intent-file"
     body:
       intent: ${parameters.name}
       examples: ${examplesToWriteIntoYml}
