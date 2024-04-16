@@ -10,8 +10,10 @@ getDomainFile:
   call: http.post
   args:
     url: "[#TRAINING_DMAPPER]/file/read"
+    headers:
+      type: "json"
     body:
-      file_path: ${fileLocations.response.body.response.domain_location}
+      file_path: ${fileLocations.response.body.domain_location}
   result: domainFile
 
 convertYamlToJson:
