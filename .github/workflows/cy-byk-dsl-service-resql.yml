@@ -45,9 +45,9 @@ jobs:
           SOURCE_FOLDER_SERVICE_SERVICE=DSL/Resql/services
           SOURCE_FOLDER_SERVICE_USERS=DSL/Resql/users
           git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-training
-          cp -R "source-repo-training/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/training/POST"
-          cp -R "source-repo-training/$SOURCE_FOLDER_SERVICE_SERVICE/." "$FOLDER_PATH/training/POST"
-          cp -R "source-repo-training/$SOURCE_FOLDER_SERVICE_USERS/." "$FOLDER_PATH/training/POST"
+          cp -R "source-repo-training/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services/POST"
+          cp -R "source-repo-training/$SOURCE_FOLDER_SERVICE_SERVICE/." "$FOLDER_PATH/services/POST"
+          cp -R "source-repo-training/$SOURCE_FOLDER_SERVICE_USERS/." "$FOLDER_PATH/services/POST"
 
 
 
