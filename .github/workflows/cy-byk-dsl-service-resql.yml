@@ -1,0 +1,67 @@
+name: Buerokratt DSL
+
+on:
+  push:
+    branches:
+      - dev-tmp-services # Adjust the branch name if needed
+    # Remove paths filter to trigger on any change
+    paths:
+       - '.env.train.resql'
+
+jobs:
+  setup_directories:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+
+      - name: Check and Create Folder Structure and copy DSLs for RESQL
+        run: |
+          FOLDER_PATH=Resql/
+          if [ ! -d "$FOLDER_PATH" ]; then
+            echo "Folder structure does not exist, creating..."
+            mkdir -p "$FOLDER_PATH"
+            touch "$FOLDER_PATH/readme.yml"
+          else
+            echo "Folder structure already exists."
+          fi
+
+          SUBFOLDERS=("training")
+          for folder in "${SUBFOLDERS[@]}"; do
+            SUBFOLDER_PATH="$FOLDER_PATH$folder"
+            if [ ! -d "$SUBFOLDER_PATH" ]; then
+              echo "Creating $folder folder..."
+              mkdir -p "$SUBFOLDER_PATH/GET"
+              touch "$SUBFOLDER_PATH/GET/readme.yml"
+            else
+              echo "$folder folder already exists."
+            fi
+          done
+
+          SOURCE_REPO_SERVICE=buerokratt/Service-Module
+          SOURCE_FOLDER_SERVICE=DSL/Resql/training
+          SOURCE_FOLDER_SERVICE_SERVICE=DSL/Resql/services
+          SOURCE_FOLDER_SERVICE_USERS=DSL/Resql/users
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-training
+          cp -R "source-repo-training/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/training/POST"
+          cp -R "source-repo-training/$SOURCE_FOLDER_SERVICE_SERVICE/." "$FOLDER_PATH/training/POST"
+          cp -R "source-repo-training/$SOURCE_FOLDER_SERVICE_USERS/." "$FOLDER_PATH/training/POST"
+
+
+
+      - name: Clean Up Cloned Repositories
+        run: |
+          rm -rf source-repo-training
+
+
+      - name: Commit and Push Folder Structure with Copied Contents
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git restore .
+          git add -A .
+          git commit --amend --no-edit
+          git pull origin dev-tmp-train --rebase
+          git push
