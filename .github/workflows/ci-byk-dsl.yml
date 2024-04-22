@@ -142,15 +142,25 @@ jobs:
           git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_ANALYTICS.git" source-repo-analytics
           cp -R "source-repo-analytics/$SOURCE_FOLDER_ANALYTICS/." "$FOLDER_PATH/analytics/POST"
 
+
           SOURCE_REPO_SERVICE=buerokratt/Service-Module
-          SOURCE_FOLDER_SERVICE=DSL/Resql
-          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_SERVICE.git" source-repo-service
-          cp -R "source-repo-service/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/services/POST"
+          SOURCE_FOLDER_SERVICE=DSL/Resql/training
+          SOURCE_FOLDER_SERVICE_SERVICE=DSL/Resql/services
+          SOURCE_FOLDER_SERVICE_USERS=DSL/Resql/users
+          git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
+          cp -R "source-repo-training/$SOURCE_FOLDER_SERVICE/." "$FOLDER_PATH/training/POST"
+          cp -R "source-repo-training/$SOURCE_FOLDER_SERVICE_SERVICE/." "$FOLDER_PATH/training/POST"
+          cp -R "source-repo-training/$SOURCE_FOLDER_SERVICE_USERS/." "$FOLDER_PATH/training/POST"
 
           SOURCE_REPO_TRAINING=buerokratt/Training-Module
-          SOURCE_FOLDER_TRAINING=DSL/Resql
+          SOURCE_FOLDER_TRAINING=DSL/Resql/training
+          SOURCE_FOLDER_TRAINING_SERVICE=DSL/Resql/services
+          SOURCE_FOLDER_TRAINING_USERS=DSL/Resql/users
           git clone --depth=1 --branch=dev "https://github.com/$SOURCE_REPO_TRAINING.git" source-repo-training
           cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING/." "$FOLDER_PATH/training/POST"
+          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING_SERVICE/." "$FOLDER_PATH/training/POST"
+          cp -R "source-repo-training/$SOURCE_FOLDER_TRAINING_USERS/." "$FOLDER_PATH/training/POST"
+
 
       - name: Clean Up Cloned Repositories
         run: |
