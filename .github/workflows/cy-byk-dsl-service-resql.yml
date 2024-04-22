@@ -63,5 +63,5 @@ jobs:
           git restore .
           git add -A .
           git commit --amend --no-edit
-          git pull origin dev-tmp-train --rebase
+          git pull origin dev-tmp-services --rebase
           git push
